@@ -8,4 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class DeedTm {
+    private String description;
+    private String date;
+    private String lawyerId;
+    private String clientId;
 }

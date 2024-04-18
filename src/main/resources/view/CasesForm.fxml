@@ -1,14 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.SGA.controller.CasesFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane fx:id="rootNode" prefHeight="589.0" prefWidth="675.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.CasesFormController">
+   <children>
+      <Label layoutX="222.0" layoutY="36.0" prefHeight="47.0" prefWidth="232.0" text="Case Manage">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="63.0" layoutY="135.0" text="Case id" />
+      <Label layoutX="63.0" layoutY="167.0" text="Description" />
+      <Label layoutX="63.0" layoutY="202.0" text="Date" />
+      <Label layoutX="344.0" layoutY="202.0" text="Lawyer id" />
+      <Label layoutX="344.0" layoutY="135.0" text="ClientId" />
+      <TextField fx:id="txtCaseId" layoutX="146.0" layoutY="131.0" />
+      <TextField fx:id="txtDescription" layoutX="146.0" layoutY="163.0" prefHeight="24.0" prefWidth="454.0" />
+      <TextField fx:id="txtDate" layoutX="146.0" layoutY="198.0" />
+      <TextField fx:id="txtClientId" layoutX="429.0" layoutY="131.0" />
+      <TextField fx:id="txtLawyerId" layoutX="429.0" layoutY="198.0" />
+      <JFXButton layoutX="32.0" layoutY="36.0" onAction="#btnBackOnAction" style="-fx-background-color: #9da8a5;" text="Back" />
+      <JFXButton layoutX="299.0" layoutY="271.0" onAction="#btnSaveOnAction" style="-fx-background-color: #8febd4;" text="save" />
+      <JFXButton layoutX="398.0" layoutY="271.0" onAction="#btnUpdateOnAction" style="-fx-background-color: #ABCABC;" text="update" />
+      <JFXButton layoutX="507.0" layoutY="271.0" onAction="#btnDeleteOnAction" style="-fx-background-color: #f26b6b;" text="delete" />
+      <TableView fx:id="tblCase" layoutX="32.0" layoutY="342.0" prefHeight="215.0" prefWidth="602.0">
+        <columns>
+          <TableColumn fx:id="colClientId" prefWidth="110.0" text="ClientId" />
+          <TableColumn fx:id="colDescription" prefWidth="268.0" text="Description" />
+            <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="112.0" text="Date" />
+            <TableColumn fx:id="colLawyerId" prefWidth="111.0" text="LawyerId" />
+        </columns>
+      </TableView>
+   </children>
 </AnchorPane>

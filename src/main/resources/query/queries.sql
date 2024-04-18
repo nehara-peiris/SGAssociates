@@ -1,3 +1,10 @@
+CREATE TABLE user(
+    userId VARCHAR(5) primary key,
+    password VARCHAR(20) not null
+);
+
+INSERT INTO user values ('U001', '1234');
+
 CREATE TABLE lawyer(
     lawyerId VARCHAR(5) primary key,
     name VARCHAR(100) not null,

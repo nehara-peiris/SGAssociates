@@ -8,4 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class CourtTm {
+    private String courtId;
+    private String location;
 }

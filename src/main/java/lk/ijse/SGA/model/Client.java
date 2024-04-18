@@ -6,19 +6,19 @@ public class Client {
     private String name;
     private String address;
     private String email;
-    private int contact;
-    private String LawyerId;
+    private String contact;
+    private String lawyerId;
 
     public Client() {
     }
 
-    public Client(String clientId, String name, String address, String email, int contact, String lawyerId) {
+    public Client(String clientId, String name, String address, String email, String contact, String lawyerId) {
         this.clientId = clientId;
         this.name = name;
         this.address = address;
         this.email = email;
         this.contact = contact;
-        LawyerId = lawyerId;
+        this.lawyerId = lawyerId;
     }
 
     public String getClientId() {
@@ -53,20 +53,20 @@ public class Client {
         this.email = email;
     }
 
-    public int getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(int contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 
     public String getLawyerId() {
-        return LawyerId;
+        return lawyerId;
     }
 
     public void setLawyerId(String lawyerId) {
-        LawyerId = lawyerId;
+        lawyerId = lawyerId;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Client {
                 ", address='" + address + '\'' +
                 ", email='" + email + '\'' +
                 ", contact=" + contact +
-                ", LawyerId='" + LawyerId + '\'' +
+                ", lawyerId='" + lawyerId + '\'' +
                 '}';
     }
 }

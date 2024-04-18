@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.SGA.controller.JudgeFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="rootNode" prefHeight="558.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.JudgeFormController">
+   <children>
+      <Label layoutX="237.0" layoutY="24.0" prefHeight="50.0" prefWidth="197.0" text="Judge Manage">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="63.0" layoutY="116.0" text="JudgeId" />
+      <Label layoutX="316.0" layoutY="116.0" text="Name" />
+      <Label layoutX="64.0" layoutY="161.0" text="CourtId" />
+      <Label layoutX="316.0" layoutY="161.0" text="YrsOfExp" />
+      <TextField fx:id="txtJudgeId" layoutX="126.0" layoutY="112.0" />
+      <TextField fx:id="txtCourtId" layoutX="126.0" layoutY="157.0" />
+      <TextField fx:id="txtName" layoutX="401.0" layoutY="112.0" />
+      <TextField fx:id="txtYrsOfExp" layoutX="401.0" layoutY="157.0" />
+      <JFXButton layoutX="40.0" layoutY="37.0" onAction="#btnBackOnAction" style="-fx-background-color: #9da8a5;" text="Back" />
+      <JFXButton layoutX="315.0" layoutY="247.0" onAction="#btnSaveOnAction" style="-fx-background-color: #8febd4;" text="save" />
+      <JFXButton layoutX="434.0" layoutY="247.0" onAction="#btnUpdateOnAction" style="-fx-background-color: #ABCABC;" text="update" />
+      <JFXButton layoutX="552.0" layoutY="247.0" onAction="#btnDeleteOnAction" style="-fx-background-color: #f26b6b;" text="delete" />
+      <TableView fx:id="tblJudge" layoutX="40.0" layoutY="304.0" prefHeight="220.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="colJudgeId" prefWidth="139.0" text="JudgeId" />
+          <TableColumn fx:id="colName" prefWidth="157.0" text="Name" />
+            <TableColumn fx:id="colCourtId" prefWidth="140.0" text="CourtId" />
+            <TableColumn fx:id="colYrsOfExp" prefWidth="163.0" text="YrsOfExp" />
+        </columns>
+      </TableView>
+   </children>
 </AnchorPane>

@@ -5,35 +5,132 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da6271e5-d11f-486f-afcc-fc4fba9a262d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CasesFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CasesFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ChargeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ChargeFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ClientFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ClientFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CourtFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CourtFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DashboardFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DashboardFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/JudgeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/JudgeFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/LawyerFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/LawyerFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/LoginFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/LoginFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/SummonFormController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/db/DbConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/db/DbConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Charge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Charge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Judge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Judge.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Lawyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Lawyer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/CasesTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/CasesTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/ChargeTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/ChargeTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/ClientTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/ClientTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/CourtTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/CourtTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/DeedTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/DeedTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/JudgeTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/JudgeTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/LawyerTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/LawyerTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/SummonTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/SummonTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CasesRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CasesRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/ChargeRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/ChargeRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/ClientRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/ClientRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CourtRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CourtRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/DeedRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/DeedRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/JudgeRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/JudgeRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/LawyerRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/LawyerRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/SummonRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/SummonRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/query/queries.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/query/queries.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/CasesForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/CasesForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/ChargeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/ChargeForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/ClientForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/ClientForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/CourtForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/CourtForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DashboardForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DashboardForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DeedForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DeedForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/JudgeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/JudgeForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/LawyerForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/LawyerForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/SummonForm.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2ehfs9kRbRT59Y8LITwRelrJoSA" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.JDBCConfiguration.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LauncherWrapper.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/neha/Desktop/SGA/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="lk.ijse.SGA" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="LauncherWrapper" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lk.ijse.SGA.LauncherWrapper" />
+      <module name="SGA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lk.ijse.SGA.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.LauncherWrapper" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -43,7 +140,25 @@
       <option name="presentableId" value="Default" />
       <updated>1712361935520</updated>
       <workItem from="1712361937314" duration="12000" />
+      <workItem from="1712422772128" duration="1509000" />
+      <workItem from="1712505630000" duration="4638000" />
+      <workItem from="1712640735462" duration="3635000" />
+      <workItem from="1712652496432" duration="575000" />
+      <workItem from="1712683524588" duration="35000" />
+      <workItem from="1712719471730" duration="3864000" />
+      <workItem from="1712784478887" duration="579000" />
+      <workItem from="1713181898169" duration="9208000" />
+      <workItem from="1713251118250" duration="7539000" />
+      <workItem from="1713263336450" duration="3172000" />
+      <workItem from="1713336450213" duration="2107000" />
+      <workItem from="1713338929635" duration="1403000" />
+      <workItem from="1713341685668" duration="8771000" />
+      <workItem from="1713422730663" duration="971000" />
+      <workItem from="1713423747857" duration="15455000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

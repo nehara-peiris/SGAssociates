@@ -8,4 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ChargeTm {
+    private String chargeId;
+    private String description;
+    private String amount;
 }

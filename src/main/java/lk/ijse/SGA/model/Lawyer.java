@@ -3,15 +3,15 @@ package lk.ijse.SGA.model;
 public class Lawyer {
     private String lawyerId;
     private String name;
-    private int yrsOfExp;
+    private String yrsOfExp;
     private String address;
     private String email;
-    private int contact;
+    private String contact;
 
     public Lawyer() {
     }
 
-    public Lawyer(String lawyerId, String name, int yrsOfExp, String address, String email, int contact) {
+    public Lawyer(String lawyerId, String name, String yrsOfExp, String address, String email, String contact) {
         this.lawyerId = lawyerId;
         this.name = name;
         this.yrsOfExp = yrsOfExp;
@@ -36,11 +36,11 @@ public class Lawyer {
         this.name = name;
     }
 
-    public int getYrsOfExp() {
+    public String getYrsOfExp() {
         return yrsOfExp;
     }
 
-    public void setYrsOfExp(int yrsOfExp) {
+    public void setYrsOfExp(String yrsOfExp) {
         this.yrsOfExp = yrsOfExp;
     }
 
@@ -60,11 +60,11 @@ public class Lawyer {
         this.email = email;
     }
 
-    public int getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(int contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 

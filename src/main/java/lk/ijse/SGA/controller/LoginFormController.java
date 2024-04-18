@@ -22,10 +22,10 @@ public class LoginFormController {
 
     public void btnLoginOnAction(ActionEvent actionEvent) {
         String userId = txtUserId.getText();
-        String pw = txtPassword.getText();
+        String password = txtPassword.getText();
 
         try {
-            checkCredential(userId, pw);
+            checkCredential(userId, password);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         } catch (IOException e) {
@@ -33,8 +33,8 @@ public class LoginFormController {
         }
     }
 
-    private void checkCredential(String userId, String pw) throws SQLException, IOException {
-        String sql = "SELECT user_id, password FROM users WHERE user_id = ?";
+    private void checkCredential(String userId, String password) throws SQLException, IOException {
+        String sql = "SELECT userId, password FROM user WHERE userId = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -44,7 +44,7 @@ public class LoginFormController {
         if(resultSet.next()) {
             String dbPw = resultSet.getString("password");
 
-            if(pw.equals(dbPw)) {
+            if(password.equals(dbPw)) {
                 navigateToTheDashboard();
             } else {
                 new Alert(Alert.AlertType.ERROR, "sorry! password is incorrect!").show();
@@ -56,7 +56,7 @@ public class LoginFormController {
     }
 
     private void navigateToTheDashboard() throws IOException {
-        AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/view/dashboard_form.fxml"));
+        AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/view/DashboardForm.fxml"));
 
         Scene scene = new Scene(rootNode);
 

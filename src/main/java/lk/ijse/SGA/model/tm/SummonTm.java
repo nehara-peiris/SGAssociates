@@ -8,4 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class SummonTm {
+    private String summonId;
+    private String description;
+    private String defendant;
+    private String lawyerId;
 }

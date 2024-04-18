@@ -4,12 +4,12 @@ public class Charge {
 
     private String chargeId;
     private String description;
-    private double amount;
+    private String amount;
 
     public Charge() {
     }
 
-    public Charge(String chargeId, String description, double amount) {
+    public Charge(String chargeId, String description, String amount) {
         this.chargeId = chargeId;
         this.description = description;
         this.amount = amount;
@@ -31,11 +31,11 @@ public class Charge {
         this.description = description;
     }
 
-    public double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 

@@ -4,12 +4,12 @@ public class Judge {
     private String judgeId;
     private String name;
     private String courtId;
-    private int yrsOfExp;
+    private String yrsOfExp;
 
     public Judge() {
     }
 
-    public Judge(String judgeId, String name, String courtId, int yrsOfExp) {
+    public Judge(String judgeId, String name, String courtId, String yrsOfExp) {
         this.judgeId = judgeId;
         this.name = name;
         this.courtId = courtId;
@@ -40,11 +40,11 @@ public class Judge {
         this.courtId = courtId;
     }
 
-    public int getYrsOfExp() {
+    public String getYrsOfExp() {
         return yrsOfExp;
     }
 
-    public void setYrsOfExp(int yrsOfExp) {
+    public void setYrsOfExp(String yrsOfExp) {
         this.yrsOfExp = yrsOfExp;
     }
 
