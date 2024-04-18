@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="rootNode" prefHeight="558.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.SummonFormController">
+   <children>
+      <Label layoutX="237.0" layoutY="25.0" prefHeight="52.0" prefWidth="235.0" text="Summon Manage">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <Label layoutX="67.0" layoutY="123.0" text="Summon Id" />
+      <Label layoutX="359.0" layoutY="123.0" text="Description" />
+      <Label layoutX="67.0" layoutY="174.0" text="Defendant" />
+      <Label layoutX="359.0" layoutY="174.0" text="LawyerId" />
+      <TextField fx:id="txtSummonId" layoutX="152.0" layoutY="119.0" />
+      <TextField fx:id="txtDescription" layoutX="444.0" layoutY="119.0" />
+      <TextField fx:id="txtDefendant" layoutX="152.0" layoutY="170.0" />
+      <TextField fx:id="txtLawyerId" layoutX="444.0" layoutY="170.0" />
+      <TableView fx:id="tblSummon" layoutX="28.0" layoutY="326.0" prefHeight="210.0" prefWidth="653.0">
+        <columns>
+          <TableColumn fx:id="colSummonId" prefWidth="121.0" text="Summon Id" />
+          <TableColumn fx:id="colDescription" prefWidth="202.0" text="Description" />
+            <TableColumn fx:id="colDefendant" prefWidth="202.0" text="Defendant" />
+            <TableColumn fx:id="colLawyerId" prefWidth="127.0" text="Lawyer Id" />
+        </columns>
+      </TableView>
+      <JFXButton layoutX="52.0" layoutY="39.0" onAction="#btnBackOnAction" style="-fx-background-color: #9da8a5;" text="Back" />
+      <JFXButton layoutX="328.0" layoutY="233.0" onAction="#btnSaveOnAction" style="-fx-background-color: #8febd4;" text="save" />
+      <JFXButton layoutX="441.0" layoutY="233.0" onAction="#btnUpdateOnAction" style="-fx-background-color: #ABCABC;" text="update" />
+      <JFXButton layoutX="553.0" layoutY="233.0" onAction="#btnDeleteOnAction" style="-fx-background-color: #f26b6b;" text="delete" />
+   </children>
+</AnchorPane>
