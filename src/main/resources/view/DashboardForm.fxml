@@ -1,10 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="519.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
-
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #CACACA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
+   <children>
+      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #F7F7F7;" />
+      <VBox alignment="TOP_RIGHT" layoutX="111.0" layoutY="349.0" prefHeight="480.0" prefWidth="148.0" style="-fx-background-color: #8E8B82;">
+         <children>
+            <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Lawyers" />
+            <JFXButton buttonType="RAISED" onAction="#btnClientsOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Clients" />
+            <JFXButton buttonType="RAISED" onAction="#btnJudgesOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Judges" />
+            <JFXButton buttonType="RAISED" onAction="#btnCasesOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Cases" />
+            <JFXButton buttonType="RAISED" onAction="#btnDeedsOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Deeds" />
+            <JFXButton buttonType="RAISED" onAction="#btnSummonsOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Summons" />
+            <JFXButton buttonType="RAISED" onAction="#btnCourtsOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Courts" />
+            <JFXButton buttonType="RAISED" onAction="#btnChargesOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Charges" />
+         </children>
+      </VBox>
+      <Label layoutY="17.0" prefHeight="53.0" prefWidth="1905.0" style="-fx-background-color: black;" text=" SHIRANTHI GUNAWARDENA ASSOCIATES " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="252.0" fitWidth="148.0" layoutX="81.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/icons8-male-user-50.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>

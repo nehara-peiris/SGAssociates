@@ -10,10 +10,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.SGA.model.Client;
 import lk.ijse.SGA.model.Court;
 import lk.ijse.SGA.model.tm.CourtTm;
-import lk.ijse.SGA.repository.ClientRepo;
 import lk.ijse.SGA.repository.CourtRepo;
 
 import java.sql.SQLException;
