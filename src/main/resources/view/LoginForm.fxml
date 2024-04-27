@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,28 +14,37 @@
 
 <AnchorPane fx:id="rootNode" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.LoginFormController">
    <children>
-      <AnchorPane layoutX="980.0" layoutY="166.0" prefHeight="704.0" prefWidth="701.0" style="-fx-background-color: #ffffff;">
+      <ImageView fitHeight="1080.0" fitWidth="1920.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../asserts/LoginBG.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="leafNode" layoutX="980.0" layoutY="166.0" prefHeight="704.0" prefWidth="701.0" style="-fx-background-color: #ffffff;">
          <children>
-            <ImageView fitHeight="717.0" fitWidth="701.0" opacity="0.49" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="717.0" fitWidth="701.0" opacity="0.34" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../asserts/whitebg%20(1).jpg" />
+                  <Image url="@../asserts/whiteBG.jpg" />
                </image>
             </ImageView>
             <TextField fx:id="txtUserId" layoutX="152.0" layoutY="197.0" prefHeight="32.0" prefWidth="398.0" promptText="userId" style="-fx-background-color: #ebebeb;" />
-            <TextField fx:id="txtPassword" layoutX="152.0" layoutY="292.0" prefHeight="32.0" prefWidth="398.0" promptText="password" style="-fx-background-color: #ebebeb;" />
             <JFXButton buttonType="RAISED" layoutX="148.0" layoutY="441.0" onAction="#btnLoginOnAction" prefHeight="41.0" prefWidth="398.0" ripplerFill="#91bbe1" style="-fx-background-color: #5f6661;" text="Login" textFill="WHITE" />
-            <Label layoutX="259.0" layoutY="28.0" prefHeight="122.0" prefWidth="176.0" text="LOGIN">
+            <Label layoutX="259.0" layoutY="42.0" prefHeight="74.0" prefWidth="176.0" text="LOGIN">
                <font>
                   <Font name="System Bold" size="50.0" />
                </font>
             </Label>
             <Label layoutX="152.0" layoutY="174.0" text="User ID" />
             <Label layoutX="152.0" layoutY="270.0" text="Password" />
-            <Hyperlink layoutX="377.0" layoutY="512.0" prefHeight="22.0" prefWidth="98.0" text="Register now" />
+            <Hyperlink layoutX="377.0" layoutY="512.0" onAction="#hypRegOnAction" prefHeight="22.0" prefWidth="98.0" text="Register now" />
             <Label layoutX="219.0" layoutY="515.0" prefHeight="16.0" prefWidth="166.0" text="Don't have an account? " />
+            <CheckBox fx:id="checkBoxPw" layoutX="152.0" layoutY="343.0" mnemonicParsing="false" onAction="#chkPwOnAction" text="Show Password" />
+            <PasswordField fx:id="txtPassword" layoutX="152.0" layoutY="294.0" prefHeight="32.0" prefWidth="398.0" promptText="password" style="-fx-background-color: #ebebeb;" />
          </children>
+         <opaqueInsets>
+            <Insets top="20.0" />
+         </opaqueInsets>
       </AnchorPane>
-      <ImageView fitHeight="867.0" fitWidth="1314.0" layoutX="-229.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0">
+      <ImageView fitHeight="856.0" fitWidth="1356.0" layoutX="-229.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0">
          <image>
             <Image url="@../asserts/welcome2-removebg-preview.png" />
          </image>

@@ -12,23 +12,23 @@
 
 <AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.LawyerFormController">
    <children>
-      <ImageView fitHeight="1047.0" fitWidth="1627.0" layoutX="7.0" layoutY="6.0" opacity="0.34" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="984.0" fitWidth="1592.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../asserts/whitebg%20(2)%20(1)%20(3).jpg" />
+            <Image url="@../asserts/blackBG.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="678.0" layoutY="21.0" prefHeight="50.0" prefWidth="236.0" text="Lawyer Manage">
+      <Label layoutX="678.0" layoutY="21.0" prefHeight="50.0" prefWidth="236.0" text="Lawyer Manage" textFill="WHITE">
          <font>
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="160.0" text="Lawyer ID" />
-      <Label layoutX="56.0" layoutY="267.0" text="Name" />
-      <Label layoutX="56.0" layoutY="367.0" text="Yrs of exp" />
-      <Label layoutX="56.0" layoutY="473.0" text="Address" />
-      <Label layoutX="56.0" layoutY="583.0" text="Email" />
-      <Label layoutX="56.0" layoutY="696.0" text="Contact" />
-      <TableView fx:id="tblLawyer" layoutX="520.0" layoutY="156.0" prefHeight="724.0" prefWidth="1005.0">
+      <Label layoutX="56.0" layoutY="160.0" text="Lawyer ID" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="208.0" text="Name" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="253.0" text="Yrs of exp" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="296.0" text="Address" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="339.0" text="Email" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="384.0" text="Contact" textFill="WHITE" />
+      <TableView fx:id="tblLawyer" layoutX="520.0" layoutY="156.0" prefHeight="345.0" prefWidth="1005.0">
         <columns>
           <TableColumn fx:id="colName" prefWidth="168.0" text="Name" />
           <TableColumn fx:id="colYrsOfExp" prefWidth="171.0" text="yrsOfExp" />
@@ -38,14 +38,13 @@
         </columns>
       </TableView>
       <TextField fx:id="txtLawyerId" layoutX="137.0" layoutY="156.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtYrsOfExp" layoutX="137.0" layoutY="363.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtEmail" layoutX="137.0" layoutY="579.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtName" layoutX="137.0" layoutY="263.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtAddress" layoutX="137.0" layoutY="469.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtContact" layoutX="137.0" layoutY="692.0" prefHeight="24.0" prefWidth="345.0" />
-      <JFXButton layoutX="375.0" layoutY="845.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #f26b6b;" text="delete" />
-      <JFXButton layoutX="215.0" layoutY="845.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #ABCABC;" text="update" />
-      <JFXButton layoutX="56.0" layoutY="845.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #8febd4;" text="save" />
-      <JFXButton layoutX="32.0" layoutY="21.0" onAction="#btnBackOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #9da8a5;" text="Back" />
+      <TextField fx:id="txtYrsOfExp" layoutX="137.0" layoutY="249.0" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtEmail" layoutX="137.0" layoutY="335.0" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtName" layoutX="137.0" layoutY="204.0" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtAddress" layoutX="137.0" layoutY="292.0" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtContact" layoutX="137.0" layoutY="380.0" prefHeight="24.0" prefWidth="345.0" />
+      <JFXButton layoutX="367.0" layoutY="466.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #f26b6b;" text="delete" />
+      <JFXButton layoutX="212.0" layoutY="466.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #ABCABC;" text="update" />
+      <JFXButton layoutX="56.0" layoutY="466.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #8febd4;" text="save" />
    </children>
 </AnchorPane>

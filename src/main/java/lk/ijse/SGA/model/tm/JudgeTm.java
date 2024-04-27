@@ -11,5 +11,5 @@ public class JudgeTm {
     private String judgeId;
     private String name;
     private String courtId;
-    private String yrsOfExp;
+    private int yrsOfExp;
 }

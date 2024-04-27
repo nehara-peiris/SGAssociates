@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,10 +15,15 @@ import lk.ijse.SGA.model.Charge;
 
 import lk.ijse.SGA.model.tm.ChargeTm;
 import lk.ijse.SGA.repository.ChargeRepo;
+import lk.ijse.SGA.repository.ClientRepo;
 
+import java.net.URL;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class ChargeFormController {
+public class ChargeFormController implements Initializable {
     @FXML
     private AnchorPane rootNode;
     @FXML
@@ -29,13 +35,18 @@ public class ChargeFormController {
     @FXML
     private TextField txtAmount;
     @FXML
+    private TextField txtDate;
+    @FXML
     private TableColumn<?, ?> colChargeId;
     @FXML
     private TableColumn<?, ?> colDescription;
     @FXML
     private TableColumn<?, ?> colAmount;
+    @FXML
+    private TableColumn<?, ?> colDate;
 
-    public void initialize(){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllCharges();
     }
@@ -44,32 +55,39 @@ public class ChargeFormController {
         colChargeId.setCellValueFactory(new PropertyValueFactory<>("ChargeId"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
     }
 
     private void loadAllCharges() {
         ObservableList<ChargeTm> obList = FXCollections.observableArrayList();
 
-        List<Charge> chargeList = ChargeRepo.getAll();
-        for (Charge charge : chargeList) {
-            ChargeTm tm = new ChargeTm(
-                    charge.getChargeId(),
-                    charge.getDescription(),
-                    charge.getAmount()
-            );
+        try {
+            List<Charge> chargeList = ChargeRepo.getAll();
+            for (Charge charge : chargeList) {
+                ChargeTm tm = new ChargeTm(
+                        charge.getChargeId(),
+                        charge.getDescription(),
+                        charge.getAmount(),
+                        charge.getDate()
+                );
 
-            obList.add(tm);
+                obList.add(tm);
+            }
+
+            tblCharge.setItems(obList);
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        tblCharge.setItems(obList);
     }
 
     @FXML
-    void btnSaveOnAction (ActionEvent event){
+    void btnSaveOnAction (ActionEvent event) throws SQLException {
         String chargeId = txtChargeId.getText();
         String description = txtDescription.getText();
-        String amount = txtAmount.getText();
+        double amount = Double.parseDouble(txtAmount.getText());
+        Date date = Date.valueOf(txtDate.getText());
 
-        Charge charge = new Charge(chargeId, description, amount);
+        Charge charge = new Charge(chargeId, description, amount, date);
 
         boolean isSaved = ChargeRepo.save(charge);
         if (isSaved) {
@@ -82,23 +100,42 @@ public class ChargeFormController {
         txtChargeId.setText("");
         txtDescription.setText("");
         txtAmount.setText("");
+        txtDate.setText("");
     }
 
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event){
+    void btnUpdateOnAction(ActionEvent event) throws SQLException {
+        String chargeId = txtChargeId.getText();
+        String description = txtDescription.getText();
+        double amount = Double.parseDouble(txtAmount.getText());
+        Date date = Date.valueOf(txtDate.getText());
 
+        Charge charge = new Charge(chargeId, description, amount, date);
+
+        try {
+            boolean isSaved = ChargeRepo.update(charge);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "charge updated!").show();
+                clearFields();
+            }
+        }catch(SQLException e){
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtChargeId.getText();
 
+        try {
+            boolean isDeleted = ChargeRepo.delete(id);
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "charge deleted!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
-
-    @FXML
-    void btnBackOnAction(ActionEvent event) {
-
-    }
-
 }

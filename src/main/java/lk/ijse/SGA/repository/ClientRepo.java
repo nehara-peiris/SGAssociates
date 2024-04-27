@@ -7,9 +7,56 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientRepo {
+    public static List<Client> getAll() throws SQLException {
+        String sql = "SELECT * FROM client";
+
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        List<Client> clientList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            String clientId = resultSet.getString(1);
+            String name = resultSet.getString(2);
+            String address = resultSet.getString(3);
+            String email = resultSet.getString(4);
+            int contact = Integer.parseInt(resultSet.getString(5));
+            String lawyerId = resultSet.getString(6);
+
+            Client client = new Client(clientId, name, address, email, contact, lawyerId);
+            clientList.add(client);
+        }
+        return clientList;
+    }
+
+    public static Client searchById(String id) throws SQLException {
+        String sql = "SELECT * FROM client WHERE id = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String clientId = resultSet.getString(1);
+            String name = resultSet.getString(2);
+            String address = resultSet.getString(3);
+            String email = resultSet.getString(4);
+            int contact = Integer.parseInt(resultSet.getString(5));
+            String lawyerId = resultSet.getString(6);
+
+            Client client = new Client(clientId, name, address, email, contact, lawyerId);
+
+            return client;
+        }
+        return null;
+    }
+
     public static boolean save(Client client) throws SQLException {
         String sql = "INSERT INTO client VALUES(?,?,?,?,?,?)";
 
@@ -26,36 +73,8 @@ public class ClientRepo {
         return pstm.executeUpdate() > 0;
     }
 
-    public static List<Client> getAll() {
-
-        return null;
-    }
-
-    public static Client searchById(String id) throws SQLException {
-        String sql = "SELECT * FROM client WHERE id = ?";
-
-        Connection connection = DbConnection.getInstance().getConnection();
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setObject(1, id);
-
-        ResultSet resultSet = pstm.executeQuery();
-        if (resultSet.next()) {
-            String clientId = resultSet.getString(1);
-            String name = resultSet.getString(2);
-            String address = resultSet.getString(3);
-            String email = resultSet.getString(4);
-            String contact = resultSet.getString(5);
-            String lawyerId = resultSet.getString(6);
-
-            Client client = new Client(clientId, name, address, email, contact, lawyerId);
-
-            return client;
-        }
-        return null;
-    }
-
     public static boolean update(Client client) throws SQLException {
-        String sql = "UPDATE client SET name = ?, address = ?, email = ?, contact = ?, lawyerId = ? WHERE id = ?";
+        String sql = "UPDATE client SET name = ?, address = ?, email = ?, contact = ?, lawyerId = ? WHERE clientId = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -70,7 +89,7 @@ public class ClientRepo {
     }
 
     public static boolean delete(String id) throws SQLException {
-        String sql = "DELETE FROM client WHERE id = ?";
+        String sql = "DELETE FROM client WHERE clientId = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);

@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class LawyerTm {
     private String name;
-    private String yrsOfExp;
+    private int yrsOfExp;
     private String address;
     private String email;
-    private String contact;
+    private int contact;
 }

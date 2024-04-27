@@ -1,9 +1,11 @@
 package lk.ijse.SGA.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -16,9 +18,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginFormController {
+    public AnchorPane rootNode;
+    public AnchorPane leafNode;
     public TextField txtUserId;
     public TextField txtPassword;
-    public AnchorPane rootNode;
+    public CheckBox checkBoxPw;
 
     public void btnLoginOnAction(ActionEvent actionEvent) {
         String userId = txtUserId.getText();
@@ -64,5 +68,22 @@ public class LoginFormController {
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.setTitle("Dashboard Form");
+    }
+
+    @FXML
+    void hypRegOnAction(ActionEvent event) throws IOException {
+        AnchorPane registerForm = FXMLLoader.load(this.getClass().getResource("/view/RegisterForm.fxml"));
+
+        rootNode.getChildren().add(registerForm);
+
+    }
+
+
+    public void chkPwOnAction(ActionEvent event) {
+        if (((CheckBox) event.getSource()).isSelected()) {
+            txtPassword.getText();
+        } else {
+            txtPassword.getText();
+        }
     }
 }

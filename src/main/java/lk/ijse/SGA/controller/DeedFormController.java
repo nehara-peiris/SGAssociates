@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,12 +14,19 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Deed;
 import lk.ijse.SGA.model.tm.DeedTm;
+import lk.ijse.SGA.repository.ClientRepo;
 import lk.ijse.SGA.repository.DeedRepo;
 
+import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class DeedFormController {
+public class DeedFormController implements Initializable {
+
+    @FXML
+    private BarChart<?,?> BarChartDeed;
     @FXML
     private AnchorPane rootNode;
     @FXML
@@ -27,6 +36,8 @@ public class DeedFormController {
     @FXML
     private TableColumn<?, ?> colDescription;
     @FXML
+    private TableColumn<?, ?> colType;
+    @FXML
     private TableColumn<?, ?> colLawyerId;
     @FXML
     private TableColumn<?, ?> colDate;
@@ -35,6 +46,8 @@ public class DeedFormController {
     @FXML
     private TextField txtDescription;
     @FXML
+    private TextField txtType;
+    @FXML
     private TextField txtLawyerId;
     @FXML
     private TextField txtClientId;
@@ -42,51 +55,64 @@ public class DeedFormController {
     private TextField txtDate;
 
 
-    public void initialize(){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllDeeds();
     }
 
+
     private void setCellValueFactory() {
-        colClientId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        colLawyerId.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
+        colType.setCellValueFactory(new PropertyValueFactory<>("Type"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colLawyerId.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
+        colClientId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
 
     }
 
     private void loadAllDeeds() {
         ObservableList<DeedTm> obList = FXCollections.observableArrayList();
 
-        List<Deed> deedList = DeedRepo.getAll();
-        for (Deed deed : deedList) {
-            DeedTm tm = new DeedTm(
-                    deed.getClientId(),
-                    deed.getDescription(),
-                    deed.getDate(),
-                    deed.getLawyerId()
-            );
+        try{
+            List<Deed> deedList = DeedRepo.getAll();
+            for (Deed deed : deedList) {
+                DeedTm tm = new DeedTm(
+                        deed.getDescription(),
+                        deed.getType(),
+                        deed.getDate(),
+                        deed.getLawyerId(),
+                        deed.getClientId()
+                );
 
-            obList.add(tm);
+                obList.add(tm);
+            }
+
+            tblDeed.setItems(obList);
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        tblDeed.setItems(obList);
     }
 
     @FXML
-    void btnSaveOnAction (ActionEvent event) throws SQLException {
+    void btnSaveOnAction (ActionEvent event){
         String deedId = txtDeedId.getText();
-        String clientId = txtClientId.getText();
         String description = txtDescription.getText();
-        String date = txtDate.getText();
+        String type = txtType.getText();
+        Date date = Date.valueOf(txtDate.getText());
         String lawyerId = txtLawyerId.getText();
+        String clientId = txtClientId.getText();
 
-        Deed deed = new Deed(deedId, description, date, lawyerId, clientId);
+        Deed deed = new Deed(deedId, description, type, date, lawyerId, clientId);
 
-        boolean isSaved = DeedRepo.save(deed);
-        if (isSaved) {
-            new Alert(Alert.AlertType.CONFIRMATION, "deed saved!").show();
-            clearFields();
+        try{
+            boolean isSaved = DeedRepo.save(deed);
+            if (isSaved){
+                new Alert(Alert.AlertType.CONFIRMATION, "Deed saved successfully!").show();
+                clearFields();
+            }
+        }catch(SQLException e){
+            throw new RuntimeException(e);
         }
     }
 
@@ -100,17 +126,38 @@ public class DeedFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event){
+        String deedId = txtDeedId.getText();
+        String description = txtDescription.getText();
+        String type = txtType.getText();
+        Date date = Date.valueOf(txtDate.getText());
+        String lawyerId = txtLawyerId.getText();
+        String clientId = txtClientId.getText();
 
+        Deed deed = new Deed(deedId, description, type, date, lawyerId, clientId);
+
+        try{
+            boolean isUpdated = DeedRepo.update(deed);
+            if (isUpdated){
+                new Alert(Alert.AlertType.CONFIRMATION, "Deed updated successfully!").show();
+                clearFields();
+            }
+        }catch(SQLException e){
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtDeedId.getText();
 
-    }
-
-    @FXML
-    void btnBackOnAction(ActionEvent event) {
-
+        try {
+            boolean isDeleted = ClientRepo.delete(id);
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Deed deleted!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 }

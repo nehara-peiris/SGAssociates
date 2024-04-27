@@ -1,9 +1,12 @@
+CREATE DATABASE SGAssociates;
+
+USE SGAssociates;
+
 CREATE TABLE user(
-    userId VARCHAR(5) primary key,
+    userId VARCHAR(5) primary key not null ,
+    name VARCHAR(50),
     password VARCHAR(20) not null
 );
-
-INSERT INTO user values ('U001', '1234');
 
 CREATE TABLE lawyer(
     lawyerId VARCHAR(5) primary key,
@@ -31,6 +34,7 @@ CREATE TABLE summon(
     description VARCHAR(100)not null,
     defendant VARCHAR(100),
     lawyerId VARCHAR(5),
+    date DATE,
     FOREIGN KEY (lawyerId) references lawyer(lawyerId) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -38,6 +42,7 @@ CREATE TABLE summon(
 CREATE TABLE deed(
     deedId VARCHAR(5) primary key,
     description VARCHAR(100) not null,
+    type VARCHAR(20),
     date DATE,
     lawyerId VARCHAR(5),
     clientId VARCHAR(5),
@@ -64,6 +69,7 @@ CREATE TABLE judge(
 CREATE TABLE cases(
     caseId VARCHAR(5) primary key,
     description VARCHAR(100) not null,
+    type VARCHAR(20),
     date DATE,
     lawyerId VARCHAR(5),
     clientId VARCHAR(5),
@@ -75,7 +81,8 @@ CREATE TABLE cases(
 CREATE TABLE charge(
     chargeId VARCHAR(5) primary key,
     description VARCHAR(100)not null,
-    amount DECIMAL(10,2)
+    amount DECIMAL(10,2),
+    date DATE
 );
 
 

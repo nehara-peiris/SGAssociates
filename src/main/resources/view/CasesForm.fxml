@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -12,37 +15,47 @@
 
 <AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.CasesFormController">
    <children>
-      <ImageView fitHeight="984.0" fitWidth="1592.0" layoutX="6.0" layoutY="2.0" opacity="0.34" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="984.0" fitWidth="1592.0" layoutX="6.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../asserts/whitebg%20(2)%20(1)%20(3).jpg" />
+            <Image url="@../asserts/blackBG.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="680.0" layoutY="30.0" prefHeight="47.0" prefWidth="232.0" text="Case Manage">
+      <Label layoutX="680.0" layoutY="30.0" prefHeight="47.0" prefWidth="232.0" text="Case Manage" textFill="WHITE">
          <font>
             <Font name="System Bold" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="160.0" text="Case id" />
-      <Label layoutX="56.0" layoutY="388.0" text="Description" />
-      <Label layoutX="56.0" layoutY="502.0" text="Date" />
-      <Label layoutX="56.0" layoutY="619.0" text="Lawyer id" />
-      <Label layoutX="56.0" layoutY="277.0" text="ClientId" />
+      <Label layoutX="56.0" layoutY="160.0" text="Case ID" textFill="WHITE" />
+      <Label layoutX="55.0" layoutY="247.0" text="Description" textFill="WHITE" />
+      <Label layoutX="55.0" layoutY="334.0" text="Date" textFill="WHITE" />
+      <Label layoutX="54.0" layoutY="376.0" text="Lawyer ID" textFill="WHITE" />
+      <Label layoutX="55.0" layoutY="204.0" text="Client ID" textFill="WHITE" />
       <TextField fx:id="txtCaseId" layoutX="137.0" layoutY="156.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtDescription" layoutX="137.0" layoutY="384.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtDate" layoutX="137.0" layoutY="498.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtClientId" layoutX="137.0" layoutY="272.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtLawyerId" layoutX="137.0" layoutY="615.0" prefHeight="24.0" prefWidth="345.0" />
-      <JFXButton layoutX="32.0" layoutY="36.0" onAction="#btnBackOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #9da8a5;" text="Back" />
-      <JFXButton layoutX="56.0" layoutY="846.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #8febd4;" text="save" />
-      <JFXButton layoutX="210.0" layoutY="846.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #ABCABC;" text="update" />
-      <JFXButton layoutX="367.0" layoutY="846.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #f26b6b;" text="delete" />
-      <TableView fx:id="tblCase" layoutX="520.0" layoutY="156.0" prefHeight="724.0" prefWidth="1005.0">
+      <TextField fx:id="txtDescription" layoutX="136.0" layoutY="243.0" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtDate" layoutX="136.0" layoutY="330.0" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtClientId" layoutX="136.0" layoutY="199.0" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtLawyerId" layoutX="135.0" layoutY="372.0" prefHeight="24.0" prefWidth="345.0" />
+      <JFXButton layoutX="54.0" layoutY="457.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #8febd4;" text="save" />
+      <JFXButton layoutX="208.0" layoutY="457.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #ABCABC;" text="update" />
+      <JFXButton layoutX="365.0" layoutY="457.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #f26b6b;" text="delete" />
+      <TableView fx:id="tblCase" layoutX="53.0" layoutY="518.0" prefHeight="418.0" prefWidth="850.0">
         <columns>
-          <TableColumn fx:id="colClientId" prefWidth="110.0" text="ClientId" />
+          <TableColumn fx:id="colClientId" prefWidth="110.0" text="Client ID" />
           <TableColumn fx:id="colDescription" prefWidth="268.0" text="Description" />
+            <TableColumn fx:id="colType" prefWidth="95.0" text="Type" />
             <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="112.0" text="Date" />
-            <TableColumn fx:id="colLawyerId" prefWidth="111.0" text="LawyerId" />
+            <TableColumn fx:id="colLawyerId" prefWidth="111.0" text="Lawyer ID" />
         </columns>
       </TableView>
+      <Label layoutX="53.0" layoutY="289.0" text="Type" textFill="WHITE" />
+      <TextField fx:id="txtType" layoutX="136.0" layoutY="285.0" prefHeight="24.0" prefWidth="345.0" />
+      <BarChart fx:id="BarChartCase" layoutX="995.0" layoutY="518.0" legendSide="TOP" prefHeight="418.0" prefWidth="524.0" style="-fx-background-color: #ffffff;" title="Case Summary">
+        <xAxis>
+          <CategoryAxis fx:id="cTypeAxis" label="Case Type" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="cNoAxis" label="No Of Cases" side="LEFT" />
+        </yAxis>
+      </BarChart>
    </children>
 </AnchorPane>

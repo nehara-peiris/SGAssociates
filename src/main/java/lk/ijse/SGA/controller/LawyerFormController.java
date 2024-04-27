@@ -4,23 +4,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.SGA.model.Client;
 import lk.ijse.SGA.model.Lawyer;
-import lk.ijse.SGA.model.tm.ClientTm;
 import lk.ijse.SGA.model.tm.LawyerTm;
-import lk.ijse.SGA.repository.ClientRepo;
 import lk.ijse.SGA.repository.LawyerRepo;
 
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ResourceBundle;
 
-public class LawyerFormController {
+public class LawyerFormController implements Initializable {
     @FXML
     private TextField txtContact;
     @FXML
@@ -48,10 +48,12 @@ public class LawyerFormController {
     @FXML
     private AnchorPane rootNode;
 
-    public void initialize(){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllLawyers();
     }
+
 
     private void setCellValueFactory() {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -65,36 +67,44 @@ public class LawyerFormController {
     private void loadAllLawyers() {
         ObservableList<LawyerTm> obList = FXCollections.observableArrayList();
 
-        List<Lawyer> lawyerList = LawyerRepo.getAll();
-        for (Lawyer lawyer : lawyerList) {
-            LawyerTm tm = new LawyerTm(
-                    lawyer.getName(),
-                    lawyer.getYrsOfExp(),
-                    lawyer.getAddress(),
-                    lawyer.getEmail(),
-                    lawyer.getContact()
-            );
+        try{
+            List<Lawyer> lawyerList = LawyerRepo.getAll();
+            for (Lawyer lawyer : lawyerList) {
+                LawyerTm tm = new LawyerTm(
+                        lawyer.getName(),
+                        lawyer.getYrsOfExp(),
+                        lawyer.getAddress(),
+                        lawyer.getEmail(),
+                        lawyer.getContact()
+                );
 
-            obList.add(tm);
+                obList.add(tm);
+            }
+            tblLawyer.setItems(obList);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
         }
-        tblLawyer.setItems(obList);
     }
 
     @FXML
-    void btnSaveOnAction (ActionEvent event) throws SQLException {
+    void btnSaveOnAction (ActionEvent event) {
         String lawyerId = txtLawyerId.getText();
         String name = txtName.getText();
-        String yrsOfExp = txtYrsOfExp.getText();
+        int yrsOfExp = Integer.parseInt(txtYrsOfExp.getText());
         String address = txtAddress.getText();
         String email = txtEmail.getText();
-        String contact = txtContact.getText();
+        int contact = Integer.parseInt(txtContact.getText());
 
         Lawyer lawyer = new Lawyer(lawyerId, name, yrsOfExp, address, email, contact);
 
-        boolean isSaved = LawyerRepo.save(lawyer);
-        if (isSaved) {
-            new Alert(Alert.AlertType.CONFIRMATION, "Lawyer saved!").show();
-            clearFields();
+        try{
+            boolean isSaved = LawyerRepo.save(lawyer);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Lawyer saved!").show();
+                clearFields();
+            }
+        }catch(SQLException e){
+            throw new RuntimeException(e);
         }
     }
 
@@ -107,21 +117,41 @@ public class LawyerFormController {
         txtContact.setText("");
     }
 
-
     @FXML
     void btnUpdateOnAction(ActionEvent event){
+        String lawyerId = txtLawyerId.getText();
+        String name = txtName.getText();
+        int yrsOfExp = Integer.parseInt(txtYrsOfExp.getText());
+        String address = txtAddress.getText();
+        String email = txtEmail.getText();
+        int contact = Integer.parseInt(txtContact.getText());
 
+        Lawyer lawyer = new Lawyer(lawyerId, name, yrsOfExp, address, email, contact);
+
+        try{
+            boolean isUpdated = LawyerRepo.update(lawyer);
+            if (isUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Lawyer updated!").show();
+                clearFields();
+            }
+        }catch(SQLException e){
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtLawyerId.getText();
 
-    }
-
-    @FXML
-    void btnBackOnAction(ActionEvent event) {
-
+        try {
+            boolean isDeleted = LawyerRepo.delete(id);
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Lawyer deleted!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
 }

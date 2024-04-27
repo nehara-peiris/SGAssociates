@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Judge;
 import lk.ijse.SGA.model.tm.JudgeTm;
+import lk.ijse.SGA.repository.ClientRepo;
 import lk.ijse.SGA.repository.JudgeRepo;
 
 import java.sql.SQLException;
@@ -38,7 +39,7 @@ public class JudgeFormController {
     @FXML
     private AnchorPane rootNode;
 
-    public void initialize(){
+   public void initialize(){
         setCellValueFactory();
         loadAllJudges();
     }
@@ -53,19 +54,23 @@ public class JudgeFormController {
     private void loadAllJudges() {
         ObservableList<JudgeTm> obList = FXCollections.observableArrayList();
 
-        List<Judge> judgeList = JudgeRepo.getAll();
-        for (Judge judge : judgeList) {
-            JudgeTm tm = new JudgeTm(
-                    judge.getJudgeId(),
-                    judge.getName(),
-                    judge.getCourtId(),
-                    judge.getYrsOfExp()
-            );
+        try{
+            List<Judge> judgeList = JudgeRepo.getAll();
+            for (Judge judge : judgeList) {
+                JudgeTm tm = new JudgeTm(
+                        judge.getJudgeId(),
+                        judge.getName(),
+                        judge.getCourtId(),
+                        judge.getYrsOfExp()
+                );
 
-            obList.add(tm);
+                obList.add(tm);
+            }
+
+            tblJudge.setItems(obList);
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        tblJudge.setItems(obList);
     }
 
     @FXML
@@ -73,14 +78,18 @@ public class JudgeFormController {
         String judgeId = txtJudgeId.getText();
         String name = txtName.getText();
         String courtId = txtCourtId.getText();
-        String yrsOfExp = txtYrsOfExp.getText();
+        int yrsOfExp = Integer.parseInt(txtYrsOfExp.getText());
 
         Judge judge = new Judge(judgeId, name, courtId, yrsOfExp);
 
-        boolean isSaved = JudgeRepo.save(judge);
-        if (isSaved) {
-            new Alert(Alert.AlertType.CONFIRMATION, "deed saved!").show();
-            clearFields();
+        try{
+            boolean isSaved = JudgeRepo.save(judge);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "deed saved!").show();
+                clearFields();
+            }
+        }catch(SQLException e){
+            throw new RuntimeException(e);
         }
     }
 
@@ -93,17 +102,37 @@ public class JudgeFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event){
+        String judgeId = txtJudgeId.getText();
+        String name = txtName.getText();
+        String courtId = txtCourtId.getText();
+        int yrsOfExp = Integer.parseInt(txtYrsOfExp.getText());
 
+        Judge judge = new Judge(judgeId, name, courtId, yrsOfExp);
+
+        try{
+            boolean isUpdated = JudgeRepo.update(judge);
+            if (isUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Judge Updated!").show();
+                clearFields();
+            }
+        }catch(SQLException e){
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtJudgeId.getText();
 
+        try {
+            boolean isDeleted = JudgeRepo.delete(id);
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Judge deleted!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
-    @FXML
-    void btnBackOnAction(ActionEvent event) {
-
-    }
 }

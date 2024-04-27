@@ -10,17 +10,102 @@
 
 <AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #CACACA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
    <children>
-      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #F7F7F7;" />
-      <VBox alignment="TOP_RIGHT" layoutX="111.0" layoutY="349.0" prefHeight="480.0" prefWidth="148.0" style="-fx-background-color: #8E8B82;">
+      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #F7F7F7;">
          <children>
-            <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Lawyers" />
-            <JFXButton buttonType="RAISED" onAction="#btnClientsOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Clients" />
-            <JFXButton buttonType="RAISED" onAction="#btnJudgesOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Judges" />
-            <JFXButton buttonType="RAISED" onAction="#btnCasesOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Cases" />
-            <JFXButton buttonType="RAISED" onAction="#btnDeedsOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Deeds" />
-            <JFXButton buttonType="RAISED" onAction="#btnSummonsOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Summons" />
-            <JFXButton buttonType="RAISED" onAction="#btnCourtsOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Courts" />
-            <JFXButton buttonType="RAISED" onAction="#btnChargesOnAction" prefHeight="60.0" prefWidth="150.0" ripplerFill="#91bbe1" text="Charges" />
+            <JFXButton buttonType="RAISED" contentDisplay="BOTTOM" layoutX="112.0" layoutY="97.0" prefHeight="150.0" prefWidth="150.0" ripplerFill="#71cdd75e" style="-fx-background-color: #abcdab;" text="Recent Activities" />
+            <JFXButton buttonType="RAISED" layoutX="320.0" layoutY="97.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #abbcab;" text="Upcoming Actvities" />
+            <JFXButton buttonType="RAISED" layoutX="529.0" layoutY="97.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #abcabc;" text="Button" />
+         </children></AnchorPane>
+      <VBox alignment="TOP_RIGHT" layoutX="35.0" layoutY="261.0" prefHeight="728.0" prefWidth="240.0" style="-fx-background-color: #8E8B82;">
+         <children>
+            <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Lawyers">
+               <graphic>
+                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asserts/icons8-lawyer-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font></JFXButton>
+            <JFXButton buttonType="RAISED" onAction="#btnClientsOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Clients">
+               <graphic>
+                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asserts/icons8-client-80.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font></JFXButton>
+            <JFXButton buttonType="RAISED" onAction="#btnJudgesOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Judges">
+               <graphic>
+                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asserts/icons8-judge-50.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font></JFXButton>
+            <JFXButton buttonType="RAISED" onAction="#btnCasesOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Cases">
+               <graphic>
+                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asserts/icons8-deed-66.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font></JFXButton>
+            <JFXButton buttonType="RAISED" onAction="#btnDeedsOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Deeds">
+               <graphic>
+                  <ImageView fitHeight="85.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asserts/icons8-deed-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font></JFXButton>
+            <JFXButton buttonType="RAISED" onAction="#btnSummonsOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Summons">
+               <graphic>
+                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asserts/icons8-note-24.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font></JFXButton>
+            <JFXButton buttonType="RAISED" onAction="#btnCourtsOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Courts">
+               <graphic>
+                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asserts/icons8-court-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font></JFXButton>
+            <JFXButton buttonType="RAISED" onAction="#btnChargesOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Charges">
+               <graphic>
+                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asserts/icons8-pay-80.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="16.0" />
+               </font></JFXButton>
          </children>
       </VBox>
       <Label layoutY="17.0" prefHeight="53.0" prefWidth="1905.0" style="-fx-background-color: black;" text=" SHIRANTHI GUNAWARDENA ASSOCIATES " textFill="WHITE">
@@ -28,10 +113,13 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="252.0" fitWidth="148.0" layoutX="81.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="95.0" fitWidth="100.0" layoutX="35.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../asserts/icons8-male-user-50.png" />
          </image>
       </ImageView>
+      <JFXButton layoutX="1719.0" layoutY="26.0" prefHeight="35.0" prefWidth="115.0" text="Logout" textFill="#903030" />
+      <Label fx:id="lblUserId" layoutX="155.0" layoutY="97.0" text="Label" />
+      <Label fx:id="lblUsername" layoutX="155.0" layoutY="128.0" text="Label" />
    </children>
 </AnchorPane>

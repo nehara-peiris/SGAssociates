@@ -44,17 +44,21 @@ public class CourtFormController {
     private void loadAllCourts() {
         ObservableList<CourtTm> obList = FXCollections.observableArrayList();
 
-        List<Court> courtList = CourtRepo.getAll();
-        for (Court court : courtList) {
-            CourtTm tm = new CourtTm(
-                    court.getCourtId(),
-                    court.getLocation()
-            );
+        try{
+            List<Court> courtList = CourtRepo.getAll();
+            for (Court court : courtList) {
+                CourtTm tm = new CourtTm(
+                        court.getCourtId(),
+                        court.getLocation()
+                );
 
-            obList.add(tm);
+                obList.add(tm);
+            }
+
+            tblCourt.setItems(obList);
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-
-        tblCourt.setItems(obList);
     }
 
     @FXML
@@ -64,10 +68,14 @@ public class CourtFormController {
 
         Court court = new Court(courtId, location);
 
-        boolean isSaved = CourtRepo.save(court);
-        if (isSaved) {
-            new Alert(Alert.AlertType.CONFIRMATION, "court saved!").show();
-            clearFields();
+        try{
+            boolean isSaved = CourtRepo.save(court);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "court saved!").show();
+                clearFields();
+            }
+        }catch (SQLException e){
+            throw new RuntimeException(e);
         }
     }
 
@@ -79,17 +87,35 @@ public class CourtFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event){
+        String courtId = txtCourtId.getText();
+        String location = txtLocation.getText();
 
+        Court court = new Court(courtId, location);
+
+        try{
+            boolean isUpdated = CourtRepo.update(court);
+            if (isUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, "court updated!").show();
+                clearFields();
+            }
+        }catch (SQLException e){
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String id = txtCourtId.getText();
 
+        try {
+            boolean isDeleted = CourtRepo.delete(id);
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Court deleted!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
-    @FXML
-    void btnBackOnAction(ActionEvent event) {
-
-    }
 }

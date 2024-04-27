@@ -1,50 +1,20 @@
 package lk.ijse.SGA.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.sql.Date;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Charge {
 
     private String chargeId;
     private String description;
-    private String amount;
+    private double amount;
+    private Date date;
 
-    public Charge() {
-    }
 
-    public Charge(String chargeId, String description, String amount) {
-        this.chargeId = chargeId;
-        this.description = description;
-        this.amount = amount;
-    }
-
-    public String getChargeId() {
-        return chargeId;
-    }
-
-    public void setChargeId(String chargeId) {
-        this.chargeId = chargeId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
-
-    @Override
-    public String toString() {
-        return "Charge{" +
-                "chargeId='" + chargeId + '\'' +
-                ", description='" + description + '\'' +
-                ", amount=" + amount +
-                '}';
-    }
 }
