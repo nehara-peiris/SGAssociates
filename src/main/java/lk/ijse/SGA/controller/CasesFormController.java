@@ -14,11 +14,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Cases;
 import lk.ijse.SGA.model.tm.CasesTm;
 import lk.ijse.SGA.repository.CasesRepo;
-import lk.ijse.SGA.repository.ClientRepo;
 
 import java.net.URL;
 import java.sql.Date;
@@ -26,7 +26,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class CasesFormController implements Initializable {
+public class CasesFormController {
     @FXML
     private NumberAxis cNoAxis;
     @FXML
@@ -64,7 +64,39 @@ public class CasesFormController implements Initializable {
     public void initialize(){
         setCellValueFactory();
         loadAllCases();
+
+        txtCaseId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtClientId.requestFocus();
+            }
+        });
+
+        txtClientId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDescription.requestFocus();
+            }
+        });
+
+        txtDescription.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtType.requestFocus();
+            }
+        });
+
+        txtType.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDate.requestFocus();
+            }
+        });
+
+        txtDate.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtLawyerId.requestFocus();
+            }
+        });
+
     }
+
 
     private void setCellValueFactory() {
         colClientId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
@@ -162,13 +194,5 @@ public class CasesFormController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        XYChart.Series series1 = new XYChart.Series<>();
-        series1.getData().add(new XYChart.Data("Criminal","1200"));
-        BarChartCase.getData().addAll(series1);
     }
 }

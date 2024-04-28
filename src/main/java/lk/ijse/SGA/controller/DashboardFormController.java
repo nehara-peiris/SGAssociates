@@ -14,6 +14,8 @@ public class DashboardFormController {
     private Label lblUsername;
     @FXML
     private AnchorPane rootNode;
+    @FXML
+    private AnchorPane mainNode;
 
 
     @FXML
@@ -69,4 +71,19 @@ public class DashboardFormController {
         rootNode.getChildren().add(summonForm);
     }
 
+    @FXML
+    void btnLogoutOnAction(ActionEvent event) throws IOException {
+        AnchorPane loginForm = FXMLLoader.load(this.getClass().getResource("/view/LoginForm.fxml"));
+
+        mainNode.getChildren().add(loginForm);
+    }
+
+    @FXML
+    void btnUpWkOnAction(ActionEvent event) throws IOException {
+    }
+
+    @FXML
+    void btnInProgOnAction(ActionEvent event) throws IOException {
+
+    }
 }

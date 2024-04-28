@@ -1,12 +1,15 @@
 package lk.ijse.SGA.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.SGA.db.DbConnection;
@@ -23,6 +26,23 @@ public class LoginFormController {
     public TextField txtUserId;
     public TextField txtPassword;
     public CheckBox checkBoxPw;
+    public JFXButton btnLogin;
+
+    @FXML
+    void initialize() {
+        // Set up event handler for txtUserId to move focus to txtPassword on Enter key press
+        txtUserId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtPassword.requestFocus();
+            }
+        });
+
+        txtPassword.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnLogin.requestFocus(); // Replace "JFXButton" with the actual ID of your login button
+            }
+        });
+    }
 
     public void btnLoginOnAction(ActionEvent actionEvent) {
         String userId = txtUserId.getText();
@@ -72,12 +92,16 @@ public class LoginFormController {
 
     @FXML
     void hypRegOnAction(ActionEvent event) throws IOException {
-        AnchorPane registerForm = FXMLLoader.load(this.getClass().getResource("/view/RegisterForm.fxml"));
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/RegisterForm.fxml"));
 
-        rootNode.getChildren().add(registerForm);
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
 
+        stage.setTitle("Registration Form");
+
+        stage.show();
     }
-
 
     public void chkPwOnAction(ActionEvent event) {
         if (((CheckBox) event.getSource()).isSelected()) {

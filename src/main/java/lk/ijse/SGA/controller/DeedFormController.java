@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Deed;
 import lk.ijse.SGA.model.tm.DeedTm;
@@ -59,6 +60,36 @@ public class DeedFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllDeeds();
+
+        txtDeedId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtClientId.requestFocus();
+            }
+        });
+
+        txtClientId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDescription.requestFocus();
+            }
+        });
+
+        txtDescription.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtType.requestFocus();
+            }
+        });
+
+        txtType.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtLawyerId.requestFocus();
+            }
+        });
+
+        txtLawyerId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDate.requestFocus();
+            }
+        });
     }
 
 
@@ -161,3 +192,10 @@ public class DeedFormController implements Initializable {
         }
     }
 }
+
+/*
+        XYChart.Series series1 = new XYChart.Series<>();
+        series1.getData().add(new XYChart.Data("Criminal","1200"));
+        BarChartCase.getData().addAll(series1);
+
+ */

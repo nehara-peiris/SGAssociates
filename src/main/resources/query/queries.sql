@@ -4,9 +4,11 @@ USE SGAssociates;
 
 CREATE TABLE user(
     userId VARCHAR(5) primary key not null ,
-    name VARCHAR(50),
+    name VARCHAR(50) not null,
     password VARCHAR(20) not null
 );
+
+INSERT INTO user VALUES ('U001', 'Nes', '1234');
 
 CREATE TABLE lawyer(
     lawyerId VARCHAR(5) primary key,
@@ -77,6 +79,11 @@ CREATE TABLE cases(
     FOREIGN KEY (clientId) references client(clientId) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+INSERT INTO cases VALUES (caseId, description, type, date, lawyerId, clientId)
+('CA01', 'nfjjrhwgwr', 'Criminal', '2023-10-10', 'L001', 'C001'),
+('CA02', 'efeggtrhrh', 'Divorce', '2023-10-10', 'L001', 'C001'),
+('CA03', 'rtwt5w4ujj', 'Kidnap', '2023-10-10', 'L001', 'C001'),
+('CA04', 'jyuseryyte', 'Criminal', '2023-10-10', 'L001', 'C001');
 
 CREATE TABLE charge(
     chargeId VARCHAR(5) primary key,

@@ -8,13 +8,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #CACACA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
+<AnchorPane fx:id="mainNode" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #CACACA;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
    <children>
       <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #F7F7F7;">
          <children>
-            <JFXButton buttonType="RAISED" contentDisplay="BOTTOM" layoutX="112.0" layoutY="97.0" prefHeight="150.0" prefWidth="150.0" ripplerFill="#71cdd75e" style="-fx-background-color: #abcdab;" text="Recent Activities" />
-            <JFXButton buttonType="RAISED" layoutX="320.0" layoutY="97.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #abbcab;" text="Upcoming Actvities" />
-            <JFXButton buttonType="RAISED" layoutX="529.0" layoutY="97.0" prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: #abcabc;" text="Button" />
+            <JFXButton buttonType="RAISED" layoutX="100.0" layoutY="61.0" onAction="#btnUpWkOnAction" prefHeight="150.0" prefWidth="281.0" style="-fx-background-color: #abbcab;" text="Upcoming Week" />
+            <JFXButton buttonType="RAISED" layoutX="448.0" layoutY="61.0" onAction="#btnInProgOnAction" prefHeight="150.0" prefWidth="281.0" style="-fx-background-color: #abcabc;" text="In progress" />
          </children></AnchorPane>
       <VBox alignment="TOP_RIGHT" layoutX="35.0" layoutY="261.0" prefHeight="728.0" prefWidth="240.0" style="-fx-background-color: #8E8B82;">
          <children>
@@ -118,7 +117,7 @@
             <Image url="@../asserts/icons8-male-user-50.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="1719.0" layoutY="26.0" prefHeight="35.0" prefWidth="115.0" text="Logout" textFill="#903030" />
+      <JFXButton layoutX="1719.0" layoutY="26.0" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="115.0" text="Logout" textFill="#903030" />
       <Label fx:id="lblUserId" layoutX="155.0" layoutY="97.0" text="Label" />
       <Label fx:id="lblUsername" layoutX="155.0" layoutY="128.0" text="Label" />
    </children>
