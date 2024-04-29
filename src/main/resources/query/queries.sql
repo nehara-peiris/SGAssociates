@@ -106,6 +106,8 @@ CREATE TABLE deedCharge(
     deedId VARCHAR(5),
     chargeId VARCHAR(5),
     date DATE,
+    amount DECIMAL(),
+    clientId VARCHAR(5),
     FOREIGN KEY (deedId) references deed(deedId) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (chargeId) references charge(chargeId) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -115,6 +117,8 @@ CREATE TABLE caseCharge(
     caseId VARCHAR(5),
     chargeId VARCHAR(5),
     date DATE,
+    amount DECIMAL(),
+    clientId VARCHAR(5),
     FOREIGN KEY (caseId) references cases(caseId) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (chargeId) references charge(chargeId) ON DELETE CASCADE ON UPDATE CASCADE
 );

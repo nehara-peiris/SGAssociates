@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BarChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,8 +25,6 @@ import java.util.ResourceBundle;
 
 public class DeedFormController implements Initializable {
 
-    @FXML
-    private BarChart<?,?> BarChartDeed;
     @FXML
     private AnchorPane rootNode;
     @FXML
@@ -191,11 +188,22 @@ public class DeedFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+
+    @FXML
+    void txtSearchOnAction(ActionEvent event) throws SQLException {
+        String id = txtDeedId.getText();
+
+        Deed deed = DeedRepo.searchById(id);
+        if (deed != null) {
+            txtDeedId.setText(deed.getDeedId());
+            txtDescription.setText(deed.getDescription());
+            txtType.setText(deed.getType());
+            txtDate.setText(String.valueOf(deed.getDate()));
+            txtClientId.setText(deed.getClientId());
+            txtLawyerId.setText(deed.getLawyerId());
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "Client not found!").show();
+        }
+    }
 }
 
-/*
-        XYChart.Series series1 = new XYChart.Series<>();
-        series1.getData().add(new XYChart.Data("Criminal","1200"));
-        BarChartCase.getData().addAll(series1);
-
- */

@@ -12,14 +12,17 @@
    <children>
       <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #F7F7F7;">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="100.0" layoutY="61.0" onAction="#btnUpWkOnAction" prefHeight="150.0" prefWidth="281.0" style="-fx-background-color: #abbcab;" text="Upcoming Week" />
-            <JFXButton buttonType="RAISED" layoutX="448.0" layoutY="61.0" onAction="#btnInProgOnAction" prefHeight="150.0" prefWidth="281.0" style="-fx-background-color: #abcabc;" text="In progress" />
+            <ImageView fitHeight="984.0" fitWidth="1592.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../asserts/dashB.jpg" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
-      <VBox alignment="TOP_RIGHT" layoutX="35.0" layoutY="261.0" prefHeight="728.0" prefWidth="240.0" style="-fx-background-color: #8E8B82;">
+      <VBox alignment="TOP_RIGHT" layoutX="35.0" layoutY="239.0" prefHeight="783.0" prefWidth="240.0" style="-fx-background-color: #8E8B82;">
          <children>
-            <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Lawyers">
+            <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Lawyers">
                <graphic>
-                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asserts/icons8-lawyer-50.png" />
                      </image>
@@ -28,9 +31,9 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnClientsOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Clients">
+            <JFXButton buttonType="RAISED" onAction="#btnClientsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Clients">
                <graphic>
-                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asserts/icons8-client-80.png" />
                      </image>
@@ -39,9 +42,9 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnJudgesOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Judges">
+            <JFXButton buttonType="RAISED" onAction="#btnJudgesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Judges">
                <graphic>
-                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asserts/icons8-judge-50.png" />
                      </image>
@@ -50,9 +53,9 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnCasesOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Cases">
+            <JFXButton buttonType="RAISED" onAction="#btnCasesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Cases">
                <graphic>
-                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asserts/icons8-deed-66.png" />
                      </image>
@@ -61,9 +64,9 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnDeedsOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Deeds">
+            <JFXButton buttonType="RAISED" onAction="#btnDeedsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Deeds">
                <graphic>
-                  <ImageView fitHeight="85.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asserts/icons8-deed-64.png" />
                      </image>
@@ -72,20 +75,20 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnSummonsOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Summons">
+            <JFXButton buttonType="RAISED" onAction="#btnSummonsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Summons">
                <graphic>
-                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-note-24.png" />
+                        <Image url="@../asserts/icons8-letter-64.png" />
                      </image>
                   </ImageView>
                </graphic>
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnCourtsOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Courts">
+            <JFXButton buttonType="RAISED" onAction="#btnCourtsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Courts">
                <graphic>
-                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asserts/icons8-court-64.png" />
                      </image>
@@ -94,9 +97,9 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnChargesOnAction" prefHeight="91.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Charges">
+            <JFXButton buttonType="RAISED" onAction="#btnChargesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Charges">
                <graphic>
-                  <ImageView fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asserts/icons8-pay-80.png" />
                      </image>
@@ -105,6 +108,18 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
+            <JFXButton onAction="#btnSalaryOnAction" prefHeight="87.0" prefWidth="240.0" text="Salary">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../asserts/icons8-cost-80.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
          </children>
       </VBox>
       <Label layoutY="17.0" prefHeight="53.0" prefWidth="1905.0" style="-fx-background-color: black;" text=" SHIRANTHI GUNAWARDENA ASSOCIATES " textFill="WHITE">
@@ -112,13 +127,15 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="95.0" fitWidth="100.0" layoutX="35.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="87.0" fitWidth="87.0" layoutX="35.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../asserts/icons8-male-user-50.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="1719.0" layoutY="26.0" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="115.0" text="Logout" textFill="#903030" />
-      <Label fx:id="lblUserId" layoutX="155.0" layoutY="97.0" text="Label" />
-      <Label fx:id="lblUsername" layoutX="155.0" layoutY="128.0" text="Label" />
+      <JFXButton buttonType="RAISED" layoutX="1719.0" layoutY="26.0" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#9a0202" style="-fx-background-color: #d15949;" text="Logout" textFill="WHITE" />
+      <Label fx:id="lblUserId" layoutX="155.0" layoutY="101.0" />
+      <Label fx:id="lblUsername" layoutX="155.0" layoutY="127.0" />
+      <JFXButton buttonType="RAISED" layoutX="1392.0" layoutY="26.0" onAction="#btnInProgOnAction" prefHeight="35.0" prefWidth="200.0" ripplerFill="#233294" style="-fx-background-color: #abcabc;" text="In progress" />
+      <JFXButton buttonType="RAISED" layoutX="1174.0" layoutY="26.0" onAction="#btnUpWkOnAction" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #abbcab;" text="Upcoming Week" />
    </children>
 </AnchorPane>

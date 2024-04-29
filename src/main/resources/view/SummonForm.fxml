@@ -17,16 +17,16 @@
             <Image url="@../asserts/blackBG.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="676.0" layoutY="29.0" prefHeight="52.0" prefWidth="235.0" text="Summon Manage" textFill="WHITE">
+      <Label layoutX="530.0" layoutY="36.0" prefHeight="65.0" prefWidth="532.0" text="Summon Management" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="23.0" />
+            <Font name="System Bold" size="41.0" />
          </font>
       </Label>
       <Label layoutX="54.0" layoutY="141.0" text="Summon Id" textFill="WHITE" />
       <Label layoutX="54.0" layoutY="184.0" text="Description" textFill="WHITE" />
       <Label layoutX="54.0" layoutY="223.0" text="Defendant" textFill="WHITE" />
       <Label layoutX="54.0" layoutY="264.0" text="LawyerId" textFill="WHITE" />
-      <TextField fx:id="txtSummonId" layoutX="135.0" layoutY="137.0" prefWidth="317.0" />
+      <TextField fx:id="txtSummonId" layoutX="135.0" layoutY="137.0" onAction="#txtSearchOnAction" prefWidth="317.0" />
       <TextField fx:id="txtDescription" layoutX="135.0" layoutY="180.0" prefHeight="24.0" prefWidth="317.0" />
       <TextField fx:id="txtDefendant" layoutX="135.0" layoutY="219.0" prefHeight="24.0" prefWidth="317.0" />
       <TextField fx:id="txtLawyerId" layoutX="135.0" layoutY="260.0" prefHeight="24.0" prefWidth="317.0" />

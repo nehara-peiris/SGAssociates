@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Client;
 import lk.ijse.SGA.model.tm.ClientTm;
@@ -53,6 +54,36 @@ public class ClientFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllClients();
+
+        txtClientId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtName.requestFocus();
+            }
+        });
+
+        txtName.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtAddress.requestFocus();
+            }
+        });
+
+        txtAddress.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtContact.requestFocus();
+            }
+        });
+
+        txtContact.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtEmail.requestFocus();
+            }
+        });
+
+        txtEmail.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtLawyerId.requestFocus();
+            }
+        });
     }
 
     private void setCellValueFactory() {
@@ -155,6 +186,7 @@ public class ClientFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {

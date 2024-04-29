@@ -10,9 +10,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.SGA.model.Lawyer;
 import lk.ijse.SGA.model.Summon;
 import lk.ijse.SGA.model.tm.SummonTm;
+import lk.ijse.SGA.repository.LawyerRepo;
 import lk.ijse.SGA.repository.SummonRepo;
 
 import java.net.URL;
@@ -52,6 +55,31 @@ public class SummonFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllSummons();
+
+
+        txtSummonId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDescription.requestFocus();
+            }
+        });
+
+        txtDescription.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDefendant.requestFocus();
+            }
+        });
+
+        txtDefendant.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtLawyerId.requestFocus();
+            }
+        });
+
+        txtLawyerId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDate.requestFocus();
+            }
+        });
     }
 
     private void setCellValueFactory() {
@@ -147,6 +175,23 @@ public class SummonFormController implements Initializable {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void txtSearchOnAction(ActionEvent event) throws SQLException {
+        String id = txtSummonId.getText();
+
+        Summon summon = SummonRepo.searchById(id);
+
+        if (summon != null) {
+            txtSummonId.setText(summon.getSummonId());
+            txtDescription.setText(summon.getDescription());
+            txtDefendant.setText(String.valueOf(summon.getDefendant()));
+            txtLawyerId.setText(summon.getLawyerId());
+            txtDate.setText(String.valueOf(summon.getDate()));
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "Lawyer not found!").show();
         }
     }
 }

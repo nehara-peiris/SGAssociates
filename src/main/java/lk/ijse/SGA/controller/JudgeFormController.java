@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Judge;
 import lk.ijse.SGA.model.tm.JudgeTm;
@@ -42,6 +43,26 @@ public class JudgeFormController {
    public void initialize(){
         setCellValueFactory();
         loadAllJudges();
+
+
+       txtJudgeId.setOnKeyPressed(event -> {
+           if (event.getCode() == KeyCode.ENTER) {
+               txtName.requestFocus();
+           }
+       });
+
+       txtName.setOnKeyPressed(event -> {
+           if (event.getCode() == KeyCode.ENTER) {
+               txtCourtId.requestFocus();
+           }
+       });
+
+       txtCourtId.setOnKeyPressed(event -> {
+           if (event.getCode() == KeyCode.ENTER) {
+               txtYrsOfExp.requestFocus();
+           }
+       });
+
     }
 
     private void setCellValueFactory() {

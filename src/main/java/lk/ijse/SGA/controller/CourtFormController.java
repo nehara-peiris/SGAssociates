@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Court;
 import lk.ijse.SGA.model.tm.CourtTm;
@@ -34,6 +35,14 @@ public class CourtFormController {
     public void initialize(){
         setCellValueFactory();
         loadAllCourts();
+
+
+        txtCourtId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtLocation.requestFocus();
+            }
+        });
+
     }
 
     private void setCellValueFactory() {

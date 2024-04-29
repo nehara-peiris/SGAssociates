@@ -69,4 +69,28 @@ public class DeedRepo {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public static Deed searchById(String id) throws SQLException {
+        String sql = "SELECT * FROM deed WHERE deedId = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String deedId = resultSet.getString(1);
+            String description = resultSet.getString(2);
+            String type = resultSet.getString(3);
+            Date date = Date.valueOf(resultSet.getString(4));
+            String lawyerId = resultSet.getString(5);
+            String clientId = resultSet.getString(6);
+
+            Deed deed = new Deed(deedId, description, type, date, lawyerId, clientId);
+
+            return deed;
+        }
+
+        return null;
+    }
 }

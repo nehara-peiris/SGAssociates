@@ -17,9 +17,9 @@
             <Image url="@../asserts/blackBG.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="225.0" layoutY="22.0" prefHeight="57.0" prefWidth="260.0" text="Charge Manage" textFill="WHITE">
+      <Label layoutX="549.0" layoutY="29.0" prefHeight="57.0" prefWidth="494.0" text="Charge Management" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="29.0" />
+            <Font name="System Bold" size="41.0" />
          </font>
       </Label>
       <Label layoutX="56.0" layoutY="160.0" text="Charge id" textFill="WHITE" />
@@ -28,7 +28,7 @@
       <TextField fx:id="txtChargeId" layoutX="137.0" layoutY="156.0" prefHeight="24.0" prefWidth="317.0" />
       <TextField fx:id="txtDescription" layoutX="137.0" layoutY="203.0" prefHeight="24.0" prefWidth="317.0" />
       <TextField fx:id="txtAmount" layoutX="137.0" layoutY="251.0" prefHeight="24.0" prefWidth="317.0" />
-      <TableView fx:id="tblCharge" layoutX="520.0" layoutY="156.0" prefHeight="460.0" prefWidth="1005.0">
+      <TableView fx:id="tblCharge" layoutX="520.0" layoutY="156.0" prefHeight="321.0" prefWidth="1005.0">
         <columns>
           <TableColumn fx:id="colChargeId" prefWidth="205.0" text="Charge ID" />
           <TableColumn fx:id="colDescription" prefWidth="381.0" text="Description" />
@@ -36,10 +36,17 @@
             <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="223.0" text="Date" />
         </columns>
       </TableView>
-      <JFXButton layoutX="56.0" layoutY="581.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #8febd4;" text="save" />
-      <JFXButton layoutX="198.0" layoutY="581.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #ABCABC;" text="update" />
-      <JFXButton layoutX="339.0" layoutY="581.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #f26b6b;" text="delete" />
+      <JFXButton layoutX="56.0" layoutY="442.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #265073;" text="save" textFill="#82d0f2" />
+      <JFXButton layoutX="198.0" layoutY="442.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #6962AD;" text="update" textFill="#bfbfbf" />
+      <JFXButton layoutX="339.0" layoutY="442.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #860A35;" text="delete" textFill="#e1c1c1" />
       <Label layoutX="56.0" layoutY="297.0" text="Date" textFill="WHITE" />
       <TextField fx:id="txtDate" layoutX="137.0" layoutY="293.0" prefHeight="24.0" prefWidth="317.0" />
+      <Label layoutX="41.0" layoutY="625.0" prefHeight="47.0" prefWidth="260.0" style="-fx-background-color: black;" text="Charging Details" textFill="#ebeabc">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <JFXButton buttonType="RAISED" layoutX="41.0" layoutY="706.0" onAction="#btnCasesOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #001524;" text="Cases" textFill="#68cdd0" />
+      <JFXButton layoutX="41.0" layoutY="767.0" onAction="#btnDeedsOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #001524;" text="Deeds" textFill="#68cdd0" />
    </children>
 </AnchorPane>

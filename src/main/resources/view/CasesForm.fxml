@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -49,13 +46,5 @@
       </TableView>
       <Label layoutX="53.0" layoutY="289.0" text="Type" textFill="WHITE" />
       <TextField fx:id="txtType" layoutX="136.0" layoutY="285.0" prefHeight="24.0" prefWidth="345.0" />
-      <BarChart fx:id="BarChartCase" layoutX="995.0" layoutY="518.0" legendSide="TOP" prefHeight="418.0" prefWidth="524.0" style="-fx-background-color: #ffffff;" title="Case Summary">
-        <xAxis>
-          <CategoryAxis fx:id="cTypeAxis" label="Case Type" side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis fx:id="cNoAxis" label="No Of Cases" side="LEFT" />
-        </yAxis>
-      </BarChart>
    </children>
 </AnchorPane>

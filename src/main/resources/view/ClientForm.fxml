@@ -17,9 +17,9 @@
             <Image url="@../asserts/blackBG.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="678.0" layoutY="16.0" prefHeight="59.0" prefWidth="218.0" text="Client Manage" textFill="WHITE">
+      <Label layoutX="564.0" layoutY="26.0" prefHeight="65.0" prefWidth="465.0" text="Client Management" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="26.0" />
+            <Font name="System Bold" size="41.0" />
          </font>
       </Label>
       <JFXButton layoutX="56.0" layoutY="845.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #8febd4;" text="Save" />

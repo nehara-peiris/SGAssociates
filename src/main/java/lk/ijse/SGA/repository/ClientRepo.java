@@ -35,7 +35,7 @@ public class ClientRepo {
     }
 
     public static Client searchById(String id) throws SQLException {
-        String sql = "SELECT * FROM client WHERE id = ?";
+        String sql = "SELECT * FROM client WHERE clientId = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);

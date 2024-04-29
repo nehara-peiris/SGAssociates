@@ -27,12 +27,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class CasesFormController {
-    @FXML
-    private NumberAxis cNoAxis;
-    @FXML
-    private CategoryAxis cTypeAxis;
-    @FXML
-    private BarChart<?,?> BarChartCase;
+
     @FXML
     private TextField txtCaseId;
     @FXML

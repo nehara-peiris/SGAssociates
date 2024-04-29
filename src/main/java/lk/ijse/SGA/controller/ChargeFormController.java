@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Charge;
 
@@ -17,6 +18,7 @@ import lk.ijse.SGA.model.tm.ChargeTm;
 import lk.ijse.SGA.repository.ChargeRepo;
 import lk.ijse.SGA.repository.ClientRepo;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -49,6 +51,25 @@ public class ChargeFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllCharges();
+
+
+        txtChargeId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDescription.requestFocus();
+            }
+        });
+
+        txtDescription.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtAmount.requestFocus();
+            }
+        });
+
+        txtAmount.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtDate.requestFocus();
+            }
+        });
     }
 
     private void setCellValueFactory() {
@@ -137,5 +158,15 @@ public class ChargeFormController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    @FXML
+    void btnCasesOnAction(ActionEvent event) throws IOException {
+
+    }
+
+    @FXML
+    void btnDeedsOnAction(ActionEvent event) throws IOException {
+
     }
 }

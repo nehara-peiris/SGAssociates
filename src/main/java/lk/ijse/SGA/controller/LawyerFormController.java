@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Lawyer;
 import lk.ijse.SGA.model.tm.LawyerTm;
@@ -52,6 +53,37 @@ public class LawyerFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllLawyers();
+
+        txtLawyerId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtName.requestFocus();
+            }
+        });
+
+        txtName.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtYrsOfExp.requestFocus();
+            }
+        });
+
+        txtYrsOfExp.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtAddress.requestFocus();
+            }
+        });
+
+        txtAddress.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtEmail.requestFocus();
+            }
+        });
+
+        txtEmail.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtContact.requestFocus();
+            }
+        });
+
     }
 
 
@@ -151,6 +183,23 @@ public class LawyerFormController implements Initializable {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    @FXML
+    void txtSearchOnAction(ActionEvent event) throws SQLException {
+        String id = txtLawyerId.getText();
+
+        Lawyer lawyer = LawyerRepo.searchById(id);
+        if (lawyer != null) {
+            txtLawyerId.setText(lawyer.getLawyerId());
+            txtName.setText(lawyer.getName());
+            txtYrsOfExp.setText(String.valueOf(lawyer.getYrsOfExp()));
+            txtAddress.setText(lawyer.getAddress());
+            txtEmail.setText(lawyer.getEmail());
+            txtContact.setText(String.valueOf(lawyer.getContact()));
+        } else {
+            new Alert(Alert.AlertType.INFORMATION, "Lawyer not found!").show();
         }
     }
 

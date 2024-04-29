@@ -69,4 +69,26 @@ public class SummonRepo {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public static Summon searchById(String id) throws SQLException {
+        String sql = "SELECT * FROM summon WHERE summonId = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String summonId = resultSet.getString(1);
+            String description = resultSet.getString(2);
+            String defendant = resultSet.getString(4);
+            String lawyerId = resultSet.getString(5);
+            Date date = Date.valueOf(resultSet.getString(6));
+
+            Summon summon = new Summon(summonId, description, defendant, lawyerId, date);
+
+            return summon;
+        }
+        return null;
+    }
 }

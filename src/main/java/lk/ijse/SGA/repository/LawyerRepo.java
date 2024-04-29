@@ -2,7 +2,6 @@ package lk.ijse.SGA.repository;
 
 import lk.ijse.SGA.db.DbConnection;
 import lk.ijse.SGA.model.Lawyer;
-import lk.ijse.SGA.model.Summon;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -74,5 +73,28 @@ public class LawyerRepo {
         pstm.setObject(1, id);
 
         return pstm.executeUpdate() > 0;
+    }
+
+    public static Lawyer searchById(String id) throws SQLException {
+        String sql = "SELECT * FROM lawyer WHERE lawyerId = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, id);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String lawyerId = resultSet.getString(1);
+            String name = resultSet.getString(2);
+            int yrsOfExp = Integer.parseInt(resultSet.getString(3));
+            String address = resultSet.getString(4);
+            String email = resultSet.getString(5);
+            int contact = Integer.parseInt(resultSet.getString(6));
+
+            Lawyer lawyer = new Lawyer(lawyerId, name, yrsOfExp, address, email, contact);
+
+            return lawyer;
+        }
+        return null;
     }
 }
