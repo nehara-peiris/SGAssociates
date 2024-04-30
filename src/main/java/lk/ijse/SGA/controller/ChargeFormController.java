@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
@@ -16,7 +17,6 @@ import lk.ijse.SGA.model.Charge;
 
 import lk.ijse.SGA.model.tm.ChargeTm;
 import lk.ijse.SGA.repository.ChargeRepo;
-import lk.ijse.SGA.repository.ClientRepo;
 
 import java.io.IOException;
 import java.net.URL;
@@ -65,18 +65,12 @@ public class ChargeFormController implements Initializable {
             }
         });
 
-        txtAmount.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtDate.requestFocus();
-            }
-        });
     }
 
     private void setCellValueFactory() {
         colChargeId.setCellValueFactory(new PropertyValueFactory<>("ChargeId"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("Description"));
         colAmount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
     }
 
     private void loadAllCharges() {
@@ -88,8 +82,7 @@ public class ChargeFormController implements Initializable {
                 ChargeTm tm = new ChargeTm(
                         charge.getChargeId(),
                         charge.getDescription(),
-                        charge.getAmount(),
-                        charge.getDate()
+                        charge.getAmount()
                 );
 
                 obList.add(tm);
@@ -106,9 +99,8 @@ public class ChargeFormController implements Initializable {
         String chargeId = txtChargeId.getText();
         String description = txtDescription.getText();
         double amount = Double.parseDouble(txtAmount.getText());
-        Date date = Date.valueOf(txtDate.getText());
 
-        Charge charge = new Charge(chargeId, description, amount, date);
+        Charge charge = new Charge(chargeId, description, amount);
 
         boolean isSaved = ChargeRepo.save(charge);
         if (isSaved) {
@@ -118,10 +110,9 @@ public class ChargeFormController implements Initializable {
     }
 
     private void clearFields() {
-        txtChargeId.setText("");
-        txtDescription.setText("");
-        txtAmount.setText("");
-        txtDate.setText("");
+        txtChargeId.clear();
+        txtDescription.clear();
+        txtAmount.clear();
     }
 
 
@@ -130,9 +121,8 @@ public class ChargeFormController implements Initializable {
         String chargeId = txtChargeId.getText();
         String description = txtDescription.getText();
         double amount = Double.parseDouble(txtAmount.getText());
-        Date date = Date.valueOf(txtDate.getText());
 
-        Charge charge = new Charge(chargeId, description, amount, date);
+        Charge charge = new Charge(chargeId, description, amount);
 
         try {
             boolean isSaved = ChargeRepo.update(charge);
@@ -162,11 +152,15 @@ public class ChargeFormController implements Initializable {
 
     @FXML
     void btnCasesOnAction(ActionEvent event) throws IOException {
+        AnchorPane caseCharge = FXMLLoader.load(this.getClass().getResource("/view/CaseChargeForm.fxml"));
 
+        rootNode.getChildren().add(caseCharge);
     }
 
     @FXML
     void btnDeedsOnAction(ActionEvent event) throws IOException {
+        AnchorPane deedCharge = FXMLLoader.load(this.getClass().getResource("/view/DeedChargeForm.fxml"));
 
+        rootNode.getChildren().add(deedCharge);
     }
 }

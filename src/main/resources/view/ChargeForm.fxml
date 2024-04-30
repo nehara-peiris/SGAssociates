@@ -33,14 +33,11 @@
           <TableColumn fx:id="colChargeId" prefWidth="205.0" text="Charge ID" />
           <TableColumn fx:id="colDescription" prefWidth="381.0" text="Description" />
             <TableColumn fx:id="colAmount" prefWidth="195.0" text="Amount" />
-            <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="223.0" text="Date" />
         </columns>
       </TableView>
       <JFXButton layoutX="56.0" layoutY="442.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #265073;" text="save" textFill="#82d0f2" />
       <JFXButton layoutX="198.0" layoutY="442.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #6962AD;" text="update" textFill="#bfbfbf" />
       <JFXButton layoutX="339.0" layoutY="442.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #860A35;" text="delete" textFill="#e1c1c1" />
-      <Label layoutX="56.0" layoutY="297.0" text="Date" textFill="WHITE" />
-      <TextField fx:id="txtDate" layoutX="137.0" layoutY="293.0" prefHeight="24.0" prefWidth="317.0" />
       <Label layoutX="41.0" layoutY="625.0" prefHeight="47.0" prefWidth="260.0" style="-fx-background-color: black;" text="Charging Details" textFill="#ebeabc">
          <font>
             <Font size="30.0" />

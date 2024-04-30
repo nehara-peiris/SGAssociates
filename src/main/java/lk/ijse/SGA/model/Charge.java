@@ -14,7 +14,5 @@ public class Charge {
     private String chargeId;
     private String description;
     private double amount;
-    private Date date;
-
 
 }

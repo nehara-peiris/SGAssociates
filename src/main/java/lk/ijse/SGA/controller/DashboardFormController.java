@@ -40,18 +40,12 @@ public class DashboardFormController {
     }
 
     @FXML
-    void btnChargesOnAction(ActionEvent event) throws IOException {
-        AnchorPane chargeForm = FXMLLoader.load(this.getClass().getResource("/view/ChargeForm.fxml"));
-
-        rootNode.getChildren().add(chargeForm);
-    }
-
-    @FXML
     void btnJudgesOnAction(ActionEvent event) throws IOException {
         AnchorPane judgeForm = FXMLLoader.load(this.getClass().getResource("/view/JudgeForm.fxml"));
 
         rootNode.getChildren().add(judgeForm);
     }
+
     @FXML
     void btnCasesOnAction(ActionEvent event) throws IOException {
         AnchorPane casesForm = FXMLLoader.load(this.getClass().getResource("/view/CasesForm.fxml"));
@@ -70,6 +64,19 @@ public class DashboardFormController {
 
         rootNode.getChildren().add(summonForm);
     }
+    @FXML
+    void btnChargesOnAction(ActionEvent event) throws IOException {
+        AnchorPane chargeForm = FXMLLoader.load(this.getClass().getResource("/view/ChargeForm.fxml"));
+
+        rootNode.getChildren().add(chargeForm);
+    }
+
+    @FXML
+    void btnSalaryOnAction(ActionEvent event) throws IOException {
+        AnchorPane salaryForm = FXMLLoader.load(this.getClass().getResource("/view/SalaryForm.fxml"));
+
+        rootNode.getChildren().add(salaryForm);
+    }
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) throws IOException {
@@ -82,7 +89,6 @@ public class DashboardFormController {
     void btnUpWkOnAction(ActionEvent event) throws IOException {
 
     }
-
     @FXML
     void btnInProgOnAction(ActionEvent event) throws IOException {
 

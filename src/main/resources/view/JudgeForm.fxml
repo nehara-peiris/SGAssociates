@@ -17,9 +17,9 @@
             <Image url="@../asserts/blackBG.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="697.0" layoutY="31.0" prefHeight="50.0" prefWidth="197.0" text="Judge Manage" textFill="WHITE">
+      <Label layoutX="563.0" layoutY="34.0" prefHeight="50.0" prefWidth="467.0" text="Judge Management" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="System Bold" size="41.0" />
          </font>
       </Label>
       <Label layoutX="56.0" layoutY="160.0" text="Judge ID" textFill="WHITE" />
@@ -30,9 +30,9 @@
       <TextField fx:id="txtCourtId" layoutX="137.0" layoutY="247.0" prefHeight="24.0" prefWidth="345.0" />
       <TextField fx:id="txtName" layoutX="137.0" layoutY="200.0" prefHeight="24.0" prefWidth="345.0" />
       <TextField fx:id="txtYrsOfExp" layoutX="137.0" layoutY="292.0" prefHeight="24.0" prefWidth="345.0" />
-      <JFXButton layoutX="56.0" layoutY="845.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #8febd4;" text="save" />
-      <JFXButton layoutX="215.0" layoutY="845.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #ABCABC;" text="update" />
-      <JFXButton layoutX="375.0" layoutY="845.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #f26b6b;" text="delete" />
+      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="845.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#4d5894" style="-fx-background-color: #265073;" text="save" textFill="#79f2ecf0" />
+      <JFXButton buttonType="RAISED" layoutX="215.0" layoutY="845.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#733d90f0" style="-fx-background-color: #6962AD;" text="update" textFill="#cd96d6" />
+      <JFXButton buttonType="RAISED" layoutX="375.0" layoutY="845.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#e14949" style="-fx-background-color: #860A35;" text="delete" textFill="#eba0a0" />
       <TableView fx:id="tblJudge" layoutX="520.0" layoutY="156.0" prefHeight="724.0" prefWidth="1005.0">
         <columns>
           <TableColumn fx:id="colJudgeId" prefWidth="153.0" text="JudgeId" />
