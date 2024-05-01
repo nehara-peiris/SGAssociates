@@ -188,9 +188,9 @@ public class LawyerFormController implements Initializable {
 
     @FXML
     void txtSearchOnAction(ActionEvent event) throws SQLException {
-        String id = txtLawyerId.getText();
+        String contact = txtContact.getText();
 
-        Lawyer lawyer = LawyerRepo.searchById(id);
+        Lawyer lawyer = LawyerRepo.searchById(contact);
         if (lawyer != null) {
             txtLawyerId.setText(lawyer.getLawyerId());
             txtName.setText(lawyer.getName());

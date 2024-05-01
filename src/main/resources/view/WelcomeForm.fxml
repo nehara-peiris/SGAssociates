@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="rootNode" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.WelcomeFormController">
+   <children>
+      <Label fx:id="lblTime" layoutX="1619.0" layoutY="69.0" prefHeight="55.0" prefWidth="215.0" style="-fx-background-color: #ffffff;" text="Label" />
+      <Label fx:id="lblDate" layoutX="1337.0" layoutY="69.0" prefHeight="55.0" prefWidth="215.0" style="-fx-background-color: #ffffff;" text="Label" />
+   </children>
+</AnchorPane>

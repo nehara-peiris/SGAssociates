@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="984.0" prefWidth="1592.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DeedChargeFormController">
+   <children>
+      <ImageView fitHeight="984.0" fitWidth="1592.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../asserts/blackBG.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="571.0" layoutY="47.0" text="Deed Charge Detail" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="41.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="170.0" text="DCPay ID" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="215.0" text="Deed ID" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="260.0" text="Charge ID" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="305.0" text="Date" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="350.0" text="Amount" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="395.0" text="Client ID" textFill="WHITE" />
+      <TextField fx:id="txtDCPayId" layoutX="137.0" layoutY="166.0" prefWidth="317.0" promptText="DPXXX" />
+      <TextField fx:id="txtDeedId" layoutX="137.0" layoutY="211.0" prefWidth="317.0" promptText="DXXX" />
+      <TextField fx:id="txtChargeId" layoutX="137.0" layoutY="256.0" prefWidth="317.0" promptText="CHXXX" />
+      <TextField fx:id="txtDate" layoutX="137.0" layoutY="301.0" prefWidth="317.0" promptText="YYYY-MM-DD" />
+      <TextField fx:id="txtAmount" layoutX="137.0" layoutY="346.0" prefWidth="317.0" promptText="XXXX.XX" />
+      <TextField fx:id="txtClientId" layoutX="137.0" layoutY="391.0" prefWidth="317.0" promptText="CXXX" />
+      <TableView fx:id="tblDeedCharge2" layoutX="59.0" layoutY="575.0" prefHeight="348.0" prefWidth="1483.0">
+        <columns>
+          <TableColumn fx:id="colDCPayId2" prefWidth="117.0" text="DCPay ID" />
+          <TableColumn fx:id="colDeedId2" prefWidth="98.0" text="Deed ID" />
+            <TableColumn fx:id="colChargeId2" prefWidth="87.0" text="Charge ID" />
+            <TableColumn fx:id="colDate2" prefWidth="107.0" text="Date" />
+            <TableColumn fx:id="colAmount2" prefWidth="90.0" text="Amount" />
+            <TableColumn fx:id="colClientId2" prefWidth="138.0" text="Client ID" />
+        </columns>
+      </TableView>
+      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="460.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#3264e4" style="-fx-background-color: #265073;" text="Save" textFill="#7cd8ff" />
+      <JFXButton buttonType="RAISED" layoutX="198.0" layoutY="460.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#da6ce4" style="-fx-background-color: #6962AD;" text="Update" textFill="#e5c4f2" />
+      <JFXButton layoutX="339.0" layoutY="460.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#eb4141" style="-fx-background-color: #860A35;" text="Delete" textFill="#f89090" />
+      <TableView fx:id="tblDeedCharge1" layoutX="561.0" layoutY="166.0" prefHeight="329.0" prefWidth="981.0">
+        <columns>
+          <TableColumn fx:id="colDCPayId1" prefWidth="100.0" text="DCPay ID" />
+          <TableColumn fx:id="colDeedId1" prefWidth="168.0" text="Deed ID" />
+            <TableColumn fx:id="colDate1" prefWidth="168.0" text="Date" />
+            <TableColumn fx:id="colTotalPay1" prefWidth="168.0" text="Total Payment" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

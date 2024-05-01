@@ -37,12 +37,12 @@
             <TableColumn fx:id="colContact" prefWidth="219.0" text="Contact" />
         </columns>
       </TableView>
-      <TextField fx:id="txtLawyerId" layoutX="137.0" layoutY="156.0" onAction="#txtSearchOnAction" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtLawyerId" layoutX="137.0" layoutY="156.0" prefHeight="24.0" prefWidth="345.0" />
       <TextField fx:id="txtYrsOfExp" layoutX="137.0" layoutY="249.0" prefHeight="24.0" prefWidth="345.0" />
       <TextField fx:id="txtEmail" layoutX="137.0" layoutY="335.0" prefHeight="24.0" prefWidth="345.0" />
       <TextField fx:id="txtName" layoutX="137.0" layoutY="204.0" prefHeight="24.0" prefWidth="345.0" />
       <TextField fx:id="txtAddress" layoutX="137.0" layoutY="292.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtContact" layoutX="137.0" layoutY="380.0" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtContact" layoutX="137.0" layoutY="380.0" onAction="#txtSearchOnAction" prefHeight="24.0" prefWidth="345.0" />
       <JFXButton layoutX="367.0" layoutY="466.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #f26b6b;" text="delete" />
       <JFXButton layoutX="212.0" layoutY="466.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #ABCABC;" text="update" />
       <JFXButton layoutX="56.0" layoutY="466.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #8febd4;" text="save" />

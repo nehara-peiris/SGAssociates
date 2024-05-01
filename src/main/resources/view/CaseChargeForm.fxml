@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="984.0" prefWidth="1592.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.CaseChargeFormController">
+   <children>
+      <ImageView fitHeight="984.0" fitWidth="1592.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../asserts/blackBG.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="576.0" layoutY="48.0" text="Case Charge Detail" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="41.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="170.0" text="CCPay Id" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="215.0" text="Case ID" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="260.0" text="Charge ID" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="305.0" text="Date" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="350.0" text="Amount" textFill="WHITE" />
+      <Label layoutX="54.0" layoutY="395.0" text="Client ID" textFill="WHITE" />
+      <TextField fx:id="txtCCPayId" layoutX="137.0" layoutY="166.0" prefHeight="24.0" prefWidth="317.0" promptText="CPXXX" />
+      <TextField fx:id="txtCaseId" layoutX="137.0" layoutY="211.0" prefWidth="317.0" promptText="CAXXX" />
+      <TextField fx:id="txtChargeId" layoutX="137.0" layoutY="256.0" prefWidth="317.0" promptText="CHXXX" />
+      <TextField fx:id="txtDate" layoutX="137.0" layoutY="301.0" prefWidth="317.0" promptText="YYYY-MM-DD" />
+      <TextField fx:id="txtAmount" layoutX="137.0" layoutY="346.0" prefWidth="317.0" promptText="XXXX.XX" />
+      <TextField fx:id="txtClientId" layoutX="137.0" layoutY="391.0" prefHeight="24.0" prefWidth="317.0" promptText="CXXX" />
+      <TableView fx:id="tblCaseCharge2" layoutX="49.0" layoutY="551.0" prefHeight="355.0" prefWidth="1476.0">
+        <columns>
+          <TableColumn fx:id="colCCPayId2" prefWidth="129.0" text="CCPay ID" />
+          <TableColumn fx:id="colCaseId2" prefWidth="115.0" text="Case ID" />
+            <TableColumn fx:id="colChargeId2" prefWidth="157.0" text="Charge Id" />
+            <TableColumn fx:id="colDate2" prefWidth="220.0" text="Date" />
+            <TableColumn fx:id="colAmount2" prefWidth="143.0" text="Amount" />
+            <TableColumn fx:id="colClientId2" prefWidth="137.0" text="Client ID" />
+        </columns>
+      </TableView>
+      <JFXButton buttonType="RAISED" layoutX="49.0" layoutY="467.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#58b7da" style="-fx-background-color: #265073;" text="Save" textFill="#c1e5ee" />
+      <JFXButton buttonType="RAISED" layoutX="197.0" layoutY="467.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #6962AD;" text="Update" textFill="#e1acff" />
+      <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="467.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #860A35;" text="Delete" textFill="#e8b2b2" />
+      <TableView fx:id="tblCaseCharge1" layoutX="521.0" layoutY="166.0" prefHeight="336.0" prefWidth="1004.0">
+        <columns>
+          <TableColumn fx:id="colCCPayId1" prefWidth="99.0" text="CCPay ID" />
+          <TableColumn fx:id="colCaseId1" prefWidth="116.0" text="Case ID" />
+            <TableColumn fx:id="colDate1" prefWidth="99.0" text="Date" />
+            <TableColumn fx:id="colTotalPay1" prefWidth="192.0" text="Total Payment" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

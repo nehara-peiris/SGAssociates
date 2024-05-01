@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.SalaryFormController">
+   <children>
+      <ImageView fitHeight="984.0" fitWidth="1592.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../asserts/blackBG.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="565.0" layoutY="34.0" text="Salary Management" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="41.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="166.0" text="Salary ID" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="211.0" text="Lawyer ID" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="256.0" text="Date" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="301.0" text="Amount" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="346.0" text="Bonus" textFill="WHITE" />
+      <TextField fx:id="txtSalaryId" layoutX="137.0" layoutY="162.0" prefHeight="24.0" prefWidth="317.0" />
+      <TextField fx:id="txtLawyerID" layoutX="137.0" layoutY="207.0" prefWidth="317.0" />
+      <TextField fx:id="txtDate" layoutX="137.0" layoutY="252.0" prefWidth="317.0" />
+      <TextField fx:id="txtAmount" layoutX="137.0" layoutY="297.0" prefWidth="317.0" />
+      <TextField fx:id="txtBonus" layoutX="137.0" layoutY="342.0" prefWidth="317.0" />
+      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="469.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#388fa4" style="-fx-background-color: #265073;" text="save" textFill="#b7d3d1" />
+      <JFXButton buttonType="RAISED" layoutX="203.0" layoutY="469.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#742197" style="-fx-background-color: #6962AD;" text="update" textFill="#bca8bf" />
+      <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="469.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#d0555b" style="-fx-background-color: #860A35;" text="delete" textFill="#d3a3a3" />
+      <TableView fx:id="tblSalary" layoutX="56.0" layoutY="575.0" prefHeight="348.0" prefWidth="1471.0">
+        <columns>
+          <TableColumn fx:id="colLawyerId" prefWidth="214.0" text="Lawyer ID" />
+          <TableColumn fx:id="colDate" prefWidth="224.0" text="Date" />
+            <TableColumn fx:id="colAmount" prefWidth="178.0" text="Amount" />
+            <TableColumn fx:id="colBonus" prefWidth="179.0" text="Bonus" />
+        </columns>
+      </TableView>
+      <TableView layoutX="545.0" layoutY="162.0" prefHeight="336.0" prefWidth="981.0">
+        <columns>
+          <TableColumn prefWidth="94.0" text="Lawyer ID" />
+          <TableColumn prefWidth="98.0" text="Date" />
+            <TableColumn prefWidth="98.0" text="Total Salary" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
