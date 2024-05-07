@@ -11,6 +11,7 @@ import java.sql.Date;
 public class CaseChargeTm {
     private String CCPayId;
     private String caseId;
+    private String lawyerId;
     private String chargeId;
     private Date date;
     private double amount;

@@ -5,6 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,6 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Deed;
 import lk.ijse.SGA.model.tm.DeedTm;
+import lk.ijse.SGA.repository.CasesRepo;
 import lk.ijse.SGA.repository.ClientRepo;
 import lk.ijse.SGA.repository.DeedRepo;
 
@@ -21,6 +26,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class DeedFormController implements Initializable {
@@ -51,12 +57,26 @@ public class DeedFormController implements Initializable {
     private TextField txtClientId;
     @FXML
     private TextField txtDate;
-
+    @FXML
+    private BarChart<String, Number> chartDeeds;
+    @FXML
+    private CategoryAxis axisDeeds;
+    @FXML
+    private NumberAxis axisNoOfDeeds;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllDeeds();
+
+        axisDeeds.setLabel("Deed Type");
+        axisNoOfDeeds.setLabel("Number of Deeds");
+
+        try {
+            populateBarChart();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         txtDeedId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -88,7 +108,18 @@ public class DeedFormController implements Initializable {
             }
         });
     }
+    private void populateBarChart() throws SQLException {
+        chartDeeds.getData().clear();
 
+        Map<String, Integer> deedTypeCounts = DeedRepo.getAllToChart();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+        deedTypeCounts.forEach((type, count) -> {
+            series.getData().add(new XYChart.Data<>(type, count));
+        });
+
+        chartDeeds.getData().add(series);
+    }
 
     private void setCellValueFactory() {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));

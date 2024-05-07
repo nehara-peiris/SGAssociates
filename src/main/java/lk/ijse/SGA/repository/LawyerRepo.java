@@ -1,12 +1,10 @@
 package lk.ijse.SGA.repository;
 
 import lk.ijse.SGA.db.DbConnection;
+import lk.ijse.SGA.model.LawCase;
 import lk.ijse.SGA.model.Lawyer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +32,26 @@ public class LawyerRepo {
         return lawyerList;
     }
 
+    public static List<LawCase> assignedCases() throws SQLException {
+        String sql = "SELECT * FROM lawCase";
+
+        PreparedStatement pstm = DbConnection.getInstance().getConnection().prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        List<LawCase> lawCaseList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            String lawyerId = resultSet.getString(1);
+            String caseId = resultSet.getString(2);
+            Date date = Date.valueOf(resultSet.getString(3));
+
+            LawCase lawCase = new LawCase(lawyerId, caseId, date);
+            lawCaseList.add(lawCase);
+        }
+        return lawCaseList;
+    }
+
     public static boolean save(Lawyer lawyer) throws SQLException {
         String sql = "INSERT INTO lawyer VALUES(?,?,?,?,?,?)";
 
@@ -49,7 +67,6 @@ public class LawyerRepo {
 
         return pstm.executeUpdate() > 0;
     }
-
     public static boolean update(Lawyer lawyer) throws SQLException {
         String sql = "UPDATE lawyer SET name = ?, yrsOfExp = ?, address = ?, email = ?, contact = ? WHERE lawyerId = ?";
 
@@ -65,6 +82,7 @@ public class LawyerRepo {
 
         return pstm.executeUpdate() > 0;
     }
+
     public static boolean delete(String id) throws SQLException {
         String sql = "DELETE FROM lawyer WHERE lawyerId = ?";
 

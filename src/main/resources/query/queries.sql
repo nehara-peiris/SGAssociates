@@ -144,22 +144,20 @@ CREATE TABLE cases(
     description VARCHAR(100) not null,
     type VARCHAR(20),
     date DATE,
-    lawyerId VARCHAR(6),
     clientId VARCHAR(6),
-    FOREIGN KEY (lawyerId) references lawyer(lawyerId) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (clientId) references client(clientId) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO cases VALUES ('CA001', 'Property Dispute', 'Civil', '2024-04-01', 'L001', 'C001');
-INSERT INTO cases VALUES ('CA002', 'Contract Breach', 'Civil', '2024-04-05', 'L002', 'C002');
-INSERT INTO cases VALUES ('CA003', 'Personal Injury', 'Civil', '2024-04-10', 'L003', 'C003');
-INSERT INTO cases VALUES ('CA004', 'Divorce Proceedings', 'Family', '2024-04-15', 'L004', 'C004');
-INSERT INTO cases VALUES ('CA005', 'Tax Evasion', 'Criminal', '2024-04-20', 'L005', 'C005');
-INSERT INTO cases VALUES ('CA006', 'Employment Dispute', 'Civil', '2024-04-25', 'L006', 'C006');
-INSERT INTO cases VALUES ('CA007', 'Intellectual Property Theft', 'Civil', '2024-04-30', 'L007', 'C007');
-INSERT INTO cases VALUES ('CA008', 'Fraud Case', 'Criminal', '2024-05-01', 'L008', 'C008');
-INSERT INTO cases VALUES ('CA009', 'Wrongful Termination', 'Civil', '2024-05-05', 'L009', 'C009');
-INSERT INTO cases VALUES ('CA010', 'Product Liability', 'Civil', '2024-05-10', 'L010', 'C010');
+INSERT INTO cases VALUES ('CA001', 'Property Dispute', 'Civil', '2024-04-01', 'C001');
+INSERT INTO cases VALUES ('CA002', 'Contract Breach', 'Civil', '2024-04-05', 'C002');
+INSERT INTO cases VALUES ('CA003', 'Personal Injury', 'Civil', '2024-04-10', 'C003');
+INSERT INTO cases VALUES ('CA004', 'Divorce Proceedings', 'Family', '2024-04-15', 'C004');
+INSERT INTO cases VALUES ('CA005', 'Tax Evasion', 'Criminal', '2024-04-20', 'C005');
+INSERT INTO cases VALUES ('CA006', 'Employment Dispute', 'Civil', '2024-04-25', 'C006');
+INSERT INTO cases VALUES ('CA007', 'Intellectual Property Theft', 'Civil', '2024-04-30', 'C007');
+INSERT INTO cases VALUES ('CA008', 'Fraud Case', 'Criminal', '2024-05-01', 'C008');
+INSERT INTO cases VALUES ('CA009', 'Wrongful Termination', 'Civil', '2024-05-05', 'C009');
+INSERT INTO cases VALUES ('CA010', 'Product Liability', 'Civil', '2024-05-10', 'C010');
 
 
 CREATE TABLE charge(
@@ -207,49 +205,53 @@ INSERT INTO lawCase VALUES ('L010', 'CA010', '2024-04-10');
 CREATE TABLE deedCharge (
     DCPayId VARCHAR(6),
     deedId VARCHAR(6),
+    lawyerId VARCHAR(6),
     chargeId VARCHAR(6),
     date DATE,
     amount DECIMAL(10, 2),
     clientId VARCHAR(6),
+    FOREIGN KEY (lawyerId) references lawyer(lawyerId) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (deedId) REFERENCES deed(deedId) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (clientId) REFERENCES client(clientId) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (chargeId) REFERENCES charge(chargeId) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO deedCharge VALUES ('DC001', 'D001', 'CH001', '2024-04-01', 1500.00, 'C001');
-INSERT INTO deedCharge VALUES ('DC002', 'D002', 'CH002', '2024-04-02', 1250.00, 'C002');
-INSERT INTO deedCharge VALUES ('DC003', 'D003', 'CH003', '2024-04-03', 1100.00, 'C003');
-INSERT INTO deedCharge VALUES ('DC004', 'D004', 'CH004', '2024-04-04', 1800.00, 'C004');
-INSERT INTO deedCharge VALUES ('DC005', 'D005', 'CH005', '2024-04-05', 1300.00, 'C005');
-INSERT INTO deedCharge VALUES ('DC006', 'D006', 'CH006', '2024-04-06', 1500.00, 'C006');
-INSERT INTO deedCharge VALUES ('DC007', 'D007', 'CH007', '2024-04-07', 1600.00, 'C007');
-INSERT INTO deedCharge VALUES ('DC008', 'D008', 'CH008', '2024-04-08', 1750.00, 'C008');
-INSERT INTO deedCharge VALUES ('DC009', 'D009', 'CH009', '2024-04-09', 2200.00, 'C009');
-INSERT INTO deedCharge VALUES ('DC010', 'D010', 'CH010', '2024-04-10', 2100.00, 'C010');
+INSERT INTO deedCharge VALUES ('DC001', 'D001', 'L001', 'CH001', '2024-04-01', 1500.00, 'C001');
+INSERT INTO deedCharge VALUES ('DC002', 'D002', 'L002', 'CH002', '2024-04-02', 1250.00, 'C002');
+INSERT INTO deedCharge VALUES ('DC003', 'D003', 'L003', 'CH003', '2024-04-03', 1100.00, 'C003');
+INSERT INTO deedCharge VALUES ('DC004', 'D004', 'L004', 'CH004', '2024-04-04', 1800.00, 'C004');
+INSERT INTO deedCharge VALUES ('DC005', 'D005', 'L005', 'CH005', '2024-04-05', 1300.00, 'C005');
+INSERT INTO deedCharge VALUES ('DC006', 'D006', 'L006', 'CH006', '2024-04-06', 1500.00, 'C006');
+INSERT INTO deedCharge VALUES ('DC007', 'D007', 'L001', 'CH007', '2024-04-07', 1600.00, 'C007');
+INSERT INTO deedCharge VALUES ('DC008', 'D008', 'L002', 'CH008', '2024-04-08', 1750.00, 'C008');
+INSERT INTO deedCharge VALUES ('DC009', 'D009', 'L003', 'CH009', '2024-04-09', 2200.00, 'C009');
+INSERT INTO deedCharge VALUES ('DC010', 'D010', 'L003', 'CH010', '2024-04-10', 2100.00, 'C010');
 
 
 CREATE TABLE caseCharge(
     CCPayId VARCHAR(6),
     caseId VARCHAR(6),
+    lawyerId VARCHAR(6),
     chargeId VARCHAR(6),
     date DATE,
     amount DECIMAL(10,2),
     clientId VARCHAR(6),
     FOREIGN KEY (caseId) references cases(caseId) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (lawyerId) references lawyer(lawyerId) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (clientId) references client(clientId) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (chargeId) references charge(chargeId) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-INSERT INTO caseCharge VALUES ('CC001', 'CA001', 'CH001', '2024-04-01', 3000.00, 'C001');
-INSERT INTO caseCharge VALUES ('CC002', 'CA002', 'CH002', '2024-04-02', 2800.00, 'C002');
-INSERT INTO caseCharge VALUES ('CC003', 'CA003', 'CH003', '2024-04-03', 1900.00, 'C003');
-INSERT INTO caseCharge VALUES ('CC004', 'CA004', 'CH004', '2024-04-04', 2600.00, 'C004');
-INSERT INTO caseCharge VALUES ('CC005', 'CA005', 'CH005', '2024-04-05', 950.00, 'C005');
-INSERT INTO caseCharge VALUES ('CC006', 'CA006', 'CH006', '2024-04-06', 200.00, 'C006');
-INSERT INTO caseCharge VALUES ('CC007', 'CA007', 'CH007', '2024-04-07', 300.00, 'C007');
-INSERT INTO caseCharge VALUES ('CC008', 'CA008', 'CH008', '2024-04-08', 150.00, 'C008');
-INSERT INTO caseCharge VALUES ('CC009', 'CA009', 'CH009', '2024-04-09', 250.00, 'C009');
-INSERT INTO caseCharge VALUES ('CC010', 'CA010', 'CH010', '2024-04-10', 400.00, 'C010');
+INSERT INTO caseCharge VALUES ('CC001', 'CA001', 'L001', 'CH001', '2024-04-01', 3000.00, 'C001');
+INSERT INTO caseCharge VALUES ('CC002', 'CA002', 'L002', 'CH002', '2024-04-02', 2800.00, 'C002');
+INSERT INTO caseCharge VALUES ('CC003', 'CA003', 'L002', 'CH003', '2024-04-03', 1900.00, 'C003');
+INSERT INTO caseCharge VALUES ('CC004', 'CA004', 'L004', 'CH004', '2024-04-04', 2600.00, 'C004');
+INSERT INTO caseCharge VALUES ('CC005', 'CA005', 'L003', 'CH005', '2024-04-05', 950.00, 'C005');
+INSERT INTO caseCharge VALUES ('CC006', 'CA006', 'L005', 'CH006', '2024-04-06', 200.00, 'C006');
+INSERT INTO caseCharge VALUES ('CC007', 'CA007', 'L003', 'CH007', '2024-04-07', 300.00, 'C007');
+INSERT INTO caseCharge VALUES ('CC008', 'CA008', 'L004', 'CH008', '2024-04-08', 150.00, 'C008');
+INSERT INTO caseCharge VALUES ('CC009', 'CA009', 'L008', 'CH009', '2024-04-09', 250.00, 'C009');
+INSERT INTO caseCharge VALUES ('CC010', 'CA010', 'L006', 'CH010', '2024-04-10', 400.00, 'C010');
 
 
 CREATE TABLE salary(
@@ -259,4 +261,9 @@ CREATE TABLE salary(
     amount DECIMAL(10,2),
     bonus DECIMAL(10,2),
     FOREIGN KEY (lawyerId) references lawyer(lawyerId) ON DELETE CASCADE ON UPDATE CASCADE
-)
+);
+
+
+INSERT INTO salary VALUES ('SA001', 'L008', '2024-04-08', 1500.00, 500);
+INSERT INTO salary VALUES ('SA002', 'L009', '2024-04-09', 2500.00, 750);
+INSERT INTO salary VALUES ('SA003', 'L010', '2024-04-10', 4000.00, 1000);

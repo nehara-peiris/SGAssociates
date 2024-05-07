@@ -5,11 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class SalaryTm {
-    private String lawyerId;
+    private String salaryID;
+    private String lawyerID;
     private Date date;
     private double amount;
     private double bonus;

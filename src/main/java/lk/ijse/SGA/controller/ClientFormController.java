@@ -91,7 +91,7 @@ public class ClientFormController implements Initializable {
         colAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
         colContact.setCellValueFactory(new PropertyValueFactory<>("Contact"));
-        colLawyerId.setCellValueFactory(new PropertyValueFactory<>("Lawyer ID"));
+        colLawyerId.setCellValueFactory(new PropertyValueFactory<>("LawyerID"));
     }
 
     private void loadAllClients() {

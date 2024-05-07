@@ -1,4 +1,4 @@
-package lk.ijse.SGA.model;
+package lk.ijse.SGA.model.tm;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,16 +6,11 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class Cases {
-
-    private String caseId;
-    private String description;
-    private String type;
+public class LawCaseTm {
+    private String lawyerId;
+    private String CaseId;
     private Date date;
-    private String clientId;
-
-
 }

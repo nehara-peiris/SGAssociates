@@ -11,8 +11,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.SGA.model.LawCase;
 import lk.ijse.SGA.model.Lawyer;
+import lk.ijse.SGA.model.tm.LawCaseTm;
 import lk.ijse.SGA.model.tm.LawyerTm;
 import lk.ijse.SGA.repository.LawyerRepo;
 
@@ -48,12 +51,37 @@ public class LawyerFormController implements Initializable {
     private TableColumn<?, ?> colContact;
     @FXML
     private AnchorPane rootNode;
+    @FXML
+    private TableView<LawCaseTm> tblAssignedWork;
+    @FXML
+    private TableColumn<?, ?> colLawyerId;
+    @FXML
+    private TableColumn<?, ?> colCaseId;
+    @FXML
+    private TableColumn<?, ?> colDate;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllLawyers();
+        loadAssignedCases();
+        keyEventsHandling();
 
+        Validations();
+        addTextChangeListener(txtLawyerId);
+
+    }
+
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
+            }
+        });
+    }
+
+    private void keyEventsHandling() {
         txtLawyerId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtName.requestFocus();
@@ -83,7 +111,14 @@ public class LawyerFormController implements Initializable {
                 txtContact.requestFocus();
             }
         });
+    }
 
+    private void Validations() {
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+                event.consume();
+            }
+        });
     }
 
 
@@ -93,6 +128,10 @@ public class LawyerFormController implements Initializable {
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+
+        colLawyerId.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
+        colCaseId.setCellValueFactory(new PropertyValueFactory<>("CaseId"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
 
     }
 
@@ -118,6 +157,25 @@ public class LawyerFormController implements Initializable {
         }
     }
 
+    private void loadAssignedCases() {
+        ObservableList<LawCaseTm> obList = FXCollections.observableArrayList();
+
+        try{
+            List<LawCase> lawCaseList = LawyerRepo.assignedCases();
+            for (LawCase lawCase : lawCaseList) {
+                LawCaseTm tm = new LawCaseTm(
+                        lawCase.getLawyerId(),
+                        lawCase.getCaseId(),
+                        lawCase.getDate()
+                );
+                obList.add(tm);
+            }
+            tblAssignedWork.setItems(obList);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
     @FXML
     void btnSaveOnAction (ActionEvent event) {
         String lawyerId = txtLawyerId.getText();
@@ -133,6 +191,8 @@ public class LawyerFormController implements Initializable {
             boolean isSaved = LawyerRepo.save(lawyer);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Lawyer saved!").show();
+                loadAllLawyers();
+                loadAssignedCases();
                 clearFields();
             }
         }catch(SQLException e){
@@ -201,6 +261,7 @@ public class LawyerFormController implements Initializable {
         } else {
             new Alert(Alert.AlertType.INFORMATION, "Lawyer not found!").show();
         }
+
     }
 
 }

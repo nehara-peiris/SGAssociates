@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DeedFormController">
+<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DeedFormController">
    <children>
-      <ImageView fitHeight="984.0" fitWidth="1592.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../asserts/blackBG.jpg" />
-         </image>
-      </ImageView>
-      <Label layoutX="572.0" layoutY="41.0" prefHeight="65.0" prefWidth="449.0" text="Deed Management" textFill="WHITE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="845.0" layoutX="15.0" layoutY="102.0" stroke="BLACK" strokeType="INSIDE" width="1542.0" />
+      <Label layoutX="572.0" layoutY="25.0" prefHeight="65.0" prefWidth="449.0" text="Deed Management">
          <font>
             <Font name="System Bold" size="41.0" />
          </font>
@@ -27,7 +25,7 @@
       <Label layoutX="56.0" layoutY="247.0" text="Description" textFill="WHITE" />
       <Label layoutX="56.0" layoutY="366.0" text="Date" textFill="WHITE" />
       <Label layoutX="56.0" layoutY="327.0" text="LawyerId" textFill="WHITE" />
-      <TableView fx:id="tblDeed" layoutX="520.0" layoutY="154.0" prefHeight="733.0" prefWidth="981.0">
+      <TableView fx:id="tblDeed" layoutX="56.0" layoutY="522.0" prefHeight="369.0" prefWidth="1461.0">
          <columns>
             <TableColumn fx:id="colClientId" prefWidth="111.0" text="Client ID" />
             <TableColumn fx:id="colDescription" prefWidth="220.0" text="Description" />
@@ -41,10 +39,18 @@
       <TextField fx:id="txtLawyerId" layoutX="137.0" layoutY="323.0" prefWidth="345.0" />
       <TextField fx:id="txtClientId" layoutX="137.0" layoutY="198.0" prefWidth="345.0" />
       <TextField fx:id="txtDate" layoutX="137.0" layoutY="362.0" prefWidth="345.0" />
-      <JFXButton layoutX="365.0" layoutY="852.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #f26b6b;" text="delete" />
-      <JFXButton layoutX="207.0" layoutY="852.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #ABCABC;" text="update" />
-      <JFXButton layoutX="54.0" layoutY="852.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #8febd4;" text="save" />
+      <JFXButton buttonType="RAISED" layoutX="367.0" layoutY="457.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#e13a0c" style="-fx-background-color: #f26b6b;" text="delete" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="209.0" layoutY="457.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #F3CA52;" text="update" textFill="#ff4040" />
+      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="457.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #65B741;" text="save" textFill="#1937bc" />
       <Label layoutX="54.0" layoutY="289.0" text="Type" textFill="WHITE" />
       <TextField fx:id="txtType" layoutX="137.0" layoutY="285.0" prefHeight="24.0" prefWidth="345.0" />
+      <BarChart fx:id="chartDeeds" layoutX="780.0" layoutY="120.0" prefHeight="379.0" prefWidth="737.0">
+        <xAxis>
+          <CategoryAxis fx:id="axisDeeds" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="axisNoOfDeeds" prefHeight="338.0" prefWidth="19.0" side="LEFT" tickLabelFill="WHITE" />
+        </yAxis>
+      </BarChart>
    </children>
 </AnchorPane>

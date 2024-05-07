@@ -5,20 +5,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="984.0" prefWidth="1592.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DeedChargeFormController">
+<AnchorPane prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DeedChargeFormController">
    <children>
-      <ImageView fitHeight="984.0" fitWidth="1592.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../asserts/blackBG.jpg" />
-         </image>
-      </ImageView>
-      <Label layoutX="571.0" layoutY="47.0" text="Deed Charge Detail" textFill="WHITE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="838.0" layoutX="30.0" layoutY="123.0" stroke="BLACK" strokeType="INSIDE" width="1540.0" />
+      <Label layoutX="571.0" layoutY="47.0" text="Deed Charge Detail">
          <font>
             <Font name="System Bold" size="41.0" />
          </font>
@@ -45,9 +39,9 @@
             <TableColumn fx:id="colClientId2" prefWidth="138.0" text="Client ID" />
         </columns>
       </TableView>
-      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="460.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#3264e4" style="-fx-background-color: #265073;" text="Save" textFill="#7cd8ff" />
-      <JFXButton buttonType="RAISED" layoutX="198.0" layoutY="460.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#da6ce4" style="-fx-background-color: #6962AD;" text="Update" textFill="#e5c4f2" />
-      <JFXButton layoutX="339.0" layoutY="460.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#eb4141" style="-fx-background-color: #860A35;" text="Delete" textFill="#f89090" />
+      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="460.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #65B741;" text="save" textFill="#1937bc" />
+      <JFXButton buttonType="RAISED" layoutX="198.0" layoutY="460.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #F3CA52;" text="update" textFill="#ff4040" />
+      <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="460.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#e13a0c" style="-fx-background-color: #f26b6b;" text="delete" textFill="WHITE" />
       <TableView fx:id="tblDeedCharge1" layoutX="561.0" layoutY="166.0" prefHeight="329.0" prefWidth="981.0">
         <columns>
           <TableColumn fx:id="colDCPayId1" prefWidth="100.0" text="DCPay ID" />

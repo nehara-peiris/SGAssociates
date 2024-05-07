@@ -24,9 +24,10 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
-public class CasesFormController {
+public class CasesFormController implements Initializable {
 
     @FXML
     private TextField txtCaseId;
@@ -49,16 +50,30 @@ public class CasesFormController {
     @FXML
     private TableColumn<?,?> colDate;
     @FXML
-    private TableColumn<?,?> colLawyerId;
-    @FXML
     private TableColumn<?,?> colType;
     @FXML
     private AnchorPane rootNode;
+    @FXML
+    private BarChart<String, Number> chartCase;
+    @FXML
+    private CategoryAxis axisCases;
+    @FXML
+    private NumberAxis axisNoOfCases;
 
 
-    public void initialize(){
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllCases();
+
+        axisCases.setLabel("Case Type");
+        axisNoOfCases.setLabel("Number of Cases");
+
+        try {
+            populateBarChart();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         txtCaseId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -92,11 +107,23 @@ public class CasesFormController {
 
     }
 
+    private void populateBarChart() throws SQLException {
+        chartCase.getData().clear();
+
+        Map<String, Integer> caseTypeCounts =CasesRepo.getAllToChart();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+        caseTypeCounts.forEach((type, count) -> {
+            series.getData().add(new XYChart.Data<>(type, count));
+        });
+
+        chartCase.getData().add(series);
+    }
+
 
     private void setCellValueFactory() {
         colClientId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
-        colLawyerId.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
 
@@ -111,7 +138,7 @@ public class CasesFormController {
                 CasesTm tm = new CasesTm(
                         cases.getDescription(),
                         cases.getDate(),
-                        cases.getLawyerId(),
+                        cases.getType(),
                         cases.getClientId()
                 );
 
@@ -131,14 +158,14 @@ public class CasesFormController {
         String description = txtDescription.getText();
         String type = txtType.getText();
         Date date = Date.valueOf(txtDate.getText());
-        String lawyerId = txtLawyerId.getText();
 
-        Cases cases = new Cases(caseId, description, type, date, lawyerId, clientId);
+        Cases cases = new Cases(caseId, description, type, date, clientId);
 
         try{
             boolean isSaved = CasesRepo.save(cases);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "case saved!").show();
+                loadAllCases();
                 clearFields();
             }
         }catch(SQLException e){
@@ -162,9 +189,8 @@ public class CasesFormController {
         String description = txtDescription.getText();
         String type = txtType.getText();
         Date date = Date.valueOf(txtDate.getText());
-        String lawyerId = txtLawyerId.getText();
 
-        Cases cases = new Cases(caseId, description, type, date, lawyerId, clientId);
+        Cases cases = new Cases(caseId, description, type, date, clientId);
 
         try{
             boolean isUpdated = CasesRepo.update(cases);

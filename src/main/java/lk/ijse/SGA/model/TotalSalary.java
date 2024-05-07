@@ -5,15 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class CaseCharge {
-    private String CCPayId;
-    private String caseId;
+public class TotalSalary {
     private String lawyerId;
-    private String chargeId;
     private Date date;
-    private double amount;
-    private String clientId;
 }

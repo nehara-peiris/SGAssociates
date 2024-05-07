@@ -3,11 +3,14 @@ package lk.ijse.SGA.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class DashboardFormController {
+public class DashboardFormController implements Initializable {
     @FXML
     private Label lblUserId;
     @FXML
@@ -17,6 +20,15 @@ public class DashboardFormController {
     @FXML
     private AnchorPane mainNode;
 
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setUserName();
+    }
+
+    void setUserName(){
+
+    }
 
     @FXML
     void btnClientsOnAction(ActionEvent event) throws IOException {
@@ -45,7 +57,6 @@ public class DashboardFormController {
 
         rootNode.getChildren().add(judgeForm);
     }
-
     @FXML
     void btnCasesOnAction(ActionEvent event) throws IOException {
         AnchorPane casesForm = FXMLLoader.load(this.getClass().getResource("/view/CasesForm.fxml"));
@@ -64,6 +75,7 @@ public class DashboardFormController {
 
         rootNode.getChildren().add(summonForm);
     }
+
     @FXML
     void btnChargesOnAction(ActionEvent event) throws IOException {
         AnchorPane chargeForm = FXMLLoader.load(this.getClass().getResource("/view/ChargeForm.fxml"));
@@ -84,13 +96,20 @@ public class DashboardFormController {
 
         mainNode.getChildren().add(loginForm);
     }
-
     @FXML
     void btnUpWkOnAction(ActionEvent event) throws IOException {
 
     }
+
     @FXML
     void btnInProgOnAction(ActionEvent event) throws IOException {
 
+    }
+
+    @FXML
+    void btnDashboardOnAction(ActionEvent event) throws IOException {
+        AnchorPane dashboardForm = FXMLLoader.load(this.getClass().getResource("/view/DashboardForm.fxml"));
+
+        mainNode.getChildren().add(dashboardForm);
     }
 }

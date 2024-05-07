@@ -5,19 +5,14 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.SalaryFormController">
+<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.SalaryFormController">
    <children>
-      <ImageView fitHeight="984.0" fitWidth="1592.0" layoutX="8.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../asserts/blackBG.jpg" />
-         </image>
-      </ImageView>
-      <Label layoutX="565.0" layoutY="34.0" text="Salary Management" textFill="WHITE">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="837.0" layoutX="37.0" layoutY="118.0" stroke="BLACK" strokeType="INSIDE" width="1522.0" />
+      <Label layoutX="565.0" layoutY="34.0" text="Salary Management">
          <font>
             <Font name="System Bold" size="41.0" />
          </font>
@@ -32,22 +27,23 @@
       <TextField fx:id="txtDate" layoutX="137.0" layoutY="252.0" prefWidth="317.0" />
       <TextField fx:id="txtAmount" layoutX="137.0" layoutY="297.0" prefWidth="317.0" />
       <TextField fx:id="txtBonus" layoutX="137.0" layoutY="342.0" prefWidth="317.0" />
-      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="469.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#388fa4" style="-fx-background-color: #265073;" text="save" textFill="#b7d3d1" />
-      <JFXButton buttonType="RAISED" layoutX="203.0" layoutY="469.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#742197" style="-fx-background-color: #6962AD;" text="update" textFill="#bca8bf" />
-      <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="469.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#d0555b" style="-fx-background-color: #860A35;" text="delete" textFill="#d3a3a3" />
+      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="469.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #65B741;" text="save" textFill="#1937bc" />
+      <JFXButton buttonType="RAISED" layoutX="203.0" layoutY="469.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #F3CA52;" text="update" textFill="#ff4040" />
+      <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="469.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#e13a0c" style="-fx-background-color: #f26b6b;" text="delete" textFill="WHITE" />
       <TableView fx:id="tblSalary" layoutX="56.0" layoutY="575.0" prefHeight="348.0" prefWidth="1471.0">
         <columns>
-          <TableColumn fx:id="colLawyerId" prefWidth="214.0" text="Lawyer ID" />
+          <TableColumn fx:id="colSalaryId" prefWidth="214.0" text="Salary ID" />
+            <TableColumn fx:id="colLawyerId" prefWidth="214.0" text="Lawyer ID" />
           <TableColumn fx:id="colDate" prefWidth="224.0" text="Date" />
             <TableColumn fx:id="colAmount" prefWidth="178.0" text="Amount" />
             <TableColumn fx:id="colBonus" prefWidth="179.0" text="Bonus" />
         </columns>
       </TableView>
-      <TableView layoutX="545.0" layoutY="162.0" prefHeight="336.0" prefWidth="981.0">
+      <TableView fx:id="tblTotSalary" layoutX="545.0" layoutY="162.0" prefHeight="336.0" prefWidth="981.0">
         <columns>
-          <TableColumn prefWidth="94.0" text="Lawyer ID" />
-          <TableColumn prefWidth="98.0" text="Date" />
-            <TableColumn prefWidth="98.0" text="Total Salary" />
+          <TableColumn fx:id="colLawyerId2" prefWidth="94.0" text="Lawyer ID" />
+          <TableColumn fx:id="colDate2" prefWidth="98.0" text="Date" />
+            <TableColumn fx:id="colTotalSalary2" prefWidth="98.0" text="Total Salary" />
         </columns>
       </TableView>
    </children>

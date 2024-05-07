@@ -10,15 +10,8 @@
 
 <AnchorPane fx:id="mainNode" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #8E8B82;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
    <children>
-      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #F7F7F7;">
-         <children>
-            <ImageView fitHeight="984.0" fitWidth="1592.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <image>
-                  <Image url="@../asserts/dashB.jpg" />
-               </image>
-            </ImageView>
-         </children></AnchorPane>
-      <VBox alignment="TOP_RIGHT" layoutX="35.0" layoutY="239.0" prefHeight="783.0" prefWidth="240.0" style="-fx-background-color: #8E8B82;">
+      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #000000;" />
+      <VBox alignment="TOP_RIGHT" layoutX="35.0" layoutY="223.0" prefHeight="783.0" prefWidth="240.0" style="-fx-background-color: #8E8B82;">
          <children>
             <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Lawyers">
                <graphic>
@@ -108,7 +101,7 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton onAction="#btnSalaryOnAction" prefHeight="87.0" prefWidth="240.0" text="Salary">
+            <JFXButton buttonType="RAISED" onAction="#btnSalaryOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Salary">
                <font>
                   <Font size="16.0" />
                </font>
@@ -132,10 +125,24 @@
             <Image url="@../asserts/icons8-male-user-50.png" />
          </image>
       </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="1719.0" layoutY="26.0" onAction="#btnLogoutOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#9a0202" style="-fx-background-color: #d15949;" text="Logout" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="1669.0" layoutY="18.0" onAction="#btnLogoutOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#9a0202" text="Logout" textFill="RED">
+         <font>
+            <Font size="17.0" />
+         </font></JFXButton>
       <Label fx:id="lblUserId" layoutX="155.0" layoutY="101.0" />
       <Label fx:id="lblUsername" layoutX="155.0" layoutY="127.0" />
-      <JFXButton buttonType="RAISED" layoutX="1392.0" layoutY="26.0" onAction="#btnInProgOnAction" prefHeight="35.0" prefWidth="200.0" ripplerFill="#233294" style="-fx-background-color: #abcabc;" text="In progress" />
-      <JFXButton buttonType="RAISED" layoutX="1174.0" layoutY="26.0" onAction="#btnUpWkOnAction" prefHeight="35.0" prefWidth="200.0" style="-fx-background-color: #abbcab;" text="Upcoming Week" />
+      <JFXButton buttonType="RAISED" layoutX="1420.0" layoutY="18.0" onAction="#btnInProgOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#3b4fd7" text="In progress" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="1208.0" layoutY="19.0" onAction="#btnUpWkOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#3b4fd7" text="Upcoming Week" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font></JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="990.0" layoutY="19.0" onAction="#btnDashboardOnAction" prefHeight="53.0" prefWidth="200.0" ripplerFill="#3b4fd7" text="Dashboard" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

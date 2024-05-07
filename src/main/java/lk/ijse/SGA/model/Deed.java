@@ -17,5 +17,6 @@ public class Deed {
     private String lawyerId;
     private String clientId;
 
+    Deed(String type, Date date){}
 }
 

@@ -16,4 +16,9 @@ public class Salary {
     private double amount;
     private double bonus;
 
+   /* public double getTotal(){
+        double tot = amount + bonus;
+        return  tot;
+    }*/
+
 }

@@ -12,5 +12,5 @@ public class ClientTm {
     private String address;
     private String email;
     private int contact;
-    private String lawyerId;
+    private String LawyerID;
 }

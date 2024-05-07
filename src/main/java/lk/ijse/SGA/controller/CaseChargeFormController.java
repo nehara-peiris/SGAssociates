@@ -27,6 +27,7 @@ import java.util.ResourceBundle;
 public class CaseChargeFormController implements Initializable {
     public TextField txtCCPayId;
     public TextField txtCaseId;
+    public TextField txtLawyerId;
     public TextField txtChargeId;
     public TextField txtDate;
     public TextField txtAmount;
@@ -49,6 +50,7 @@ public class CaseChargeFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllCaseChargeDetails();
+        loadTotalCaseCharge();
 
         txtCCPayId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -83,16 +85,18 @@ public class CaseChargeFormController implements Initializable {
     }
 
     private void setCellValueFactory() {
-        colCCPayId2.setCellValueFactory(new PropertyValueFactory<>("CCPay ID"));
-        colCCPayId1.setCellValueFactory(new PropertyValueFactory<>("CCPay ID"));
-        colCaseId2.setCellValueFactory(new PropertyValueFactory<>("Case ID"));
-        colCaseId1.setCellValueFactory(new PropertyValueFactory<>("Case ID"));
-        colChargeId2.setCellValueFactory(new PropertyValueFactory<>("Charge ID"));
-        colDate2.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        colDate1.setCellValueFactory(new PropertyValueFactory<>("Date"));
-        colAmount2.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+        colCCPayId2.setCellValueFactory(new PropertyValueFactory<>("CCPayId"));
+        colCaseId2.setCellValueFactory(new PropertyValueFactory<>("caseId"));
+        colChargeId2.setCellValueFactory(new PropertyValueFactory<>("chargeId"));
+        colDate2.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colAmount2.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        colClientId2.setCellValueFactory(new PropertyValueFactory<>("clientId"));
+
+
+        colCCPayId1.setCellValueFactory(new PropertyValueFactory<>("CCPayId"));
+        colCaseId1.setCellValueFactory(new PropertyValueFactory<>("caseId"));
+        colDate1.setCellValueFactory(new PropertyValueFactory<>("date"));
         colTotalPay1.setCellValueFactory(new PropertyValueFactory<>("Total pay"));
-        colClientId2.setCellValueFactory(new PropertyValueFactory<>("Client ID"));
     }
 
     private void loadAllCaseChargeDetails() {
@@ -104,6 +108,7 @@ public class CaseChargeFormController implements Initializable {
                 CaseChargeTm tm = new CaseChargeTm(
                         caseCharge.getCCPayId(),
                         caseCharge.getCaseId(),
+                        caseCharge.getLawyerId(),
                         caseCharge.getChargeId(),
                         caseCharge.getDate(),
                         caseCharge.getAmount(),
@@ -117,21 +122,27 @@ public class CaseChargeFormController implements Initializable {
         }
     }
 
+    private void loadTotalCaseCharge() {
+
+    }
+
     @FXML
     void btnSaveOnAction (ActionEvent event) throws SQLException {
         String CCPayId = txtCCPayId.getText();
         String caseId = txtCaseId.getText();
+        String lawyerId = txtLawyerId.getText();
         String chargeId = txtChargeId.getText();
         Date date = Date.valueOf(txtDate.getText());
         double amount = Double.parseDouble(txtAmount.getText());
         String clientId = txtClientId.getText();
 
-        CaseCharge caseCharge = new CaseCharge(CCPayId, caseId, chargeId, date, amount, clientId);
+        CaseCharge caseCharge = new CaseCharge(CCPayId, caseId, lawyerId, chargeId, date, amount, clientId);
 
         try{
             boolean isSaved = CaseChargeRepo.save(caseCharge);
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION, "saved successfully!").show();
+                loadAllCaseChargeDetails();
                 clearFields();
             }
         }catch(SQLException e){
@@ -153,17 +164,19 @@ public class CaseChargeFormController implements Initializable {
     void btnUpdateOnAction(ActionEvent event) throws SQLException {
         String CCPayId = txtCCPayId.getText();
         String caseId = txtCaseId.getText();
+        String lawyerId = txtLawyerId.getText();
         String chargeId = txtChargeId.getText();
         Date date = Date.valueOf(txtDate.getText());
         double amount = Double.parseDouble(txtAmount.getText());
         String clientId = txtClientId.getText();
 
-        CaseCharge caseCharge = new CaseCharge(CCPayId, caseId, chargeId, date, amount, clientId);
+        CaseCharge caseCharge = new CaseCharge(CCPayId, caseId, lawyerId, chargeId, date, amount, clientId);
 
         try{
             boolean isUpdated = CaseChargeRepo.update(caseCharge);
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION, "updated successfully!").show();
+                loadAllCaseChargeDetails();
                 clearFields();
             }
         }catch(SQLException e){

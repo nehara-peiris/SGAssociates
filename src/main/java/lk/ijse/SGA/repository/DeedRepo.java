@@ -5,7 +5,9 @@ import lk.ijse.SGA.model.Deed;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DeedRepo {
     public static List<Deed> getAll() throws SQLException {
@@ -92,5 +94,22 @@ public class DeedRepo {
         }
 
         return null;
+    }
+
+    public static Map<String, Integer> getAllToChart() throws SQLException {
+        String sql = "SELECT type, COUNT(*) AS count FROM deed WHERE type IS NOT NULL GROUP BY type";
+
+        Map<String, Integer> deedTypeCounts = new HashMap<>();
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        try (PreparedStatement pstm = connection.prepareStatement(sql);
+             ResultSet resultSet = pstm.executeQuery(sql)) {
+            while (resultSet.next()) {
+                String type = resultSet.getString("type");
+                int count = resultSet.getInt("count");
+                deedTypeCounts.put(type, count);
+            }
+        }
+        return deedTypeCounts;
     }
 }

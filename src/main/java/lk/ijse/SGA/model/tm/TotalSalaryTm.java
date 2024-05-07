@@ -9,9 +9,12 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CasesTm {
-    private String description;
+public class TotalSalaryTm {
+    private String lawyerId;
     private Date date;
-    private String type;
-    private String clientId;
+    private double totSalary;
+
 }
+
+
+//select lawyerId, SUM(amount+bonus) from salary group by lawyerId;
