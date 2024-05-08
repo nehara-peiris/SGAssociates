@@ -17,14 +17,13 @@ import java.sql.SQLException;
 public class RegisterFormController {
 
     public AnchorPane rootNode;
+    public CheckBox checkBoxPw;
     @FXML
-    private PasswordField txtPw;
+    private PasswordField txtPassword;
     @FXML
     private TextField txtUserId;
     @FXML
     private TextField txtUsername;
-    @FXML
-    private TextField txtPassword;
 
 
     @FXML
@@ -56,13 +55,13 @@ public class RegisterFormController {
         return pstm.executeUpdate() > 0;
     }
 
-
     public void chkPwOnAction(ActionEvent event) {
-        if (((CheckBox) event.getSource()).isSelected()) {
-            txtPassword.getText();
+        if (checkBoxPw.isSelected()) {
+            txtPassword.setPromptText(txtPassword.getText());
+            txtPassword.setText("");
         } else {
-            txtPassword.getText();
+            txtPassword.setText(txtPassword.getPromptText());
+            txtPassword.setPromptText("");
         }
     }
-
 }

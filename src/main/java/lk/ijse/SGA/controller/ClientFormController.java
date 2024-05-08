@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Client;
 import lk.ijse.SGA.model.tm.ClientTm;
@@ -55,6 +56,19 @@ public class ClientFormController implements Initializable {
         setCellValueFactory();
         loadAllClients();
 
+        keyEventsHandling();
+
+        Validations();
+        addTextChangeListener(txtClientId);
+        addTextChangeListener(txtName);
+        addTextChangeListener(txtAddress);
+        addTextChangeListener(txtContact);
+        addTextChangeListener(txtEmail);
+        addTextChangeListener(txtLawyerId);
+
+    }
+
+    private void keyEventsHandling() {
         txtClientId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtName.requestFocus();
@@ -82,6 +96,83 @@ public class ClientFormController implements Initializable {
         txtEmail.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtLawyerId.requestFocus();
+            }
+        });
+
+    }
+
+    private void Validations() {
+        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtClientId.getText().isEmpty() && !event.getCharacter().equals("C")){
+                event.consume();
+            }
+        });
+
+        txtName.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtName.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+        txtAddress.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtAddress.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+        txtEmail.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtEmail.getText().isEmpty() && !Character.isLowerCase(event.getCharacter().charAt(0)) && !event.getCharacter().equals(".")) {
+                event.consume();
+            }
+        });
+
+        txtContact.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtContact.getText().length() <= 10 || !Character.isDigit(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+                event.consume();
+            }
+        });    }
+
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtClientId && !newValue.matches("^C.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with C").show();
+            }
+        });
+
+        txtName.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtName.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+        txtAddress.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtAddress.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+        txtContact.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtContact.getText().length() <= 10 || !Character.isDigit(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+        txtEmail.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtEmail.getText().isEmpty() && !Character.isLowerCase(event.getCharacter().charAt(0)) && !event.getCharacter().equals(".")) {
+                event.consume();
+            }
+        });
+
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+                event.consume();
             }
         });
     }

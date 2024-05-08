@@ -11,12 +11,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.SGA.model.CaseCharge;
-import lk.ijse.SGA.model.Client;
 import lk.ijse.SGA.model.tm.CaseChargeTm;
-import lk.ijse.SGA.model.tm.ClientTm;
 import lk.ijse.SGA.repository.CaseChargeRepo;
-import lk.ijse.SGA.repository.ClientRepo;
 
 import java.net.URL;
 import java.sql.Date;
@@ -29,6 +27,7 @@ public class CaseChargeFormController implements Initializable {
     public TextField txtCaseId;
     public TextField txtLawyerId;
     public TextField txtChargeId;
+
     public TextField txtDate;
     public TextField txtAmount;
     public TextField txtClientId;
@@ -51,7 +50,14 @@ public class CaseChargeFormController implements Initializable {
         setCellValueFactory();
         loadAllCaseChargeDetails();
         loadTotalCaseCharge();
+        keyEventsHandling();
 
+        Validations();
+        addTextChangeListener(txtCCPayId);
+
+    }
+
+    private void keyEventsHandling() {
         txtCCPayId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtCaseId.requestFocus();
@@ -59,6 +65,12 @@ public class CaseChargeFormController implements Initializable {
         });
 
         txtCaseId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtLawyerId.requestFocus();
+            }
+        });
+
+        txtLawyerId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtChargeId.requestFocus();
             }
@@ -81,7 +93,47 @@ public class CaseChargeFormController implements Initializable {
                 txtClientId.requestFocus();
             }
         });
+    }
 
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtCCPayId && !newValue.matches("^CCP.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with CCP").show();
+            }
+
+            if (textField == txtCaseId && !newValue.matches("^CA.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with CA").show();
+            }
+
+            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
+            }
+
+            if (textField == txtChargeId && !newValue.matches("^CH.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
+            }
+
+            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
+            }
+
+            if (textField == txtAmount && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {
+                new Alert(Alert.AlertType.ERROR, "Invalid number format").show();
+            }
+
+            if (textField == txtClientId && !newValue.matches("^C.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with C").show();
+            }
+        });
+    }
+
+    private void Validations() {
+        txtCCPayId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtCCPayId.getText().isEmpty() && !event.getCharacter().equals("CCP")){
+                event.consume();
+            }
+        });
     }
 
     private void setCellValueFactory() {

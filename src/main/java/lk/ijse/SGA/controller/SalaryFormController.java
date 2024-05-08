@@ -11,11 +11,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Salary;
 import lk.ijse.SGA.model.TotalSalary;
 import lk.ijse.SGA.model.tm.SalaryTm;
 import lk.ijse.SGA.model.tm.TotalSalaryTm;
+import lk.ijse.SGA.repository.LawyerRepo;
 import lk.ijse.SGA.repository.SalaryRepo;
 import lk.ijse.SGA.repository.TotalSalaryRepo;
 
@@ -73,39 +75,79 @@ public class SalaryFormController implements Initializable {
         loadAllSalary();
         loadTotalSalary();
 
+        keyEventsHandling();
 
-        txtSalaryId.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtLawyerID.requestFocus();
+        Validations();
+        addTextChangeListener(txtSalaryId);
+
+    }
+
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtSalaryId && !newValue.matches("^SA.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with SA").show();
             }
-        });
 
-        txtLawyerID.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtDate.requestFocus();
+            if (textField == txtLawyerID && !newValue.matches("^L.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
             }
-        });
 
-        txtDate.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtAmount.requestFocus();
+            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
             }
-        });
 
-        txtAmount.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtBonus.requestFocus();
+            if (textField == txtAmount && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {
+                new Alert(Alert.AlertType.ERROR, "Invalid number format").show();
             }
-        });
 
-        txtBonus.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                btnSaveOnAction(null);
+            if (textField == txtBonus && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {
+                new Alert(Alert.AlertType.ERROR, "Invalid number format").show();
             }
         });
     }
 
+    private void Validations() {
+        txtSalaryId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtSalaryId.getText().isEmpty() && !event.getCharacter().equals("L")){
+                event.consume();
+            }
+        });
+    }
+    private void keyEventsHandling() {
+            txtSalaryId.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    txtLawyerID.requestFocus();
+                }
+            });
+
+            txtLawyerID.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    txtDate.requestFocus();
+                }
+            });
+
+            txtDate.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    txtAmount.requestFocus();
+                }
+            });
+
+            txtAmount.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    txtBonus.requestFocus();
+                }
+            });
+
+            txtBonus.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER) {
+                    btnSaveOnAction(null);
+                }
+            });
+    }
+
     private void getChargeCodes() {
+
     }
 
     private void getLawyerIds() {
@@ -126,11 +168,11 @@ public class SalaryFormController implements Initializable {
 
     private String generateNextSalaryId(String currentId) {
         if(currentId != null) {
-            String[] split = currentId.split("O");
+            String[] split = currentId.split("SA");
             int idNum = Integer.parseInt(split[1]);
-            return "O" + ++idNum;
+            return "SA" + ++idNum;
         }
-        return "O1";
+        return "SA1";
     }
 
     private void setDate() {
@@ -186,8 +228,7 @@ public class SalaryFormController implements Initializable {
                 obList.add(tm);
             }
 
-            System.out.println(obList);
-
+            //System.out.println(obList);
 
             tblTotSalary.setItems(obList);
         }catch (SQLException e){
@@ -249,6 +290,15 @@ public class SalaryFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws SQLException {
+        String id = txtSalaryId.getText();
 
+        try {
+            boolean isDeleted = SalaryRepo.delete(id);
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "salary deleted!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 }

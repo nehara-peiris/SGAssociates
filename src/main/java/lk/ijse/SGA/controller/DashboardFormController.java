@@ -23,11 +23,12 @@ public class DashboardFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setUserName();
+        setUserDetail();
     }
 
-    void setUserName(){
-
+    void setUserDetail(){
+        lblUserId =
+        lblUsername =
     }
 
     @FXML

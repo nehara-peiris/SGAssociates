@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Cases;
 import lk.ijse.SGA.model.tm.CasesTm;
@@ -40,8 +41,6 @@ public class CasesFormController implements Initializable {
     @FXML
     private TextField txtDate;
     @FXML
-    private TextField txtLawyerId;
-    @FXML
     private TableView<CasesTm> tblCase;
     @FXML
     private TableColumn<?,?> colClientId;
@@ -66,15 +65,15 @@ public class CasesFormController implements Initializable {
         setCellValueFactory();
         loadAllCases();
 
-        axisCases.setLabel("Case Type");
-        axisNoOfCases.setLabel("Number of Cases");
+        keyEventsHandling();
+        setCasesBarchart();
 
-        try {
-            populateBarChart();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        Validations();
+        addTextChangeListener(txtCaseId);
 
+    }
+
+    private void keyEventsHandling() {
         txtCaseId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtClientId.requestFocus();
@@ -99,12 +98,48 @@ public class CasesFormController implements Initializable {
             }
         });
 
-        txtDate.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtLawyerId.requestFocus();
+    }
+
+    private void setCasesBarchart() {
+        axisCases.setLabel("Case Type");
+        axisNoOfCases.setLabel("Number of Cases");
+
+        try {
+            populateBarChart();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtCaseId && !newValue.matches("^CA.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with CA").show();
+            }
+
+            if (textField == txtDescription && !newValue.matches("[A-z].*$")) {
+            }
+
+            if (textField == txtType && !newValue.matches("[A-z].*$")) {
+            }
+
+            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
+            }
+
+            if (textField == txtClientId && !newValue.matches("^C.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with C").show();
             }
         });
+    }
 
+    private void Validations() {
+        txtCaseId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtCaseId.getText().isEmpty() && !event.getCharacter().equals("CA")){
+                event.consume();
+            }
+        });
     }
 
     private void populateBarChart() throws SQLException {
@@ -178,7 +213,6 @@ public class CasesFormController implements Initializable {
         txtDescription.setText("");
         txtDate.setText("");
         txtClientId.setText("");
-        txtLawyerId.setText("");
         txtType.setText("");
     }
 

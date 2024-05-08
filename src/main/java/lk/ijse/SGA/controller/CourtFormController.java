@@ -10,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Court;
 import lk.ijse.SGA.model.tm.CourtTm;
@@ -36,13 +37,40 @@ public class CourtFormController {
         setCellValueFactory();
         loadAllCourts();
 
+        keyEventsHandling();
 
+        Validations();
+        addTextChangeListener(txtCourtId);
+
+    }
+
+    private void keyEventsHandling() {
         txtCourtId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtLocation.requestFocus();
             }
         });
 
+    }
+
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtCourtId && !newValue.matches("^CT.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with CT").show();
+            }
+
+            if (textField == txtLocation && !newValue.matches("[A-z].*$")) {
+            }
+        });
+    }
+
+    private void Validations() {
+        txtCourtId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtCourtId.getText().isEmpty() && !event.getCharacter().equals("CT")){
+                event.consume();
+            }
+        });
     }
 
     private void setCellValueFactory() {

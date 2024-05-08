@@ -15,6 +15,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Deed;
 import lk.ijse.SGA.model.tm.DeedTm;
@@ -69,6 +70,49 @@ public class DeedFormController implements Initializable {
         setCellValueFactory();
         loadAllDeeds();
 
+        keyEventsHandling();
+        setCasesBarchart();
+
+        Validations();
+        addTextChangeListener(txtDeedId);
+
+    }
+
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtDeedId && !newValue.matches("^D.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with D").show();
+            }
+
+            if (textField == txtDescription && !newValue.matches("[A-z].*$")) {
+            }
+
+            if (textField == txtType && !newValue.matches("[A-z].*$")) {
+            }
+
+            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
+            }
+
+            if (textField == txtClientId && !newValue.matches("^C.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with C").show();
+            }
+
+            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
+            }
+        });
+    }
+
+    private void Validations() {
+        txtDeedId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtDeedId.getText().isEmpty() && !event.getCharacter().equals("D")){
+                event.consume();
+            }
+        });
+    }
+    private void setCasesBarchart() {
         axisDeeds.setLabel("Deed Type");
         axisNoOfDeeds.setLabel("Number of Deeds");
 
@@ -77,7 +121,9 @@ public class DeedFormController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    private void keyEventsHandling() {
         txtDeedId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtClientId.requestFocus();
@@ -108,6 +154,7 @@ public class DeedFormController implements Initializable {
             }
         });
     }
+
     private void populateBarChart() throws SQLException {
         chartDeeds.getData().clear();
 

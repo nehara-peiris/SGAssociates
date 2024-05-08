@@ -30,7 +30,6 @@ public class LoginFormController {
 
     @FXML
     void initialize() {
-        // Set up event handler for txtUserId to move focus to txtPassword on Enter key press
         txtUserId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtPassword.requestFocus();
@@ -39,7 +38,7 @@ public class LoginFormController {
 
         txtPassword.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                btnLogin.requestFocus(); // Replace "JFXButton" with the actual ID of your login button
+                btnLogin.requestFocus();
             }
         });
     }
@@ -104,10 +103,12 @@ public class LoginFormController {
     }
 
     public void chkPwOnAction(ActionEvent event) {
-        if (((CheckBox) event.getSource()).isSelected()) {
-            txtPassword.getText();
+        if (checkBoxPw.isSelected()) {
+            txtPassword.setPromptText(txtPassword.getText());
+            txtPassword.setText("");
         } else {
-            txtPassword.getText();
+            txtPassword.setText(txtPassword.getPromptText());
+            txtPassword.setPromptText("");
         }
     }
 }

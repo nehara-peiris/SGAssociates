@@ -70,7 +70,7 @@ public class CaseChargeRepo {
     }
 
     public static boolean delete(String id) throws SQLException {
-        String sql = "DELETE FROM client WHERE CCPayId = ?";
+        String sql = "DELETE FROM caseCharge WHERE CCPayId = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);

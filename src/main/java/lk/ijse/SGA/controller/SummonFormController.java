@@ -11,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Lawyer;
 import lk.ijse.SGA.model.Summon;
@@ -55,8 +56,14 @@ public class SummonFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllSummons();
+        keyEventsHandling();
 
+        Validations();
+        addTextChangeListener(txtSummonId);
 
+    }
+
+    private void keyEventsHandling() {
         txtSummonId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtDescription.requestFocus();
@@ -78,6 +85,37 @@ public class SummonFormController implements Initializable {
         txtLawyerId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtDate.requestFocus();
+            }
+        });
+    }
+
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtSummonId && !newValue.matches("^S.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with S").show();
+            }
+
+            if (textField == txtDescription && !newValue.matches("[A-z].*$")) {
+            }
+
+            if (textField == txtDefendant && !newValue.matches("[A-z].*$")) {
+            }
+
+            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
+            }
+
+            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
+            }
+        });
+    }
+
+    private void Validations() {
+        txtSummonId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtSummonId.getText().isEmpty() && !event.getCharacter().equals("S")){
+                event.consume();
             }
         });
     }

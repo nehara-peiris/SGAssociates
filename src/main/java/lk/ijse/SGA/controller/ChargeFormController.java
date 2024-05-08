@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Charge;
 
@@ -37,22 +38,25 @@ public class ChargeFormController implements Initializable {
     @FXML
     private TextField txtAmount;
     @FXML
-    private TextField txtDate;
-    @FXML
     private TableColumn<?, ?> colChargeId;
     @FXML
     private TableColumn<?, ?> colDescription;
     @FXML
     private TableColumn<?, ?> colAmount;
-    @FXML
-    private TableColumn<?, ?> colDate;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllCharges();
 
+        keyEventsHandling();
 
+        Validations();
+        addTextChangeListener(txtChargeId);
+
+    }
+
+    private void keyEventsHandling() {
         txtChargeId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtDescription.requestFocus();
@@ -64,8 +68,34 @@ public class ChargeFormController implements Initializable {
                 txtAmount.requestFocus();
             }
         });
-
     }
+
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtChargeId && !newValue.matches("^CH.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
+            }
+
+            if (textField == txtDescription && !newValue.matches("[A-z].*$")) {
+            }
+
+            if (textField == txtAmount && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {
+                new Alert(Alert.AlertType.ERROR, "Invalid number format").show();
+            }
+
+        });
+    }
+
+    private void Validations() {
+
+        txtChargeId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtChargeId.getText().isEmpty() && !event.getCharacter().equals("CH")){
+                event.consume();
+            }
+        });
+    }
+
 
     private void setCellValueFactory() {
         colChargeId.setCellValueFactory(new PropertyValueFactory<>("ChargeId"));

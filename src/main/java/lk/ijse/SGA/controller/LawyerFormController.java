@@ -26,17 +26,17 @@ import java.util.ResourceBundle;
 
 public class LawyerFormController implements Initializable {
     @FXML
-    private TextField txtContact;
-    @FXML
     private TextField txtLawyerId;
-    @FXML
-    private TextField txtYrsOfExp;
-    @FXML
-    private TextField txtEmail;
     @FXML
     private TextField txtName;
     @FXML
     private TextField txtAddress;
+    @FXML
+    private TextField txtContact;
+    @FXML
+    private TextField txtYrsOfExp;
+    @FXML
+    private TextField txtEmail;
     @FXML
     private TableView<LawyerTm> tblLawyer;
     @FXML
@@ -69,6 +69,55 @@ public class LawyerFormController implements Initializable {
 
         Validations();
         addTextChangeListener(txtLawyerId);
+        addTextChangeListener(txtName);
+        addTextChangeListener(txtAddress);
+        addTextChangeListener(txtContact);
+        addTextChangeListener(txtEmail);
+        addTextChangeListener(txtYrsOfExp);
+
+    }
+
+    private void Validations() {
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+                event.consume();
+            }
+        });
+
+        /*
+        txtName.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtName.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+
+
+        txtAddress.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtAddress.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+        txtContact.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtContact.getText().length() <= 10 || !Character.isDigit(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+        txtEmail.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtEmail.getText().isEmpty() && !Character.isLowerCase(event.getCharacter().charAt(0)) && !event.getCharacter().equals(".")) {
+                event.consume();
+            }
+        });
+
+        txtYrsOfExp.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (txtYrsOfExp.getText().isEmpty() && !Character.isDigit(event.getCharacter().charAt(0))) {
+                event.consume();
+            }
+        });
+
+         */
 
     }
 
@@ -78,8 +127,28 @@ public class LawyerFormController implements Initializable {
             if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
                 new Alert(Alert.AlertType.ERROR ,"Start with L").show();
             }
+
+            if (textField == txtName && !newValue.matches("[A-z].*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Name should start with Upper case").show();
+            }
+
+            if (textField == txtAddress && !newValue.matches("[A-z].*$")) {
+            }
+
+            if (textField == txtContact && !newValue.matches("^([0])([1-9]{2})([0-9]){7}$")) {
+            }
+
+            if (textField == txtEmail && !newValue.matches("^([A-z])([A-z0-9.]){1,}[@]([A-z0-9]){1,10}[.]([A-z]){2,5}$")) {
+            }
+
+            if (textField == txtYrsOfExp && !newValue.matches("^\\d{10}$")) {
+            }
         });
+
+
     }
+
+
 
     private void keyEventsHandling() {
         txtLawyerId.setOnKeyPressed(event -> {
@@ -109,14 +178,6 @@ public class LawyerFormController implements Initializable {
         txtEmail.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtContact.requestFocus();
-            }
-        });
-    }
-
-    private void Validations() {
-        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
-                event.consume();
             }
         });
     }
