@@ -17,7 +17,7 @@
    <children>
       <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #000000;">
          <children>
-            <BarChart fx:id="chartCase" layoutX="1071.0" layoutY="520.0" prefHeight="432.0" prefWidth="500.0" title="Case Growth">
+            <BarChart fx:id="chartCase" layoutX="1071.0" layoutY="520.0" prefHeight="432.0" prefWidth="500.0" style="-fx-background-color: #272829;" title="Case Growth">
               <xAxis>
                 <CategoryAxis fx:id="axisCases" side="BOTTOM" />
               </xAxis>
@@ -25,7 +25,7 @@
                 <NumberAxis fx:id="axisNoOfCases" side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="chartDeeds" layoutX="1071.0" layoutY="49.0" prefHeight="432.0" prefWidth="500.0" title="Deed Growth">
+            <BarChart fx:id="chartDeeds" layoutX="1071.0" layoutY="49.0" prefHeight="432.0" prefWidth="500.0" style="-fx-background-color: #272829;" title="Deed Growth">
               <xAxis>
                 <CategoryAxis fx:id="axisDeeds" side="BOTTOM" />
               </xAxis>

@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da6271e5-d11f-486f-afcc-fc4fba9a262d" name="Changes" comment="validation done">
+    <list default="true" id="da6271e5-d11f-486f-afcc-fc4fba9a262d" name="Changes" comment="Validation done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DashboardFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DashboardFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/query/queries.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/query/queries.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/view/DashboardForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DashboardForm.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -166,7 +163,7 @@
       <workItem from="1715059022736" duration="6277000" />
       <workItem from="1715065528610" duration="7223000" />
       <workItem from="1715077534852" duration="1290000" />
-      <workItem from="1715106251834" duration="30433000" />
+      <workItem from="1715106251834" duration="32204000" />
     </task>
     <task id="LOCAL-00001" summary="completed ui">
       <option name="closed" value="true" />
@@ -248,7 +245,23 @@
       <option name="project" value="LOCAL" />
       <updated>1715174242031</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Validation done">
+      <option name="closed" value="true" />
+      <created>1715189575930</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1715189575930</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Validation done">
+      <option name="closed" value="true" />
+      <created>1715189584088</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1715189584088</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,7 +278,8 @@
     <MESSAGE value="Updated" />
     <MESSAGE value="transaction done" />
     <MESSAGE value="validation done" />
-    <option name="LAST_COMMIT_MESSAGE" value="validation done" />
+    <MESSAGE value="Validation done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Validation done" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
