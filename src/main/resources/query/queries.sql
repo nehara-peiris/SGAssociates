@@ -267,3 +267,8 @@ CREATE TABLE salary(
 INSERT INTO salary VALUES ('SA1', 'L008', '2024-04-08', 1500.00, 500);
 INSERT INTO salary VALUES ('SA2', 'L009', '2024-04-09', 2500.00, 750);
 INSERT INTO salary VALUES ('SA3', 'L010', '2024-04-10', 4000.00, 1000);
+
+
+//AssignedWorkDetailsReport
+SELECT d.lawyerId, d.deedId, GROUP_CONCAT(lc.caseId) AS caseIds FROM deed d JOIN lawCase lc ON d.lawyerId = lc.lawyerId GROUP BY d.lawyerId, d.deedId;
+SELECT d.lawyerId, GROUP_CONCAT(d.deedId) AS deedIds, GROUP_CONCAT(lc.caseId) AS caseIds FROM deed d JOIN lawCase lc ON d.lawyerId = lc.lawyerId GROUP BY d.lawyerId;

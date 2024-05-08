@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="mainNode" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #8E8B82;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
    <children>
-      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #000000;" />
+      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #000000;">
+         <children>
+            <BarChart fx:id="chartCase" layoutX="1071.0" layoutY="520.0" prefHeight="432.0" prefWidth="500.0" title="Case Growth">
+              <xAxis>
+                <CategoryAxis fx:id="axisCases" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="axisNoOfCases" side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <BarChart fx:id="chartDeeds" layoutX="1071.0" layoutY="49.0" prefHeight="432.0" prefWidth="500.0" title="Deed Growth">
+              <xAxis>
+                <CategoryAxis fx:id="axisDeeds" side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="axisNoOfDeeds" side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <Line endX="100.0" endY="432.0" layoutX="951.0" layoutY="557.0" startX="100.0" startY="-552.0" stroke="#46474a" strokeWidth="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1046.0" AnchorPane.rightAnchor="536.0" AnchorPane.topAnchor="0.0">
+               <rotationAxis>
+                  <Point3D />
+               </rotationAxis>
+            </Line>
+         </children></AnchorPane>
       <VBox alignment="TOP_RIGHT" layoutX="35.0" layoutY="223.0" prefHeight="783.0" prefWidth="240.0" style="-fx-background-color: #8E8B82;">
          <children>
             <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Lawyers">
@@ -131,15 +159,12 @@
          </font></JFXButton>
       <Label fx:id="lblUserId" layoutX="155.0" layoutY="101.0" />
       <Label fx:id="lblUsername" layoutX="155.0" layoutY="127.0" />
-      <JFXButton buttonType="RAISED" layoutX="1420.0" layoutY="18.0" onAction="#btnInProgOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#3b4fd7" text="In progress" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="1220.0" layoutY="18.0" onAction="#btnDashboardOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#3b4fd7" text="Dashboard" textFill="WHITE">
          <font>
             <Font size="16.0" />
-         </font></JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="1208.0" layoutY="19.0" onAction="#btnUpWkOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#3b4fd7" text="Upcoming Week" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font></JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="990.0" layoutY="19.0" onAction="#btnDashboardOnAction" prefHeight="53.0" prefWidth="200.0" ripplerFill="#3b4fd7" text="Dashboard" textFill="WHITE">
+         </font>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="1449.0" layoutY="18.0" onAction="#btnReportsOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#24975b" text="Reports" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>

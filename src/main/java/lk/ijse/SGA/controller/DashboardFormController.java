@@ -4,10 +4,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.SGA.repository.CasesRepo;
+import lk.ijse.SGA.repository.DeedRepo;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class DashboardFormController implements Initializable {
@@ -19,16 +28,74 @@ public class DashboardFormController implements Initializable {
     private AnchorPane rootNode;
     @FXML
     private AnchorPane mainNode;
-
+    @FXML
+    private BarChart<String, Number> chartCase;
+    @FXML
+    private CategoryAxis axisCases;
+    @FXML
+    private NumberAxis axisNoOfCases;
+    @FXML
+    private BarChart<String, Number> chartDeeds;
+    @FXML
+    private CategoryAxis axisDeeds;
+    @FXML
+    private NumberAxis axisNoOfDeeds;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setCasesBarchart();
+        setDeedBarchart();
         setUserDetail();
     }
 
-    void setUserDetail(){
-        lblUserId =
-        lblUsername =
+    public void setUserDetail(){
+
+    }
+
+    private void setCasesBarchart() {
+        axisCases.setLabel("Case Type");
+        axisNoOfCases.setLabel("Number of Cases");
+
+        try {
+            populateCaseBarChart();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    private void populateCaseBarChart() throws SQLException {
+        chartCase.getData().clear();
+
+        Map<String, Integer> caseTypeCounts = CasesRepo.getAllToChart();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+        caseTypeCounts.forEach((type, count) -> {
+            series.getData().add(new XYChart.Data<>(type, count));
+        });
+
+        chartCase.getData().add(series);
+    }
+
+    private void setDeedBarchart() {
+        axisDeeds.setLabel("Deed Type");
+        axisNoOfDeeds.setLabel("Number of Deeds");
+
+        try {
+            populateDeedBarChart();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    private void populateDeedBarChart() throws SQLException {
+        chartDeeds.getData().clear();
+
+        Map<String, Integer> deedTypeCounts = DeedRepo.getAllToChart();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+        deedTypeCounts.forEach((type, count) -> {
+            series.getData().add(new XYChart.Data<>(type, count));
+        });
+
+        chartDeeds.getData().add(series);
     }
 
     @FXML
@@ -97,20 +164,16 @@ public class DashboardFormController implements Initializable {
 
         mainNode.getChildren().add(loginForm);
     }
-    @FXML
-    void btnUpWkOnAction(ActionEvent event) throws IOException {
-
-    }
-
-    @FXML
-    void btnInProgOnAction(ActionEvent event) throws IOException {
-
-    }
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) throws IOException {
         AnchorPane dashboardForm = FXMLLoader.load(this.getClass().getResource("/view/DashboardForm.fxml"));
 
         mainNode.getChildren().add(dashboardForm);
+    }
+
+    @FXML
+    void btnReportsOnAction(ActionEvent event) throws IOException {
+
     }
 }

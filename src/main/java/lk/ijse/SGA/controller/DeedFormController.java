@@ -71,7 +71,7 @@ public class DeedFormController implements Initializable {
         loadAllDeeds();
 
         keyEventsHandling();
-        setCasesBarchart();
+        setDeedBarchart();
 
         Validations();
         addTextChangeListener(txtDeedId);
@@ -112,16 +112,6 @@ public class DeedFormController implements Initializable {
             }
         });
     }
-    private void setCasesBarchart() {
-        axisDeeds.setLabel("Deed Type");
-        axisNoOfDeeds.setLabel("Number of Deeds");
-
-        try {
-            populateBarChart();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void keyEventsHandling() {
         txtDeedId.setOnKeyPressed(event -> {
@@ -153,6 +143,17 @@ public class DeedFormController implements Initializable {
                 txtDate.requestFocus();
             }
         });
+    }
+
+    private void setDeedBarchart() {
+        axisDeeds.setLabel("Deed Type");
+        axisNoOfDeeds.setLabel("Number of Deeds");
+
+        try {
+            populateBarChart();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void populateBarChart() throws SQLException {
