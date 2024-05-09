@@ -25,7 +25,7 @@
                 <NumberAxis fx:id="axisNoOfCases" side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="chartDeeds" layoutX="1071.0" layoutY="49.0" prefHeight="432.0" prefWidth="500.0" style="-fx-background-color: #272829;" title="Deed Growth">
+            <BarChart fx:id="chartDeeds" animated="false" layoutX="1071.0" layoutY="49.0" prefHeight="432.0" prefWidth="500.0" style="-fx-background-color: #272829;" title="Deed Growth">
               <xAxis>
                 <CategoryAxis fx:id="axisDeeds" side="BOTTOM" />
               </xAxis>

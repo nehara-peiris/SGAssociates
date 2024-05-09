@@ -14,12 +14,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Salary;
-import lk.ijse.SGA.model.TotalSalary;
 import lk.ijse.SGA.model.tm.SalaryTm;
 import lk.ijse.SGA.model.tm.TotalSalaryTm;
-import lk.ijse.SGA.repository.LawyerRepo;
 import lk.ijse.SGA.repository.SalaryRepo;
-import lk.ijse.SGA.repository.TotalSalaryRepo;
 
 import java.net.URL;
 import java.sql.Date;

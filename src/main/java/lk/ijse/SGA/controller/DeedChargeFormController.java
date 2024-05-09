@@ -12,8 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import lk.ijse.SGA.model.CaseCharge;
 import lk.ijse.SGA.model.DeedCharge;
 import lk.ijse.SGA.model.tm.DeedChargeTm;
+import lk.ijse.SGA.model.tm.TotalCaseChargeTm;
+import lk.ijse.SGA.model.tm.TotalDeedChargeTm;
+import lk.ijse.SGA.repository.CaseChargeRepo;
 import lk.ijse.SGA.repository.DeedChargeRepo;
 
 import java.net.URL;
@@ -52,7 +56,7 @@ public class DeedChargeFormController implements Initializable {
     @FXML
     private TableColumn<?, ?> colClientId2;
     @FXML
-    private TableView<DeedChargeTm> tblDeedCharge1;
+    private TableView<TotalDeedChargeTm> tblDeedCharge1;
     @FXML
     private TableColumn<?, ?> colDCPayId1;
     @FXML
@@ -123,9 +127,9 @@ public class DeedChargeFormController implements Initializable {
 
 
         colDCPayId1.setCellValueFactory(new PropertyValueFactory<>("DCPayId"));
-        colDeedId1.setCellValueFactory(new PropertyValueFactory<>("DeedId"));
+        colDeedId1.setCellValueFactory(new PropertyValueFactory<>("deedId"));
         colDate1.setCellValueFactory(new PropertyValueFactory<>("date"));
-        colTotalPay1.setCellValueFactory(new PropertyValueFactory<>("Total pay"));
+        colTotalPay1.setCellValueFactory(new PropertyValueFactory<>("TotalCharge"));
     }
 
     private void keyEventsHandling() {
@@ -167,7 +171,26 @@ public class DeedChargeFormController implements Initializable {
     }
 
     private void loadTotalDeedCharge() {
+        ObservableList<TotalDeedChargeTm> obList = FXCollections.observableArrayList();
 
+        try{
+            List<DeedCharge> deedChargeList = DeedChargeRepo.getAll();
+            for (DeedCharge deedCharge : deedChargeList) {
+                TotalDeedChargeTm tm = new TotalDeedChargeTm(
+                        deedCharge.getDCPayId(),
+                        deedCharge.getDeedId(),
+                        deedCharge.getDate(),
+                        deedCharge.getAmount()+deedCharge.getAmount()
+                );
+                obList.add(tm);
+            }
+
+            //System.out.println(obList);
+
+            tblDeedCharge1.setItems(obList);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     private void loadAllDeedChargeDetails() {

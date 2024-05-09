@@ -47,6 +47,12 @@ public class LoginFormController {
         String userId = txtUserId.getText();
         String password = txtPassword.getText();
 
+        // Check if text fields are empty
+        if (userId.isEmpty() || password.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please enter both user ID and password").show();
+            return;
+        }
+
         try {
             checkCredential(userId, password);
         } catch (SQLException e) {
@@ -55,6 +61,7 @@ public class LoginFormController {
             throw new RuntimeException(e);
         }
     }
+
 
     private void checkCredential(String userId, String password) throws SQLException, IOException {
         String sql = "SELECT userId, password FROM user WHERE userId = ?";

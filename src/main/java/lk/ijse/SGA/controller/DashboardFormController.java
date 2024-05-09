@@ -10,8 +10,13 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.SGA.db.DbConnection;
 import lk.ijse.SGA.repository.CasesRepo;
 import lk.ijse.SGA.repository.DeedRepo;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
 import java.net.URL;
@@ -173,7 +178,11 @@ public class DashboardFormController implements Initializable {
     }
 
     @FXML
-    void btnReportsOnAction(ActionEvent event) throws IOException {
+    void btnReportsOnAction(ActionEvent event) throws IOException, JRException, SQLException {
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/AssignedWorkDetails.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
+        JasperViewer.viewReport(jasperPrint, false);
     }
 }

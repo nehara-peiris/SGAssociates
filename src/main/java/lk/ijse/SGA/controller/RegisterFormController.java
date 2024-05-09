@@ -25,22 +25,27 @@ public class RegisterFormController {
     @FXML
     private TextField txtUsername;
 
-
     @FXML
     void btnRegisterOnAction(ActionEvent event) {
         String userId = txtUserId.getText();
         String name = txtUsername.getText();
         String password = txtPassword.getText();
 
+        if (userId.isEmpty() || name.isEmpty() || password.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please fill in all fields").show();
+            return;
+        }
+
         try {
             boolean isSaved = saveUser(userId, name, password);
             if(isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "user saved!").show();
+                new Alert(Alert.AlertType.CONFIRMATION, "User saved!").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+
 
     private boolean saveUser(String userId, String name, String password) throws SQLException {
         String sql = "INSERT INTO user VALUES(?, ?, ?)";

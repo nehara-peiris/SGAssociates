@@ -19,7 +19,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Deed;
 import lk.ijse.SGA.model.tm.DeedTm;
-import lk.ijse.SGA.repository.CasesRepo;
 import lk.ijse.SGA.repository.ClientRepo;
 import lk.ijse.SGA.repository.DeedRepo;
 

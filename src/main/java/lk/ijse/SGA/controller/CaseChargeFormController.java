@@ -13,8 +13,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lk.ijse.SGA.model.CaseCharge;
+import lk.ijse.SGA.model.Salary;
 import lk.ijse.SGA.model.tm.CaseChargeTm;
+import lk.ijse.SGA.model.tm.TotalCaseChargeTm;
+import lk.ijse.SGA.model.tm.TotalSalaryTm;
 import lk.ijse.SGA.repository.CaseChargeRepo;
+import lk.ijse.SGA.repository.SalaryRepo;
 
 import java.net.URL;
 import java.sql.Date;
@@ -38,7 +42,7 @@ public class CaseChargeFormController implements Initializable {
     public TableColumn<?, ?> colDate2;
     public TableColumn<?, ?> colAmount2;
     public TableColumn<?, ?> colClientId2;
-    public TableView<CaseChargeTm> tblCaseCharge1;
+    public TableView<TotalCaseChargeTm> tblCaseCharge1;
     public TableColumn<?, ?> colCCPayId1;
     public TableColumn<?, ?> colCaseId1;
     public TableColumn<?, ?> colDate1;
@@ -148,7 +152,7 @@ public class CaseChargeFormController implements Initializable {
         colCCPayId1.setCellValueFactory(new PropertyValueFactory<>("CCPayId"));
         colCaseId1.setCellValueFactory(new PropertyValueFactory<>("caseId"));
         colDate1.setCellValueFactory(new PropertyValueFactory<>("date"));
-        colTotalPay1.setCellValueFactory(new PropertyValueFactory<>("Total pay"));
+        colTotalPay1.setCellValueFactory(new PropertyValueFactory<>("TotalCharge"));
     }
 
     private void loadAllCaseChargeDetails() {
@@ -175,7 +179,26 @@ public class CaseChargeFormController implements Initializable {
     }
 
     private void loadTotalCaseCharge() {
+        ObservableList<TotalCaseChargeTm> obList = FXCollections.observableArrayList();
 
+        try{
+            List<CaseCharge> caseChargeList = CaseChargeRepo.getAll();
+            for (CaseCharge caseCharge : caseChargeList) {
+                TotalCaseChargeTm tm = new TotalCaseChargeTm(
+                        caseCharge.getCCPayId(),
+                        caseCharge.getCaseId(),
+                        caseCharge.getDate(),
+                        caseCharge.getAmount()+caseCharge.getAmount()
+                );
+                obList.add(tm);
+            }
+
+            System.out.println(obList);
+
+            tblCaseCharge1.setItems(obList);
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
