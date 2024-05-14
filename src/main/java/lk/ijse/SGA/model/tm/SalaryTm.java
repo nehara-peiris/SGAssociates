@@ -10,9 +10,8 @@ import java.sql.Date;
 @AllArgsConstructor
 @Data
 public class SalaryTm {
-    private String salaryID;
-    private String lawyerID;
+    private String salaryId;
+    private String lawyerId;
     private Date date;
-    private double amount;
-    private double bonus;
+    private double totalSalary;
 }

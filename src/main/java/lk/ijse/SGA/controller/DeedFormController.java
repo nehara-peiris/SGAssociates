@@ -77,6 +77,14 @@ public class DeedFormController implements Initializable {
 
     }
 
+    private void Validations() {
+        txtDeedId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtDeedId.getText().isEmpty() && !event.getCharacter().equals("D")){
+                event.consume();
+            }
+        });
+    }
+
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
@@ -84,10 +92,30 @@ public class DeedFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR ,"Start with D").show();
             }
 
-            if (textField == txtDescription && !newValue.matches("[A-z].*$")) {
+            if (textField == txtDescription) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
 
-            if (textField == txtType && !newValue.matches("[A-z].*$")) {
+            if (textField == txtType) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
 
             if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
@@ -100,14 +128,6 @@ public class DeedFormController implements Initializable {
 
             if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
                 new Alert(Alert.AlertType.ERROR ,"Start with L").show();
-            }
-        });
-    }
-
-    private void Validations() {
-        txtDeedId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtDeedId.getText().isEmpty() && !event.getCharacter().equals("D")){
-                event.consume();
             }
         });
     }

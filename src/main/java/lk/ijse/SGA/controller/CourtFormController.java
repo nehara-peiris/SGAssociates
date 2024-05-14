@@ -60,7 +60,17 @@ public class CourtFormController {
                 new Alert(Alert.AlertType.ERROR ,"Start with CT").show();
             }
 
-            if (textField == txtLocation && !newValue.matches("[A-z].*$")) {
+            if (textField == txtLocation) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
         });
     }

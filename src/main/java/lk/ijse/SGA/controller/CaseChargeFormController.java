@@ -13,17 +13,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import lk.ijse.SGA.model.CaseCharge;
-import lk.ijse.SGA.model.Salary;
 import lk.ijse.SGA.model.tm.CaseChargeTm;
 import lk.ijse.SGA.model.tm.TotalCaseChargeTm;
-import lk.ijse.SGA.model.tm.TotalSalaryTm;
 import lk.ijse.SGA.repository.CaseChargeRepo;
-import lk.ijse.SGA.repository.SalaryRepo;
 
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class CaseChargeFormController implements Initializable {
@@ -43,9 +42,7 @@ public class CaseChargeFormController implements Initializable {
     public TableColumn<?, ?> colAmount2;
     public TableColumn<?, ?> colClientId2;
     public TableView<TotalCaseChargeTm> tblCaseCharge1;
-    public TableColumn<?, ?> colCCPayId1;
     public TableColumn<?, ?> colCaseId1;
-    public TableColumn<?, ?> colDate1;
     public TableColumn<?, ?> colTotalPay1;
 
 
@@ -58,7 +55,92 @@ public class CaseChargeFormController implements Initializable {
 
         Validations();
         addTextChangeListener(txtCCPayId);
+        addTextChangeListener(txtCaseId);
+        addTextChangeListener(txtLawyerId);
+        addTextChangeListener(txtChargeId);
+        addTextChangeListener(txtDate);
+        addTextChangeListener(txtAmount);
+        addTextChangeListener(txtClientId);
 
+    }
+
+    private void Validations() {
+        txtCCPayId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtCCPayId.getText().isEmpty() && !event.getCharacter().equals("CCP")){
+                event.consume();
+            }
+        });
+
+        txtCaseId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtCaseId.getText().isEmpty() && !event.getCharacter().equals("CA")){
+                event.consume();
+            }
+        });
+
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+                event.consume();
+            }
+        });
+
+        txtChargeId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtChargeId.getText().isEmpty() && !event.getCharacter().equals("CH")){
+                event.consume();
+            }
+        });
+
+        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtClientId.getText().isEmpty() && !event.getCharacter().equals("C")){
+                event.consume();
+            }
+        });
+    }
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtCCPayId && !newValue.matches("^CCP.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with CCP").show();
+            }
+
+            if (textField == txtCaseId && !newValue.matches("^CA.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with CA").show();
+            }
+
+            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
+            }
+
+            if (textField == txtChargeId && !newValue.matches("^CH.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with CH").show();
+            }
+
+            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
+                textField.setText(oldValue != null ? oldValue : "");
+            }
+
+            if (textField == txtAmount && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {
+                new Alert(Alert.AlertType.ERROR, "Invalid number format").show();
+
+            }
+
+            if (textField == txtClientId && !newValue.matches("^C.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with C").show();
+            }
+        });
+    }
+
+    private void setCellValueFactory() {
+        colCCPayId2.setCellValueFactory(new PropertyValueFactory<>("CCPayId"));
+        colCaseId2.setCellValueFactory(new PropertyValueFactory<>("caseId"));
+        colChargeId2.setCellValueFactory(new PropertyValueFactory<>("chargeId"));
+        colDate2.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colAmount2.setCellValueFactory(new PropertyValueFactory<>("amount"));
+        colClientId2.setCellValueFactory(new PropertyValueFactory<>("clientId"));
+
+
+        colCaseId1.setCellValueFactory(new PropertyValueFactory<>("caseId"));
+        colTotalPay1.setCellValueFactory(new PropertyValueFactory<>("TotalCharge"));
     }
 
     private void keyEventsHandling() {
@@ -98,63 +180,6 @@ public class CaseChargeFormController implements Initializable {
             }
         });
     }
-
-    private void addTextChangeListener(TextField textField) {
-        textField.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            if (textField == txtCCPayId && !newValue.matches("^CCP.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with CCP").show();
-            }
-
-            if (textField == txtCaseId && !newValue.matches("^CA.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with CA").show();
-            }
-
-            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
-            }
-
-            if (textField == txtChargeId && !newValue.matches("^CH.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
-            }
-
-            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
-            }
-
-            if (textField == txtAmount && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {
-                new Alert(Alert.AlertType.ERROR, "Invalid number format").show();
-            }
-
-            if (textField == txtClientId && !newValue.matches("^C.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with C").show();
-            }
-        });
-    }
-
-    private void Validations() {
-        txtCCPayId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtCCPayId.getText().isEmpty() && !event.getCharacter().equals("CCP")){
-                event.consume();
-            }
-        });
-    }
-
-    private void setCellValueFactory() {
-        colCCPayId2.setCellValueFactory(new PropertyValueFactory<>("CCPayId"));
-        colCaseId2.setCellValueFactory(new PropertyValueFactory<>("caseId"));
-        colChargeId2.setCellValueFactory(new PropertyValueFactory<>("chargeId"));
-        colDate2.setCellValueFactory(new PropertyValueFactory<>("date"));
-        colAmount2.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        colClientId2.setCellValueFactory(new PropertyValueFactory<>("clientId"));
-
-
-        colCCPayId1.setCellValueFactory(new PropertyValueFactory<>("CCPayId"));
-        colCaseId1.setCellValueFactory(new PropertyValueFactory<>("caseId"));
-        colDate1.setCellValueFactory(new PropertyValueFactory<>("date"));
-        colTotalPay1.setCellValueFactory(new PropertyValueFactory<>("TotalCharge"));
-    }
-
     private void loadAllCaseChargeDetails() {
         ObservableList<CaseChargeTm> obList = FXCollections.observableArrayList();
 
@@ -181,9 +206,31 @@ public class CaseChargeFormController implements Initializable {
     private void loadTotalCaseCharge() {
         ObservableList<TotalCaseChargeTm> obList = FXCollections.observableArrayList();
 
-        try{
+        try {
             List<CaseCharge> caseChargeList = CaseChargeRepo.getAll();
+            Map<String, Double> totalChargeMap = new HashMap<>();
+
             for (CaseCharge caseCharge : caseChargeList) {
+                String caseId = caseCharge.getCaseId();
+                double amount = caseCharge.getAmount();
+
+                totalChargeMap.put(caseId, totalChargeMap.getOrDefault(caseId, 0.0) + amount);
+            }
+            for (Map.Entry<String, Double> entry : totalChargeMap.entrySet()) {
+                String caseId = entry.getKey();
+                double totalCharge = entry.getValue();
+
+                TotalCaseChargeTm tm = new TotalCaseChargeTm(null, caseId, null, totalCharge);
+                obList.add(tm);
+            }
+            tblCaseCharge1.setItems(obList);
+        } catch (SQLException e) {
+            // Handle SQLException appropriately
+            e.printStackTrace();
+        }
+    }
+
+    /*
                 TotalCaseChargeTm tm = new TotalCaseChargeTm(
                         caseCharge.getCCPayId(),
                         caseCharge.getCaseId(),
@@ -199,7 +246,11 @@ public class CaseChargeFormController implements Initializable {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-    }
+
+     */
+
+
+
 
     @FXML
     void btnSaveOnAction (ActionEvent event) throws SQLException {

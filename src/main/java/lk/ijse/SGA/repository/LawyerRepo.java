@@ -66,6 +66,7 @@ public class LawyerRepo {
         pstm.setObject(6, lawyer.getContact());
 
         return pstm.executeUpdate() > 0;
+
     }
     public static boolean update(Lawyer lawyer) throws SQLException {
         String sql = "UPDATE lawyer SET name = ?, yrsOfExp = ?, address = ?, email = ?, contact = ? WHERE lawyerId = ?";
@@ -114,5 +115,18 @@ public class LawyerRepo {
             return lawyer;
         }
         return null;
+    }
+
+    public static boolean saveLawcase(LawCase lawCase) throws SQLException {
+        String sql = "INSERT INTO lawCase VALUES(?,?,?)";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        pstm.setObject(1, lawCase.getLawyerId());
+        pstm.setObject(2, lawCase.getCaseId());
+        pstm.setObject(3, lawCase.getDate());
+
+        return pstm.executeUpdate() > 0;
     }
 }

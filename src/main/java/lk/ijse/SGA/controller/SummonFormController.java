@@ -13,10 +13,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.SGA.model.Lawyer;
 import lk.ijse.SGA.model.Summon;
 import lk.ijse.SGA.model.tm.SummonTm;
-import lk.ijse.SGA.repository.LawyerRepo;
 import lk.ijse.SGA.repository.SummonRepo;
 
 import java.net.URL;
@@ -96,10 +94,30 @@ public class SummonFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR ,"Start with S").show();
             }
 
-            if (textField == txtDescription && !newValue.matches("[A-z].*$")) {
+            if (textField == txtDescription) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
 
-            if (textField == txtDefendant && !newValue.matches("[A-z].*$")) {
+            if (textField == txtDefendant) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
 
             if (textField == txtLawyerId && !newValue.matches("^L.*$")) {

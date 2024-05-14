@@ -24,20 +24,23 @@
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="55.0" layoutY="247.0" text="Description" textFill="WHITE">
+      <Label layoutX="56.0" layoutY="247.0" text="Description" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="55.0" layoutY="334.0" text="Date" textFill="WHITE" />
-      <Label layoutX="55.0" layoutY="204.0" text="Client ID" textFill="WHITE">
+      <Label layoutX="56.0" layoutY="334.0" text="Date" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <TextField fx:id="txtCaseId" layoutX="204.0" layoutY="152.0" prefHeight="24.0" prefWidth="345.0" promptText="CAXXX" />
-      <TextField fx:id="txtDescription" layoutX="203.0" layoutY="239.0" prefHeight="24.0" prefWidth="345.0" />
-      <TextField fx:id="txtDate" layoutX="203.0" layoutY="326.0" prefHeight="24.0" prefWidth="345.0" promptText="YYYY-MM-DD" />
-      <TextField fx:id="txtClientId" layoutX="203.0" layoutY="195.0" prefHeight="24.0" prefWidth="345.0" promptText="CXXX" />
-      <JFXButton buttonType="RAISED" layoutX="54.0" layoutY="457.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#6386a8" style="-fx-background-color: #65B741;" text="save" textFill="#053043" />
+      <Label layoutX="56.0" layoutY="204.0" text="Client ID" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <TextField fx:id="txtCaseId" layoutX="176.0" layoutY="158.0" prefHeight="24.0" prefWidth="345.0" promptText="CAXXX" />
+      <TextField fx:id="txtDescription" layoutX="176.0" layoutY="245.0" prefHeight="24.0" prefWidth="345.0" />
+      <TextField fx:id="txtDate" layoutX="176.0" layoutY="332.0" prefHeight="24.0" prefWidth="345.0" promptText="YYYY-MM-DD" />
+      <TextField fx:id="txtClientId" layoutX="176.0" layoutY="202.0" prefHeight="24.0" prefWidth="345.0" promptText="CXXX" />
+      <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="54.0" layoutY="457.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#6386a8" style="-fx-background-color: #65B741;" text="save" textFill="#053043" />
       <JFXButton buttonType="RAISED" layoutX="208.0" layoutY="457.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#9c1d9e" style="-fx-background-color: F3CA52;" text="update" textFill="#b50e0e" />
       <JFXButton buttonType="RAISED" layoutX="365.0" layoutY="457.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#902929" style="-fx-background-color: F05454;" text="delete" textFill="WHITE" />
       <TableView fx:id="tblCase" layoutX="53.0" layoutY="526.0" prefHeight="418.0" prefWidth="1469.0">
@@ -48,8 +51,11 @@
             <TableColumn fx:id="colDate" minWidth="0.0" prefWidth="112.0" text="Date" />
         </columns>
       </TableView>
-      <Label layoutX="53.0" layoutY="289.0" text="Type" textFill="WHITE" />
-      <TextField fx:id="txtType" layoutX="203.0" layoutY="281.0" prefHeight="24.0" prefWidth="345.0" />
+      <Label layoutX="56.0" layoutY="289.0" text="Type" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <TextField fx:id="txtType" layoutX="176.0" layoutY="287.0" prefHeight="24.0" prefWidth="345.0" />
       <BarChart fx:id="chartCase" layoutX="916.0" layoutY="109.0" prefHeight="400.0" prefWidth="606.0">
         <xAxis>
           <CategoryAxis fx:id="axisCases" label="Case Type" side="BOTTOM" tickLabelFill="WHITE" />
@@ -58,5 +64,11 @@
           <NumberAxis fx:id="axisNoOfCases" label="No Of Cases" side="LEFT" />
         </yAxis>
       </BarChart>
+      <Label layoutX="56.0" layoutY="379.0" text="Lawyer ID" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtLawyerId" layoutX="176.0" layoutY="377.0" prefHeight="24.0" prefWidth="345.0" />
    </children>
 </AnchorPane>

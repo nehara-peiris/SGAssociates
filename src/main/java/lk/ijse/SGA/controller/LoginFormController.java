@@ -1,6 +1,5 @@
 package lk.ijse.SGA.controller;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,10 +25,14 @@ public class LoginFormController {
     public TextField txtUserId;
     public TextField txtPassword;
     public CheckBox checkBoxPw;
-    public JFXButton btnLogin;
 
     @FXML
     void initialize() {
+        //getUserDetails();
+        keyHandling();
+    }
+
+    private void keyHandling() {
         txtUserId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtPassword.requestFocus();
@@ -38,11 +41,19 @@ public class LoginFormController {
 
         txtPassword.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                btnLogin.requestFocus();
+                btnLoginOnAction(null);
             }
         });
     }
 
+    /*
+    private void getUserDetails() {
+        String userId = txtUserId.getText();
+        try{
+            boolean isUsenameRecieved = UserRepo.userDetails(userId);
+        }
+    }
+     */
     public void btnLoginOnAction(ActionEvent actionEvent) {
         String userId = txtUserId.getText();
         String password = txtPassword.getText();
@@ -86,14 +97,21 @@ public class LoginFormController {
     }
 
     private void navigateToTheDashboard() throws IOException {
-        AnchorPane rootNode = FXMLLoader.load(this.getClass().getResource("/view/DashboardForm.fxml"));
+        try{
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/view/DashboardForm.fxml"));
+            Parent rootNode = loader.load();
+            Scene scene = new Scene(rootNode);
 
-        Scene scene = new Scene(rootNode);
+            DashboardFormController controller = loader.getController();
+            controller.setUserDetail();
 
-        Stage stage = (Stage) this.rootNode.getScene().getWindow();
-        stage.setScene(scene);
-        stage.centerOnScreen();
-        stage.setTitle("Dashboard Form");
+            Stage stage = (Stage) this.rootNode.getScene().getWindow();
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.setTitle("Dashboard Form");
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML

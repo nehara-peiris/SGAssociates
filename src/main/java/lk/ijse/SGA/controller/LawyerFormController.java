@@ -19,7 +19,9 @@ import lk.ijse.SGA.model.tm.LawCaseTm;
 import lk.ijse.SGA.model.tm.LawyerTm;
 import lk.ijse.SGA.repository.LawyerRepo;
 
+import javax.swing.*;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -56,12 +58,33 @@ public class LawyerFormController implements Initializable {
     @FXML
     private TableColumn<?, ?> colLawyerId;
     @FXML
-    private TableColumn<?, ?> colCaseId;
+    private  TableColumn<?, ?> colCaseId;
     @FXML
-    private TableColumn<?, ?> colDate;
+    private  TableColumn<?, ?> colDate;
+
+
+    public static void lawCaseUpdate(String caseId, String lawyerId, Date dateOfCase) {
+
+       Date date = dateOfCase;
+
+       LawCase lawCase = new LawCase(lawyerId, caseId, date);
+
+        try{
+            boolean isSaved = LawyerRepo.saveLawcase(lawCase);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "LawCase saved!").show();
+            }
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colLawyerId.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
+        colCaseId.setCellValueFactory(new PropertyValueFactory<>("CaseId"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+
         setCellValueFactory();
         loadAllLawyers();
         loadAssignedCases();
@@ -74,8 +97,9 @@ public class LawyerFormController implements Initializable {
         addTextChangeListener(txtContact);
         addTextChangeListener(txtEmail);
         addTextChangeListener(txtYrsOfExp);
-
     }
+
+
 
     private void Validations() {
         txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
@@ -84,71 +108,65 @@ public class LawyerFormController implements Initializable {
             }
         });
 
-        /*
-        txtName.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtName.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
-                event.consume();
-            }
-        });
-
-
-
-        txtAddress.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtAddress.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
-                event.consume();
-            }
-        });
-
-        txtContact.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtContact.getText().length() <= 10 || !Character.isDigit(event.getCharacter().charAt(0))) {
-                event.consume();
-            }
-        });
-
-        txtEmail.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtEmail.getText().isEmpty() && !Character.isLowerCase(event.getCharacter().charAt(0)) && !event.getCharacter().equals(".")) {
-                event.consume();
-            }
-        });
-
-        txtYrsOfExp.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtYrsOfExp.getText().isEmpty() && !Character.isDigit(event.getCharacter().charAt(0))) {
-                event.consume();
-            }
-        });
-
-         */
-
     }
 
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
             if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
             }
 
-            if (textField == txtName && !newValue.matches("[A-z].*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Name should start with Upper case").show();
+            if (textField == txtName) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
 
-            if (textField == txtAddress && !newValue.matches("[A-z].*$")) {
+            if (textField == txtAddress) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
 
-            if (textField == txtContact && !newValue.matches("^([0])([1-9]{2})([0-9]){7}$")) {
+            if (textField == txtContact) {
+                // Check if the new value contains only digits and has a length of 10
+                if (!newValue.matches("\\d{0,10}")) {
+                    // If it contains non-digits or its length is not 10, prevent typing and display an error message
+                    textField.setText(oldValue != null ? oldValue : "");
+                    JOptionPane.showMessageDialog(null, "Please enter 10 integer numbers.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
+
+
+
 
             if (textField == txtEmail && !newValue.matches("^([A-z])([A-z0-9.]){1,}[@]([A-z0-9]){1,10}[.]([A-z]){2,5}$")) {
             }
 
-            if (textField == txtYrsOfExp && !newValue.matches("^\\d{10}$")) {
+            if (textField == txtYrsOfExp) {
+                // Check if the new value contains only digits and has a length of 10
+                if (!newValue.matches("\\d{0,10}")) {
+                    // If it contains non-digits or its length is not 10, prevent typing and display an error message
+                    textField.setText(oldValue != null ? oldValue : "");
+                    JOptionPane.showMessageDialog(null, "Only numbers are allowed", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
-
-
     }
-
-
 
     private void keyEventsHandling() {
         txtLawyerId.setOnKeyPressed(event -> {
@@ -182,7 +200,6 @@ public class LawyerFormController implements Initializable {
         });
     }
 
-
     private void setCellValueFactory() {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colYrsOfExp.setCellValueFactory(new PropertyValueFactory<>("yrsOfExp"));
@@ -190,12 +207,7 @@ public class LawyerFormController implements Initializable {
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
 
-        colLawyerId.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
-        colCaseId.setCellValueFactory(new PropertyValueFactory<>("CaseId"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
-
     }
-
     private void loadAllLawyers() {
         ObservableList<LawyerTm> obList = FXCollections.observableArrayList();
 
@@ -241,23 +253,52 @@ public class LawyerFormController implements Initializable {
     void btnSaveOnAction (ActionEvent event) {
         String lawyerId = txtLawyerId.getText();
         String name = txtName.getText();
-        int yrsOfExp = Integer.parseInt(txtYrsOfExp.getText());
+        String yearsOfExp = txtYrsOfExp.getText();
         String address = txtAddress.getText();
         String email = txtEmail.getText();
-        int contact = Integer.parseInt(txtContact.getText());
+        String contactNo = txtContact.getText();
+
+        if (lawyerId.isEmpty() || name.isEmpty() || yearsOfExp.isEmpty() || address.isEmpty() || email.isEmpty() || contactNo.isEmpty()) {
+
+            // Request focus on the unfilled TextField
+            if (lawyerId.isEmpty()) {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            } else if (name.isEmpty()) {
+                txtName.requestFocus();
+                txtName.setStyle("-fx-border-color: red;");
+            } else if (yearsOfExp.isEmpty()) {
+                txtYrsOfExp.requestFocus();
+                txtYrsOfExp.setStyle("-fx-border-color: red;");
+            } else if (address.isEmpty()) {
+                txtAddress.requestFocus();
+                txtAddress.setStyle("-fx-border-color: red;");
+            } else if (email.isEmpty()) {
+                txtEmail.requestFocus();
+                txtEmail.setStyle("-fx-border-color: red;");
+            } else {
+                txtContact.requestFocus();
+                txtContact.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        int yrsOfExp = Integer.parseInt(yearsOfExp);
+        int contact = Integer.parseInt(contactNo);
 
         Lawyer lawyer = new Lawyer(lawyerId, name, yrsOfExp, address, email, contact);
 
-        try{
+        try {
             boolean isSaved = LawyerRepo.save(lawyer);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Lawyer saved!").show();
                 loadAllLawyers();
-                loadAssignedCases();
                 clearFields();
+                loadAssignedCases();
+                txtLawyerId.requestFocus();
             }
-        }catch(SQLException e){
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -285,13 +326,14 @@ public class LawyerFormController implements Initializable {
             boolean isUpdated = LawyerRepo.update(lawyer);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Lawyer updated!").show();
+                loadAllLawyers();
+                loadAssignedCases();
                 clearFields();
             }
         }catch(SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
@@ -301,6 +343,9 @@ public class LawyerFormController implements Initializable {
             boolean isDeleted = LawyerRepo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Lawyer deleted!").show();
+                loadAllLawyers();
+                clearFields();
+                loadAssignedCases();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -309,6 +354,7 @@ public class LawyerFormController implements Initializable {
 
     @FXML
     void txtSearchOnAction(ActionEvent event) throws SQLException {
+        /*
         String contact = txtContact.getText();
 
         Lawyer lawyer = LawyerRepo.searchById(contact);
@@ -322,6 +368,7 @@ public class LawyerFormController implements Initializable {
         } else {
             new Alert(Alert.AlertType.INFORMATION, "Lawyer not found!").show();
         }
+         */
 
     }
 

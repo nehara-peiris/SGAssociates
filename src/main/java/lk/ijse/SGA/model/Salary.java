@@ -13,12 +13,6 @@ public class Salary {
     private String salaryId;
     private String lawyerId;
     private Date date;
-    private double amount;
-    private double bonus;
-
-   /* public double getTotal(){
-        double tot = amount + bonus;
-        return  tot;
-    }*/
+    private double totalSalary;
 
 }

@@ -21,7 +21,6 @@ import lk.ijse.SGA.repository.ChargeRepo;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -77,7 +76,17 @@ public class ChargeFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR ,"Start with L").show();
             }
 
-            if (textField == txtDescription && !newValue.matches("[A-z].*$")) {
+            if (textField == txtDescription) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
 
             if (textField == txtAmount && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {

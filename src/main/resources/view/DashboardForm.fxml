@@ -15,9 +15,9 @@
 
 <AnchorPane fx:id="mainNode" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #8E8B82;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
    <children>
-      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #000000;">
+      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #ffffff;">
          <children>
-            <BarChart fx:id="chartCase" layoutX="1071.0" layoutY="520.0" prefHeight="432.0" prefWidth="500.0" style="-fx-background-color: #272829;" title="Case Growth">
+            <BarChart fx:id="chartCase" layoutX="429.0" layoutY="49.0" prefHeight="924.0" prefWidth="565.0" style="-fx-background-color: #272829;" title="Case Growth">
               <xAxis>
                 <CategoryAxis fx:id="axisCases" side="BOTTOM" />
               </xAxis>
@@ -25,15 +25,15 @@
                 <NumberAxis fx:id="axisNoOfCases" side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="chartDeeds" animated="false" layoutX="1071.0" layoutY="49.0" prefHeight="432.0" prefWidth="500.0" style="-fx-background-color: #272829;" title="Deed Growth">
+            <BarChart fx:id="chartDeeds" animated="false" layoutX="1013.0" layoutY="49.0" prefHeight="924.0" prefWidth="565.0" style="-fx-background-color: #272829;" title="Deed Growth">
               <xAxis>
-                <CategoryAxis fx:id="axisDeeds" side="BOTTOM" />
+                <CategoryAxis fx:id="axisDeeds" prefHeight="8.0" prefWidth="439.0" side="BOTTOM" />
               </xAxis>
               <yAxis>
                 <NumberAxis fx:id="axisNoOfDeeds" side="LEFT" />
               </yAxis>
             </BarChart>
-            <Line endX="100.0" endY="432.0" layoutX="951.0" layoutY="557.0" startX="100.0" startY="-552.0" stroke="#46474a" strokeWidth="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1046.0" AnchorPane.rightAnchor="536.0" AnchorPane.topAnchor="0.0">
+            <Line endX="100.0" endY="432.0" layoutX="290.0" layoutY="564.0" startX="100.0" startY="-552.0" stroke="#46474a" strokeWidth="10.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="385.0" AnchorPane.rightAnchor="1197.0" AnchorPane.topAnchor="7.0">
                <rotationAxis>
                   <Point3D />
                </rotationAxis>
@@ -129,7 +129,7 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnSalaryOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Salary">
+            <JFXButton buttonType="RAISED" onAction="#btnSalaryOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Payments">
                <font>
                   <Font size="16.0" />
                </font>
@@ -153,21 +153,23 @@
             <Image url="@../asserts/icons8-male-user-50.png" />
          </image>
       </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="1669.0" layoutY="18.0" onAction="#btnLogoutOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#9a0202" text="Logout" textFill="RED">
+      <JFXButton buttonType="RAISED" layoutX="1705.0" layoutY="18.0" onAction="#btnLogoutOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#9a0202" text="Logout" textFill="RED">
          <font>
             <Font size="17.0" />
          </font></JFXButton>
       <Label fx:id="lblUserId" layoutX="155.0" layoutY="101.0" />
       <Label fx:id="lblUsername" layoutX="155.0" layoutY="127.0" />
-      <JFXButton buttonType="RAISED" layoutX="1220.0" layoutY="18.0" onAction="#btnDashboardOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#3b4fd7" text="Dashboard" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="1241.0" layoutY="18.0" onAction="#btnDashboardOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#3b4fd7" text="Dashboard" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="1449.0" layoutY="18.0" onAction="#btnReportsOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#24975b" text="Reports" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="1473.0" layoutY="18.0" onAction="#btnReportsOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#24975b" text="Reports" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </JFXButton>
+      <Label fx:id="lblDate" layoutX="492.0" layoutY="18.0" prefHeight="24.0" prefWidth="217.0" textFill="WHITE" />
+      <Label fx:id="lblTime" layoutX="492.0" layoutY="46.0" prefHeight="24.0" prefWidth="217.0" textFill="WHITE" />
    </children>
 </AnchorPane>

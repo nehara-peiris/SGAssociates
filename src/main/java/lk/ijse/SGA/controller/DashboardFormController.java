@@ -1,5 +1,6 @@
 package lk.ijse.SGA.controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,8 @@ import net.sf.jasperreports.view.JasperViewer;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -45,16 +48,21 @@ public class DashboardFormController implements Initializable {
     private CategoryAxis axisDeeds;
     @FXML
     private NumberAxis axisNoOfDeeds;
+    public Label lblDate;
+    public Label lblTime;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCasesBarchart();
         setDeedBarchart();
         setUserDetail();
+        setDate();
+        setTime();
     }
 
     public void setUserDetail(){
-
+        lblUserId.setText("");
+        lblUsername.setText("");
     }
 
     private void setCasesBarchart() {
@@ -101,6 +109,26 @@ public class DashboardFormController implements Initializable {
         });
 
         chartDeeds.getData().add(series);
+    }
+
+    private void setDate() {
+        LocalDate now = LocalDate.now();
+        lblDate.setText(String.valueOf(now));
+    }
+
+    public void setTime() {
+
+        new Thread(() -> {
+            while (true) {
+                try {
+                    String formattedTime = java.time.LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss a"));
+                    Platform.runLater(() -> lblTime.setText(formattedTime));
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     @FXML
@@ -158,7 +186,7 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     void btnSalaryOnAction(ActionEvent event) throws IOException {
-        AnchorPane salaryForm = FXMLLoader.load(this.getClass().getResource("/view/SalaryForm.fxml"));
+        AnchorPane salaryForm = FXMLLoader.load(this.getClass().getResource("/view/PaymentForm.fxml"));
 
         rootNode.getChildren().add(salaryForm);
     }
@@ -186,3 +214,22 @@ public class DashboardFormController implements Initializable {
         JasperViewer.viewReport(jasperPrint, false);
     }
 }
+/*
+try{
+FXMLLoader loader = FXMLLoader.load(this.getClass().getResource("/view/DashboardForm.fxml"));
+Parent rootNode = loader.load();
+Scene scene = new Scene(rootNode);
+
+DashboardFormController controller = loader.getController();
+            controller.setUserDetail();
+
+Stage stage = (Stage) this.rootNode.getScene().getWindow();
+            stage.setScene(scene);
+            stage.centerOnScreen();
+            stage.setTitle("Dashboard Form");
+        }catch (Exception e){
+        throw new RuntimeException(e);
+        }
+
+
+ */

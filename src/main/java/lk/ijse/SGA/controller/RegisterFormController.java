@@ -2,19 +2,23 @@ package lk.ijse.SGA.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.db.DbConnection;
 
 
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class RegisterFormController {
+public class RegisterFormController implements Initializable {
 
     public AnchorPane rootNode;
     public CheckBox checkBoxPw;
@@ -24,6 +28,25 @@ public class RegisterFormController {
     private TextField txtUserId;
     @FXML
     private TextField txtUsername;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        keyEventsHandling();
+    }
+
+    private void keyEventsHandling() {
+        txtUserId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                txtPassword.requestFocus();
+            }
+        });
+
+        txtPassword.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnRegisterOnAction(null);
+            }
+        });
+    }
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) {

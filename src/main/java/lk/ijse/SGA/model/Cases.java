@@ -16,6 +16,4 @@ public class Cases {
     private String type;
     private Date date;
     private String clientId;
-
-
 }

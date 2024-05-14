@@ -12,12 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import lk.ijse.SGA.model.CaseCharge;
 import lk.ijse.SGA.model.DeedCharge;
 import lk.ijse.SGA.model.tm.DeedChargeTm;
-import lk.ijse.SGA.model.tm.TotalCaseChargeTm;
 import lk.ijse.SGA.model.tm.TotalDeedChargeTm;
-import lk.ijse.SGA.repository.CaseChargeRepo;
 import lk.ijse.SGA.repository.DeedChargeRepo;
 
 import java.net.URL;
@@ -75,6 +72,44 @@ public class DeedChargeFormController implements Initializable {
 
         Validations();
         addTextChangeListener(txtDCPayId);
+        addTextChangeListener(txtDeedId);
+        addTextChangeListener(txtLawyerId);
+        addTextChangeListener(txtChargeId);
+        addTextChangeListener(txtDate);
+        addTextChangeListener(txtAmount);
+        addTextChangeListener(txtClientId);
+    }
+
+    private void Validations() {
+        txtDCPayId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtDCPayId.getText().isEmpty() && !event.getCharacter().equals("DCP")){
+                event.consume();
+            }
+        });
+
+        txtDeedId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtDeedId.getText().isEmpty() && !event.getCharacter().equals("D")){
+                event.consume();
+            }
+        });
+
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+                event.consume();
+            }
+        });
+
+        txtChargeId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtChargeId.getText().isEmpty() && !event.getCharacter().equals("CH")){
+                event.consume();
+            }
+        });
+
+        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtClientId.getText().isEmpty() && !event.getCharacter().equals("C")){
+                event.consume();
+            }
+        });
     }
 
     private void addTextChangeListener(TextField textField) {
@@ -93,7 +128,7 @@ public class DeedChargeFormController implements Initializable {
             }
 
             if (textField == txtChargeId && !newValue.matches("^CH.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
+                new Alert(Alert.AlertType.ERROR ,"Start with CH").show();
             }
 
             if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
@@ -106,14 +141,6 @@ public class DeedChargeFormController implements Initializable {
 
             if (textField == txtClientId && !newValue.matches("^C.*$")) {
                 new Alert(Alert.AlertType.ERROR ,"Start with C").show();
-            }
-        });
-    }
-
-    private void Validations() {
-        txtDCPayId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtDCPayId.getText().isEmpty() && !event.getCharacter().equals("DCP")){
-                event.consume();
             }
         });
     }

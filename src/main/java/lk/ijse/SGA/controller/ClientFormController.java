@@ -17,6 +17,7 @@ import lk.ijse.SGA.model.Client;
 import lk.ijse.SGA.model.tm.ClientTm;
 import lk.ijse.SGA.repository.ClientRepo;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -107,75 +108,69 @@ public class ClientFormController implements Initializable {
                 event.consume();
             }
         });
-
-        txtName.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtName.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
-                event.consume();
-            }
-        });
-
-        txtAddress.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtAddress.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
-                event.consume();
-            }
-        });
-
-        txtEmail.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtEmail.getText().isEmpty() && !Character.isLowerCase(event.getCharacter().charAt(0)) && !event.getCharacter().equals(".")) {
-                event.consume();
-            }
-        });
-
-        txtContact.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtContact.getText().length() <= 10 || !Character.isDigit(event.getCharacter().charAt(0))) {
-                event.consume();
-            }
-        });
-
-        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
-                event.consume();
-            }
-        });    }
+    }
 
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
             if (textField == txtClientId && !newValue.matches("^C.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with C").show();
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
             }
-        });
 
-        txtName.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtName.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
-                event.consume();
+            if (textField == txtName) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
-        });
 
-        txtAddress.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtAddress.getText().isEmpty() && Character.isUpperCase(event.getCharacter().charAt(0))) {
-                event.consume();
+            if (textField == txtAddress) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
-        });
 
-        txtContact.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtContact.getText().length() <= 10 || !Character.isDigit(event.getCharacter().charAt(0))) {
-                event.consume();
+            if (textField == txtContact) {
+                // Check if the new value contains only digits and has a length of 10
+                if (!newValue.matches("\\d{0,10}")) {
+                    // If it contains non-digits or its length is not 10, prevent typing and display an error message
+                    textField.setText(oldValue != null ? oldValue : "");
+                    JOptionPane.showMessageDialog(null, "Please enter 10 integer numbers.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
-        });
 
-        txtEmail.addEventFilter(KeyEvent.KEY_TYPED, event -> {
-            if (txtEmail.getText().isEmpty() && !Character.isLowerCase(event.getCharacter().charAt(0)) && !event.getCharacter().equals(".")) {
-                event.consume();
+            if (textField == txtEmail && !newValue.matches("^([A-z])([A-z0-9.]){1,}[@]([A-z0-9]){1,10}[.]([A-z]){2,5}$")) {
             }
-        });
 
-        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
-                event.consume();
+            if (textField == txtContact) {
+                // Check if the new value contains only digits and has a length of 10
+                if (!newValue.matches("\\d{0,10}")) {
+                    // If it contains non-digits or its length is not 10, prevent typing and display an error message
+                    textField.setText(oldValue != null ? oldValue : "");
+                    JOptionPane.showMessageDialog(null, "Please enter 10 integer numbers.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
+                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
             }
         });
     }
+
+
 
     private void setCellValueFactory() {
         colName.setCellValueFactory(new PropertyValueFactory<>("Name"));

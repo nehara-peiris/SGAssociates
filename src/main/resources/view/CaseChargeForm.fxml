@@ -62,9 +62,7 @@
       <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="517.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: F05454;" text="Delete" textFill="WHITE" />
       <TableView fx:id="tblCaseCharge1" layoutX="521.0" layoutY="166.0" prefHeight="383.0" prefWidth="1004.0">
         <columns>
-          <TableColumn fx:id="colCCPayId1" prefWidth="99.0" text="CCPay ID" />
           <TableColumn fx:id="colCaseId1" prefWidth="116.0" text="Case ID" />
-            <TableColumn fx:id="colDate1" prefWidth="99.0" text="Date" />
             <TableColumn fx:id="colTotalPay1" prefWidth="192.0" text="Total Payment" />
         </columns>
       </TableView>

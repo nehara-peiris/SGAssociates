@@ -79,8 +79,17 @@ public class JudgeFormController {
                 new Alert(Alert.AlertType.ERROR ,"Start with J").show();
             }
 
-            if (textField == txtName && !newValue.matches("[A-z].*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Name should start with Upper case").show();
+            if (textField == txtName) {
+                if (!newValue.isEmpty()) {
+                    if (!Character.isUpperCase(newValue.charAt(0))) {
+                        textField.setText(oldValue != null ? oldValue : "");
+                    } else {
+                        String correctedValue = Character.toUpperCase(newValue.charAt(0)) + newValue.substring(1);
+                        if (!newValue.equals(correctedValue)) {
+                            textField.setText(correctedValue);
+                        }
+                    }
+                }
             }
 
             if (textField == txtCourtId && !newValue.matches("^CT.*$")) {
