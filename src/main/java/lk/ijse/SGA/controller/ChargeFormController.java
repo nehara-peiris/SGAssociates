@@ -137,14 +137,34 @@ public class ChargeFormController implements Initializable {
     void btnSaveOnAction (ActionEvent event) throws SQLException {
         String chargeId = txtChargeId.getText();
         String description = txtDescription.getText();
-        double amount = Double.parseDouble(txtAmount.getText());
+        String crgAmount = txtAmount.getText();
+
+        if (chargeId.isEmpty() || description.isEmpty() || crgAmount.isEmpty()) {
+            if (chargeId.isEmpty()) {
+                txtChargeId.requestFocus();
+                txtChargeId.setStyle("-fx-border-color: red;");
+            } else if (description.isEmpty()) {
+                txtDescription.requestFocus();
+                txtDescription.setStyle("-fx-border-color: red;");
+            } else {
+                txtAmount.requestFocus();
+                txtAmount.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        double amount = Double.parseDouble(crgAmount);
 
         Charge charge = new Charge(chargeId, description, amount);
-
-        boolean isSaved = ChargeRepo.save(charge);
-        if (isSaved) {
-            new Alert(Alert.AlertType.CONFIRMATION, "charge saved!").show();
-            clearFields();
+        try {
+            boolean isSaved = ChargeRepo.save(charge);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "charge saved!").show();
+                clearFields();
+                loadAllCharges();
+            }
+        } catch (SQLException e){
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

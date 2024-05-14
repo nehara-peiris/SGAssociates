@@ -228,10 +228,35 @@ public class CasesFormController implements Initializable {
         String clientId = txtClientId.getText();
         String description = txtDescription.getText();
         String type = txtType.getText();
-        Date date = Date.valueOf(txtDate.getText());
+        String dateOfCase = txtDate.getText();
         String lawyerId = txtLawyerId.getText();
 
-        Cases cases = new Cases(caseId, description, type, date, clientId);
+        if (caseId.isEmpty() || clientId.isEmpty() || description.isEmpty() || type.isEmpty() || dateOfCase.isEmpty() || lawyerId.isEmpty()) {
+            if (caseId.isEmpty()) {
+                txtCaseId.requestFocus();
+                txtCaseId.setStyle("-fx-border-color: red;");
+            } else if (clientId.isEmpty()) {
+                txtClientId.requestFocus();
+                txtClientId.setStyle("-fx-border-color: red;");
+            } else if (description.isEmpty()) {
+                txtDescription.requestFocus();
+                txtDescription.setStyle("-fx-border-color: red;");
+            } else if (type.isEmpty()) {
+                txtType.requestFocus();
+                txtType.setStyle("-fx-border-color: red;");
+            } else if (dateOfCase.isEmpty()) {
+                txtDate.requestFocus();
+                txtDate.setStyle("-fx-border-color: red;");
+            } else {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        Date date = Date.valueOf(dateOfCase);
+
+            Cases cases = new Cases(caseId, description, type, date, clientId);
 
         try{
             boolean isSaved = CasesRepo.save(cases);
@@ -240,9 +265,10 @@ public class CasesFormController implements Initializable {
                 LawyerFormController.lawCaseUpdate(caseId, lawyerId, date);
                 loadAllCases();
                 clearFields();
+                txtCaseId.requestFocus();
             }
         }catch(SQLException e){
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

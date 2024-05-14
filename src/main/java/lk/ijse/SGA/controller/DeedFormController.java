@@ -17,8 +17,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.SGA.model.Cases;
 import lk.ijse.SGA.model.Deed;
 import lk.ijse.SGA.model.tm.DeedTm;
+import lk.ijse.SGA.repository.CasesRepo;
 import lk.ijse.SGA.repository.ClientRepo;
 import lk.ijse.SGA.repository.DeedRepo;
 
@@ -225,9 +227,34 @@ public class DeedFormController implements Initializable {
         String deedId = txtDeedId.getText();
         String description = txtDescription.getText();
         String type = txtType.getText();
-        Date date = Date.valueOf(txtDate.getText());
+        String dateOfDeed = txtDate.getText();
         String lawyerId = txtLawyerId.getText();
         String clientId = txtClientId.getText();
+
+        if (deedId.isEmpty() || clientId.isEmpty() || description.isEmpty() || type.isEmpty() || dateOfDeed.isEmpty() || lawyerId.isEmpty()) {
+            if (deedId.isEmpty()) {
+                txtDeedId.requestFocus();
+                txtDeedId.setStyle("-fx-border-color: red;");
+            } else if (clientId.isEmpty()) {
+                txtClientId.requestFocus();
+                txtClientId.setStyle("-fx-border-color: red;");
+            } else if (description.isEmpty()) {
+                txtDescription.requestFocus();
+                txtDescription.setStyle("-fx-border-color: red;");
+            } else if (type.isEmpty()) {
+                txtType.requestFocus();
+                txtType.setStyle("-fx-border-color: red;");
+            } else if (dateOfDeed.isEmpty()) {
+                txtDate.requestFocus();
+                txtDate.setStyle("-fx-border-color: red;");
+            } else {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        Date date = Date.valueOf(dateOfDeed);
 
         Deed deed = new Deed(deedId, description, type, date, lawyerId, clientId);
 
@@ -236,9 +263,11 @@ public class DeedFormController implements Initializable {
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION, "Deed saved successfully!").show();
                 clearFields();
+                loadAllDeeds();
+                txtDeedId.requestFocus();
             }
         }catch(SQLException e){
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

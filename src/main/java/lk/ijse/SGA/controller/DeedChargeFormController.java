@@ -249,17 +249,51 @@ public class DeedChargeFormController implements Initializable {
         String deedId = txtDeedId.getText();
         String lawyerId = txtLawyerId.getText();
         String chargeId = txtChargeId.getText();
-        Date date = Date.valueOf(txtDate.getText());
-        double amount = Double.parseDouble(txtAmount.getText());
+        String dateOfDC = txtDate.getText();
+        String dcAmount = txtAmount.getText();
         String clientId = txtClientId.getText();
 
+        if (DCPayId.isEmpty() || deedId.isEmpty() || lawyerId.isEmpty() || chargeId.isEmpty() || dateOfDC.isEmpty() || dcAmount.isEmpty() || clientId.isEmpty()) {
+
+            // Request focus on the unfilled TextField
+            if (DCPayId.isEmpty()) {
+                txtDCPayId.requestFocus();
+                txtDCPayId.setStyle("-fx-border-color: red;");
+            } else if (deedId.isEmpty()) {
+                txtDeedId.requestFocus();
+                txtDeedId.setStyle("-fx-border-color: red;");
+            } else if (lawyerId.isEmpty()) {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            } else if (chargeId.isEmpty()) {
+                txtChargeId.requestFocus();
+                txtChargeId.setStyle("-fx-border-color: red;");
+            } else if (dateOfDC.isEmpty()) {
+                txtDate.requestFocus();
+                txtDate.setStyle("-fx-border-color: red;");
+            } else if (dcAmount.isEmpty()) {
+                txtAmount.requestFocus();
+                txtAmount.setStyle("-fx-border-color: red;");
+            } else {
+                txtClientId.requestFocus();
+                txtClientId.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        Date date = Date.valueOf(dateOfDC);
+        double amount = Double.parseDouble(dcAmount);
+
         DeedCharge deedCharge = new DeedCharge(DCPayId, deedId, lawyerId, chargeId, date, amount, clientId);
+
         try{
             boolean isSaved = DeedChargeRepo.save(deedCharge);
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION, "saved successfully!").show();
                 loadAllDeedChargeDetails();
                 clearFields();
+                loadTotalDeedCharge();
+                txtDCPayId.requestFocus();
             }
         }catch(SQLException e){
             throw new RuntimeException(e);

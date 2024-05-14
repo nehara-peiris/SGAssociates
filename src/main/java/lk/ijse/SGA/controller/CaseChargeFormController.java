@@ -225,32 +225,9 @@ public class CaseChargeFormController implements Initializable {
             }
             tblCaseCharge1.setItems(obList);
         } catch (SQLException e) {
-            // Handle SQLException appropriately
             e.printStackTrace();
         }
     }
-
-    /*
-                TotalCaseChargeTm tm = new TotalCaseChargeTm(
-                        caseCharge.getCCPayId(),
-                        caseCharge.getCaseId(),
-                        caseCharge.getDate(),
-                        caseCharge.getAmount()+caseCharge.getAmount()
-                );
-                obList.add(tm);
-            }
-
-            System.out.println(obList);
-
-            tblCaseCharge1.setItems(obList);
-        }catch (SQLException e){
-            throw new RuntimeException(e);
-        }
-
-     */
-
-
-
 
     @FXML
     void btnSaveOnAction (ActionEvent event) throws SQLException {
@@ -258,9 +235,39 @@ public class CaseChargeFormController implements Initializable {
         String caseId = txtCaseId.getText();
         String lawyerId = txtLawyerId.getText();
         String chargeId = txtChargeId.getText();
-        Date date = Date.valueOf(txtDate.getText());
-        double amount = Double.parseDouble(txtAmount.getText());
+        String dateOfCharge = txtDate.getText();
+        String crgAmount = txtAmount.getText();
         String clientId = txtClientId.getText();
+
+        if (CCPayId.isEmpty() || caseId.isEmpty() || lawyerId.isEmpty() || chargeId.isEmpty() || dateOfCharge.isEmpty() || crgAmount.isEmpty() || clientId.isEmpty()) {
+
+            if (CCPayId.isEmpty()) {
+                txtCCPayId.requestFocus();
+                txtCCPayId.setStyle("-fx-border-color: red;");
+            } else if (caseId.isEmpty()) {
+                txtCaseId.requestFocus();
+                txtCaseId.setStyle("-fx-border-color: red;");
+            } else if (lawyerId.isEmpty()) {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            } else if (chargeId.isEmpty()) {
+                txtChargeId.requestFocus();
+                txtChargeId.setStyle("-fx-border-color: red;");
+            } else if (dateOfCharge.isEmpty()) {
+                txtDate.requestFocus();
+                txtDate.setStyle("-fx-border-color: red;");
+            } else if (crgAmount.isEmpty()) {
+                txtAmount.requestFocus();
+                txtAmount.setStyle("-fx-border-color: red;");
+            } else {
+                txtClientId.requestFocus();
+                txtClientId.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        Date date = Date.valueOf(dateOfCharge);
+        double amount = Double.parseDouble(crgAmount);
 
         CaseCharge caseCharge = new CaseCharge(CCPayId, caseId, lawyerId, chargeId, date, amount, clientId);
 
@@ -270,6 +277,8 @@ public class CaseChargeFormController implements Initializable {
                 new Alert(Alert.AlertType.CONFIRMATION, "saved successfully!").show();
                 loadAllCaseChargeDetails();
                 clearFields();
+                loadTotalCaseCharge();
+                txtCCPayId.requestFocus();
             }
         }catch(SQLException e){
             throw new RuntimeException(e);

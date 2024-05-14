@@ -149,7 +149,28 @@ public class JudgeFormController {
         String judgeId = txtJudgeId.getText();
         String name = txtName.getText();
         String courtId = txtCourtId.getText();
-        int yrsOfExp = Integer.parseInt(txtYrsOfExp.getText());
+        String yearsOfExp = txtYrsOfExp.getText();
+
+        if (judgeId.isEmpty() || name.isEmpty() || courtId.isEmpty() || yearsOfExp.isEmpty()) {
+
+            // Request focus on the unfilled TextField
+            if (judgeId.isEmpty()) {
+                txtJudgeId.requestFocus();
+                txtJudgeId.setStyle("-fx-border-color: red;");
+            } else if (name.isEmpty()) {
+                txtName.requestFocus();
+                txtName.setStyle("-fx-border-color: red;");
+            } else if (courtId.isEmpty()) {
+                txtName.requestFocus();
+                txtName.setStyle("-fx-border-color: red;");
+            } else {
+                txtYrsOfExp.requestFocus();
+                txtYrsOfExp.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        int yrsOfExp = Integer.parseInt(yearsOfExp);
 
         Judge judge = new Judge(judgeId, name, courtId, yrsOfExp);
 
@@ -158,6 +179,8 @@ public class JudgeFormController {
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "deed saved!").show();
                 clearFields();
+                loadAllJudges();
+                txtJudgeId.requestFocus();
             }
         }catch(SQLException e){
             throw new RuntimeException(e);

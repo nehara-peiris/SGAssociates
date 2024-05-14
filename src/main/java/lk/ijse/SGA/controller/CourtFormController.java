@@ -113,6 +113,18 @@ public class CourtFormController {
         String courtId = txtCourtId.getText();
         String location = txtLocation.getText();
 
+        if (courtId.isEmpty() || location.isEmpty()) {
+
+            if (courtId.isEmpty()) {
+                txtCourtId.requestFocus();
+                txtCourtId.setStyle("-fx-border-color: red;");
+            } else {
+                txtLocation.requestFocus();
+                txtLocation.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
         Court court = new Court(courtId, location);
 
         try{
@@ -120,9 +132,11 @@ public class CourtFormController {
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "court saved!").show();
                 clearFields();
+                loadAllCourts();
+                txtCourtId.requestFocus();
             }
         }catch (SQLException e){
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 

@@ -208,8 +208,35 @@ public class ClientFormController implements Initializable {
         String name = txtName.getText();
         String address = txtAddress.getText();
         String email = txtEmail.getText();
-        int contact = Integer.parseInt(txtContact.getText());
+        String contactNo = txtContact.getText();
         String lawyerId = txtLawyerId.getText();
+
+        if (clientId.isEmpty() || name.isEmpty() || address.isEmpty() || email.isEmpty() || contactNo.isEmpty() || lawyerId.isEmpty()) {
+
+            // Request focus on the unfilled TextField
+            if (clientId.isEmpty()) {
+                txtClientId.requestFocus();
+                txtClientId.setStyle("-fx-border-color: red;");
+            } else if (name.isEmpty()) {
+                txtName.requestFocus();
+                txtName.setStyle("-fx-border-color: red;");
+            } else if (address.isEmpty()) {
+                txtAddress.requestFocus();
+                txtAddress.setStyle("-fx-border-color: red;");
+            } else if (email.isEmpty()) {
+                txtEmail.requestFocus();
+                txtEmail.setStyle("-fx-border-color: red;");
+            }else if (contactNo.isEmpty()) {
+                txtContact.requestFocus();
+                txtContact.setStyle("-fx-border-color: red;");
+            } else {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        int contact = Integer.parseInt(contactNo);
 
         Client client = new Client(clientId, name, address, email, contact, lawyerId);
 
@@ -218,9 +245,11 @@ public class ClientFormController implements Initializable {
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION, "Client saved successfully!").show();
                 clearFields();
+                loadAllClients();
+                txtClientId.requestFocus();
             }
         }catch(SQLException e){
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
