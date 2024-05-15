@@ -10,6 +10,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Data
 public class DeedTm {
+    private String deedId;
     private String description;
     private String type;
     private Date date;

@@ -47,7 +47,7 @@
       <TextField fx:id="txtDate" layoutX="138.0" layoutY="346.0" prefWidth="317.0" promptText="YYYY-MM-DD" />
       <TextField fx:id="txtAmount" layoutX="138.0" layoutY="391.0" prefWidth="317.0" promptText="XXXX.XX" />
       <TextField fx:id="txtClientId" layoutX="138.0" layoutY="436.0" prefWidth="317.0" promptText="CXXX" />
-      <TableView fx:id="tblDeedCharge2" layoutX="59.0" layoutY="593.0" prefHeight="348.0" prefWidth="1483.0">
+      <TableView fx:id="tblDeedCharge2" layoutX="59.0" layoutY="593.0" onMouseClicked="#TableOnClick" prefHeight="348.0" prefWidth="1483.0">
         <columns>
           <TableColumn fx:id="colDCPayId2" prefWidth="117.0" text="DCPay ID" />
           <TableColumn fx:id="colDeedId2" prefWidth="98.0" text="Deed ID" />

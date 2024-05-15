@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Point3D?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -10,14 +10,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainNode" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #8E8B82;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
+<AnchorPane fx:id="mainNode" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: #01211c;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.DashboardFormController">
    <children>
-      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane fx:id="rootNode" layoutX="313.0" layoutY="80.0" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #adedd7;">
          <children>
-            <BarChart fx:id="chartCase" layoutX="429.0" layoutY="49.0" prefHeight="924.0" prefWidth="565.0" style="-fx-background-color: #272829;" title="Case Growth">
+            <BarChart fx:id="chartCase" layoutX="130.0" layoutY="30.0" prefHeight="924.0" prefWidth="565.0" style="-fx-background-color: #adedd7;" title="Case Growth">
               <xAxis>
                 <CategoryAxis fx:id="axisCases" side="BOTTOM" />
               </xAxis>
@@ -25,7 +24,7 @@
                 <NumberAxis fx:id="axisNoOfCases" side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="chartDeeds" animated="false" layoutX="1013.0" layoutY="49.0" prefHeight="924.0" prefWidth="565.0" style="-fx-background-color: #272829;" title="Deed Growth">
+            <BarChart fx:id="chartDeeds" animated="false" layoutX="914.0" layoutY="30.0" prefHeight="905.0" prefWidth="565.0" title="Deed Growth">
               <xAxis>
                 <CategoryAxis fx:id="axisDeeds" prefHeight="8.0" prefWidth="439.0" side="BOTTOM" />
               </xAxis>
@@ -33,48 +32,43 @@
                 <NumberAxis fx:id="axisNoOfDeeds" side="LEFT" />
               </yAxis>
             </BarChart>
-            <Line endX="100.0" endY="432.0" layoutX="290.0" layoutY="564.0" startX="100.0" startY="-552.0" stroke="#46474a" strokeWidth="10.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="385.0" AnchorPane.rightAnchor="1197.0" AnchorPane.topAnchor="7.0">
-               <rotationAxis>
-                  <Point3D />
-               </rotationAxis>
-            </Line>
          </children></AnchorPane>
-      <VBox alignment="TOP_RIGHT" layoutX="35.0" layoutY="223.0" prefHeight="783.0" prefWidth="240.0" style="-fx-background-color: #8E8B82;">
+      <VBox alignment="TOP_RIGHT" layoutX="35.0" layoutY="223.0" prefHeight="783.0" prefWidth="240.0" style="-fx-background-color: #01211c;">
          <children>
-            <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Lawyers">
+            <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Lawyers" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="61.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-lawyer-50.png" />
+                        <Image url="@../asserts/lawyer.png" />
                      </image>
                   </ImageView>
                </graphic>
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnClientsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Clients">
+            <JFXButton buttonType="RAISED" onAction="#btnClientsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Clients" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-client-80.png" />
+                        <Image url="@../asserts/client.png" />
                      </image>
                   </ImageView>
                </graphic>
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnJudgesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Judges">
+            <JFXButton buttonType="RAISED" onAction="#btnJudgesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Judges" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="59.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-judge-50.png" />
+                        <Image url="@../asserts/Judge.png" />
                      </image>
                   </ImageView>
                </graphic>
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnCasesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Cases">
+            <JFXButton buttonType="RAISED" onAction="#btnCasesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Cases" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -85,7 +79,7 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnDeedsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Deeds">
+            <JFXButton buttonType="RAISED" onAction="#btnDeedsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Deeds" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -96,7 +90,7 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnSummonsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Summons">
+            <JFXButton buttonType="RAISED" onAction="#btnSummonsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Summons" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -107,7 +101,7 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnCourtsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Courts">
+            <JFXButton buttonType="RAISED" onAction="#btnCourtsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Courts" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -118,7 +112,7 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnChargesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Charges">
+            <JFXButton buttonType="RAISED" onAction="#btnChargesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Charges" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -129,7 +123,7 @@
                <font>
                   <Font size="16.0" />
                </font></JFXButton>
-            <JFXButton buttonType="RAISED" onAction="#btnSalaryOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Payments">
+            <JFXButton buttonType="RAISED" onAction="#btnSalaryOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Payments" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -143,17 +137,17 @@
             </JFXButton>
          </children>
       </VBox>
-      <Label layoutY="17.0" prefHeight="53.0" prefWidth="1905.0" style="-fx-background-color: black;" text=" SHIRANTHI GUNAWARDENA ASSOCIATES " textFill="WHITE">
+      <Label layoutY="17.0" prefHeight="53.0" prefWidth="1905.0" style="-fx-background-color: #001411;" text=" SHIRANTHI GUNAWARDENA ASSOCIATES " textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="87.0" fitWidth="87.0" layoutX="35.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="79.0" fitWidth="79.0" layoutX="28.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../asserts/icons8-male-user-50.png" />
+            <Image url="@../asserts/user.png" />
          </image>
       </ImageView>
-      <JFXButton buttonType="RAISED" layoutX="1705.0" layoutY="18.0" onAction="#btnLogoutOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#9a0202" text="Logout" textFill="RED">
+      <JFXButton buttonType="RAISED" layoutX="1705.0" layoutY="18.0" onAction="#btnLogoutOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#9a0202" text="Logout" textFill="#de6f7e">
          <font>
             <Font size="17.0" />
          </font></JFXButton>
@@ -164,12 +158,8 @@
             <Font size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="1473.0" layoutY="18.0" onAction="#btnReportsOnAction" prefHeight="52.0" prefWidth="200.0" ripplerFill="#24975b" text="Reports" textFill="WHITE">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </JFXButton>
       <Label fx:id="lblDate" layoutX="492.0" layoutY="18.0" prefHeight="24.0" prefWidth="217.0" textFill="WHITE" />
       <Label fx:id="lblTime" layoutX="492.0" layoutY="46.0" prefHeight="24.0" prefWidth="217.0" textFill="WHITE" />
+      <JFXComboBox fx:id="cmbReports" focusColor="#11804a" layoutX="1454.0" layoutY="18.0" onAction="#cmbReportsOnAction" prefHeight="53.0" prefWidth="125.0" promptText="Reports" style="-fx-background-color: #032b24;" unFocusColor="#011f19" />
    </children>
 </AnchorPane>

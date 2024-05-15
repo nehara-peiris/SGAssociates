@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Client;
 import lk.ijse.SGA.model.tm.ClientTm;
@@ -38,6 +39,7 @@ public class ClientFormController implements Initializable {
     private TextField txtLawyerId;
     @FXML
     private AnchorPane rootNode;
+    public TableColumn colClientId;
     @FXML
     private TableColumn<?, ?> colName;
     @FXML
@@ -187,6 +189,7 @@ public class ClientFormController implements Initializable {
             List<Client> clientList = ClientRepo.getAll();
             for (Client client : clientList){
                 ClientTm tm = new ClientTm(
+                        client.getClientId(),
                         client.getName(),
                         client.getAddress(),
                         client.getEmail(),
@@ -315,5 +318,15 @@ public class ClientFormController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void TableOnClick(MouseEvent mouseEvent) {
+        ClientTm clientTm = tblClient.getSelectionModel().getSelectedItem();
+        txtClientId.setText(clientTm.getClientId());
+        txtName.setText(clientTm.getName());
+        txtAddress.setText(clientTm.getAddress());
+        txtEmail.setText(clientTm.getEmail());
+        txtContact.setText(String.valueOf(clientTm.getContact()));
+        txtLawyerId.setText(clientTm.getLawyerID());
     }
 }

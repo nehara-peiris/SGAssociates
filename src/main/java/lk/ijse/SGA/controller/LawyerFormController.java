@@ -5,13 +5,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.LawCase;
 import lk.ijse.SGA.model.Lawyer;
@@ -41,6 +39,8 @@ public class LawyerFormController implements Initializable {
     private TextField txtEmail;
     @FXML
     private TableView<LawyerTm> tblLawyer;
+    @FXML
+    private TableColumn<?,?> colLawyerID;
     @FXML
     private TableColumn<?,?> colName;
     @FXML
@@ -98,8 +98,6 @@ public class LawyerFormController implements Initializable {
         addTextChangeListener(txtEmail);
         addTextChangeListener(txtYrsOfExp);
     }
-
-
 
     private void Validations() {
         txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
@@ -201,6 +199,7 @@ public class LawyerFormController implements Initializable {
     }
 
     private void setCellValueFactory() {
+        colLawyerID.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colYrsOfExp.setCellValueFactory(new PropertyValueFactory<>("yrsOfExp"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
@@ -215,6 +214,7 @@ public class LawyerFormController implements Initializable {
             List<Lawyer> lawyerList = LawyerRepo.getAll();
             for (Lawyer lawyer : lawyerList) {
                 LawyerTm tm = new LawyerTm(
+                        lawyer.getLawyerId(),
                         lawyer.getName(),
                         lawyer.getYrsOfExp(),
                         lawyer.getAddress(),
@@ -259,8 +259,6 @@ public class LawyerFormController implements Initializable {
         String contactNo = txtContact.getText();
 
         if (lawyerId.isEmpty() || name.isEmpty() || yearsOfExp.isEmpty() || address.isEmpty() || email.isEmpty() || contactNo.isEmpty()) {
-
-            // Request focus on the unfilled TextField
             if (lawyerId.isEmpty()) {
                 txtLawyerId.requestFocus();
                 txtLawyerId.setStyle("-fx-border-color: red;");
@@ -352,24 +350,13 @@ public class LawyerFormController implements Initializable {
         }
     }
 
-    @FXML
-    void txtSearchOnAction(ActionEvent event) throws SQLException {
-        /*
-        String contact = txtContact.getText();
-
-        Lawyer lawyer = LawyerRepo.searchById(contact);
-        if (lawyer != null) {
-            txtLawyerId.setText(lawyer.getLawyerId());
-            txtName.setText(lawyer.getName());
-            txtYrsOfExp.setText(String.valueOf(lawyer.getYrsOfExp()));
-            txtAddress.setText(lawyer.getAddress());
-            txtEmail.setText(lawyer.getEmail());
-            txtContact.setText(String.valueOf(lawyer.getContact()));
-        } else {
-            new Alert(Alert.AlertType.INFORMATION, "Lawyer not found!").show();
-        }
-         */
-
+    public void TableOnClick(MouseEvent mouseEvent) {
+        LawyerTm lawyerTm  = tblLawyer.getSelectionModel().getSelectedItem();
+        txtLawyerId.setText(lawyerTm.getLawyerId());
+        txtName.setText(lawyerTm.getName());
+        txtYrsOfExp.setText(String.valueOf(lawyerTm.getYrsOfExp()));
+        txtAddress.setText(lawyerTm.getAddress());
+        txtEmail.setText(lawyerTm.getEmail());
+        txtContact.setText(String.valueOf(lawyerTm.getContact()));
     }
-
 }

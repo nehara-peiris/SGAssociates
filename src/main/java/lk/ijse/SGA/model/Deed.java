@@ -16,7 +16,5 @@ public class Deed {
     private Date date;
     private String lawyerId;
     private String clientId;
-
-    Deed(String type, Date date){}
 }
 

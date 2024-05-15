@@ -17,9 +17,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Cases;
 import lk.ijse.SGA.model.tm.CasesTm;
+import lk.ijse.SGA.model.tm.PaymentTm;
 import lk.ijse.SGA.repository.CasesRepo;
 
 import java.net.URL;
@@ -313,5 +315,14 @@ public class CasesFormController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void TableOnClick(MouseEvent mouseEvent) {
+        CasesTm casesTm = tblCase.getSelectionModel().getSelectedItem();
+
+        txtDescription.setText(casesTm.getDescription());
+        txtDate.setText(String.valueOf(casesTm.getDate()));
+        txtType.setText(String.valueOf(casesTm.getType()));
+        txtClientId.setText(String.valueOf(casesTm.getClientId()));
     }
 }

@@ -12,8 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Summon;
+import lk.ijse.SGA.model.tm.PaymentTm;
 import lk.ijse.SGA.model.tm.SummonTm;
 import lk.ijse.SGA.repository.SummonRepo;
 
@@ -175,7 +177,30 @@ public class SummonFormController implements Initializable {
         String description = txtDescription.getText();
         String defendant = txtDefendant.getText();
         String lawyerId = txtLawyerId.getText();
-        Date date = Date.valueOf(txtDate.getText());
+        String sDate = txtDate.getText();
+
+        if (summonId.isEmpty() || description.isEmpty() || defendant.isEmpty() || lawyerId.isEmpty() || sDate.isEmpty()) {
+            if (summonId.isEmpty()) {
+                txtSummonId.requestFocus();
+                txtSummonId.setStyle("-fx-border-color: red;");
+            } else if (description.isEmpty()) {
+                txtDescription.requestFocus();
+                txtDescription.setStyle("-fx-border-color: red;");
+            } else if (defendant.isEmpty()) {
+                txtDefendant.requestFocus();
+                txtDefendant.setStyle("-fx-border-color: red;");
+            } else if (lawyerId.isEmpty()) {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            } else {
+                txtDate.requestFocus();
+                txtDate.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        Date date = Date.valueOf(sDate);
+
 
         Summon summon = new Summon(summonId, description, defendant, lawyerId, date);
 
@@ -184,6 +209,8 @@ public class SummonFormController implements Initializable {
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "summon saved!").show();
                 clearFields();
+                loadAllSummons();
+                txtSummonId.requestFocus();
             }
         }catch(SQLException e){
             throw new RuntimeException(e);
@@ -249,5 +276,14 @@ public class SummonFormController implements Initializable {
         } else {
             new Alert(Alert.AlertType.INFORMATION, "Lawyer not found!").show();
         }
+    }
+
+    public void TableOnClick(MouseEvent mouseEvent) {
+        SummonTm summonTm = tblSummon.getSelectionModel().getSelectedItem();
+        txtSummonId.setText(summonTm.getSummonId());
+        txtDescription.setText(summonTm.getDescription());
+        txtDefendant.setText(String.valueOf(summonTm.getDefendant()));
+        txtDate.setText(String.valueOf(summonTm.getDate()));
+        txtLawyerId.setText(String.valueOf(summonTm.getLawyerId()));
     }
 }

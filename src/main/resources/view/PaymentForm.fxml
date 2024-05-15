@@ -30,7 +30,7 @@
         <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="469.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #65B741;" text="save" textFill="#1937bc" />
         <JFXButton buttonType="RAISED" layoutX="203.0" layoutY="469.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #F3CA52;" text="update" textFill="#ff4040" />
         <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="469.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#e13a0c" style="-fx-background-color: #f26b6b;" text="delete" textFill="WHITE" />
-        <TableView fx:id="tblPayment" layoutX="56.0" layoutY="575.0" prefHeight="348.0" prefWidth="1471.0">
+        <TableView fx:id="tblPayment" layoutX="56.0" layoutY="575.0" onMouseClicked="#TableOnClick" prefHeight="348.0" prefWidth="1471.0">
             <columns>
                 <TableColumn fx:id="colPayId2" prefWidth="214.0" text="Payment ID" />
                 <TableColumn fx:id="colLawyerId2" prefWidth="214.0" text="Lawyer ID" />
@@ -39,13 +39,14 @@
                 <TableColumn fx:id="colBonus2" prefWidth="179.0" text="Bonus" />
             </columns>
         </TableView>
-        <TableView fx:id="tblSalary" layoutX="545.0" layoutY="162.0" prefHeight="336.0" prefWidth="981.0">
+        <TableView fx:id="tblSalary" layoutX="545.0" layoutY="207.0" prefHeight="290.0" prefWidth="981.0">
             <columns>
                 <TableColumn fx:id="colSalaryId1" prefWidth="94.0" text="Salary ID" />
                 <TableColumn fx:id="colLawyerId1" prefWidth="98.0" text="Lawyer ID" />
-                <TableColumn fx:id="colDate1" prefWidth="98.0" text="Date" />
+                <TableColumn fx:id="colMonth1" prefWidth="98.0" text="Month" />
                 <TableColumn fx:id="colTotalSalary1" prefWidth="98.0" text="Total Salary" />
             </columns>
         </TableView>
+      <TextField fx:id="txtChoseMonth" layoutX="545.0" layoutY="162.0" prefHeight="24.0" prefWidth="220.0" promptText="Chose Month" />
     </children>
 </AnchorPane>

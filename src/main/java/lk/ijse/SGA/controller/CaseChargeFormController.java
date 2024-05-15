@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.SGA.model.CaseCharge;
 import lk.ijse.SGA.model.tm.CaseChargeTm;
 import lk.ijse.SGA.model.tm.TotalCaseChargeTm;
@@ -332,5 +333,17 @@ public class CaseChargeFormController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void TableOnClick(MouseEvent mouseEvent) {
+        CaseChargeTm caseChargeTm = tblCaseCharge2.getSelectionModel().getSelectedItem();
+
+        txtCCPayId.setText(caseChargeTm.getCCPayId());
+        txtCaseId.setText(caseChargeTm.getCaseId());
+        txtLawyerId.setText(caseChargeTm.getLawyerId());
+        txtChargeId.setText(caseChargeTm.getChargeId());
+        txtDate.setText(String.valueOf(caseChargeTm.getDate()));
+        txtAmount.setText(String.valueOf(caseChargeTm.getAmount()));
+        txtClientId.setText(caseChargeTm.getClientId());
     }
 }

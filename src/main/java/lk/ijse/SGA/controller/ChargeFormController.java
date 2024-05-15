@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Charge;
 
@@ -221,5 +222,8 @@ public class ChargeFormController implements Initializable {
         AnchorPane deedCharge = FXMLLoader.load(this.getClass().getResource("/view/DeedChargeForm.fxml"));
 
         rootNode.getChildren().add(deedCharge);
+    }
+
+    public void TableOnClick(MouseEvent mouseEvent) {
     }
 }

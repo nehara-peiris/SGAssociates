@@ -12,6 +12,6 @@ import java.sql.Date;
 public class SalaryTm {
     private String salaryId;
     private String lawyerId;
-    private Date date;
+    private Date month;
     private double totalSalary;
 }

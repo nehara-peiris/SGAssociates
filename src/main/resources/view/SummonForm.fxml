@@ -37,7 +37,7 @@
       <TextField fx:id="txtDescription" layoutX="152.0" layoutY="180.0" prefHeight="24.0" prefWidth="317.0" />
       <TextField fx:id="txtDefendant" layoutX="152.0" layoutY="219.0" prefHeight="24.0" prefWidth="317.0" />
       <TextField fx:id="txtLawyerId" layoutX="152.0" layoutY="260.0" prefHeight="24.0" prefWidth="317.0" />
-      <TableView fx:id="tblSummon" layoutX="518.0" layoutY="137.0" prefHeight="460.0" prefWidth="1005.0">
+      <TableView fx:id="tblSummon" layoutX="518.0" layoutY="137.0" onMouseClicked="#TableOnClick" prefHeight="460.0" prefWidth="1005.0">
         <columns>
           <TableColumn fx:id="colSummonId" prefWidth="133.0" text="Summon Id" />
           <TableColumn fx:id="colDescription" prefWidth="349.0" text="Description" />

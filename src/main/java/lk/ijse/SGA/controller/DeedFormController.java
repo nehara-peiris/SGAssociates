@@ -16,11 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.SGA.model.Cases;
 import lk.ijse.SGA.model.Deed;
 import lk.ijse.SGA.model.tm.DeedTm;
-import lk.ijse.SGA.repository.CasesRepo;
 import lk.ijse.SGA.repository.ClientRepo;
 import lk.ijse.SGA.repository.DeedRepo;
 
@@ -37,6 +36,8 @@ public class DeedFormController implements Initializable {
     private AnchorPane rootNode;
     @FXML
     private TableView<DeedTm> tblDeed;
+    @FXML
+    private TableColumn<?,?> colDeedId;
     @FXML
     private TableColumn<?,?> colClientId;
     @FXML
@@ -206,6 +207,7 @@ public class DeedFormController implements Initializable {
             List<Deed> deedList = DeedRepo.getAll();
             for (Deed deed : deedList) {
                 DeedTm tm = new DeedTm(
+                        deed.getDeedId(),
                         deed.getDescription(),
                         deed.getType(),
                         deed.getDate(),
@@ -331,6 +333,16 @@ public class DeedFormController implements Initializable {
         } else {
             new Alert(Alert.AlertType.INFORMATION, "Client not found!").show();
         }
+    }
+
+    public void TableOnClick(MouseEvent mouseEvent) {
+        DeedTm deedTm = tblDeed.getSelectionModel().getSelectedItem();
+        txtDeedId.setText(deedTm.getDeedId());
+        txtDescription.setText(deedTm.getDescription());
+        txtType.setText(deedTm.getType());
+        txtLawyerId.setText(deedTm.getLawyerId());
+        txtDate.setText(String.valueOf(deedTm.getDate()));
+        txtClientId.setText(deedTm.getClientId());
     }
 }
 

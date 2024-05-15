@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Judge;
 import lk.ijse.SGA.model.tm.JudgeTm;
@@ -229,4 +230,11 @@ public class JudgeFormController {
         }
     }
 
+    public void TableOnClick(MouseEvent mouseEvent) {
+        JudgeTm judgeTm = tblJudge.getSelectionModel().getSelectedItem();
+        txtJudgeId.setText(judgeTm.getJudgeId());
+        txtName.setText(judgeTm.getName());
+        txtYrsOfExp.setText(String.valueOf(judgeTm.getYrsOfExp()));
+        txtCourtId.setText(judgeTm.getCourtId());
+    }
 }

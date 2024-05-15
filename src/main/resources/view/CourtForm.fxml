@@ -24,7 +24,7 @@
       <JFXButton buttonType="RAISED" layoutX="364.0" layoutY="433.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#e13a0c" style="-fx-background-color: #f26b6b;" text="delete" textFill="WHITE" />
       <TextField fx:id="txtCourtId" layoutX="137.0" layoutY="155.0" prefHeight="24.0" prefWidth="345.0" />
       <TextField fx:id="txtLocation" layoutX="137.0" layoutY="209.0" prefHeight="24.0" prefWidth="345.0" />
-      <TableView fx:id="tblCourt" layoutX="517.0" layoutY="155.0" prefHeight="313.0" prefWidth="986.0">
+      <TableView fx:id="tblCourt" layoutX="517.0" layoutY="155.0" onMouseClicked="#TableOnClick" prefHeight="313.0" prefWidth="986.0">
         <columns>
           <TableColumn fx:id="colCourtId" prefWidth="300.0" text="court id" />
           <TableColumn fx:id="colLocation" prefWidth="348.0" text="location" />

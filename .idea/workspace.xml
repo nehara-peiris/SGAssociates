@@ -4,16 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da6271e5-d11f-486f-afcc-fc4fba9a262d" name="Changes" comment="Transaction done">
+    <list default="true" id="da6271e5-d11f-486f-afcc-fc4fba9a262d" name="Changes" comment="validation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CaseChargeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CaseChargeFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CasesFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CasesFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ChargeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ChargeFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ClientFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ClientFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CourtFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CourtFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DashboardFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DashboardFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedChargeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedChargeFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/JudgeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/JudgeFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/LawyerFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/LawyerFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/PaymentFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/PaymentFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/SummonFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/SummonFormController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Deed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Deed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/ClientTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/ClientTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/DeedTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/DeedTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/LawyerTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/LawyerTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/SalaryTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/SalaryTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/CaseChargeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/CaseChargeForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/CasesForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/CasesForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/ChargeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/ChargeForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/ClientForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/ClientForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/CourtForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/CourtForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DashboardForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DashboardForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DeedChargeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DeedChargeForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/DeedForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/DeedForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/JudgeForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/JudgeForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/LawyerForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/LawyerForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PaymentForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PaymentForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/SummonForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/SummonForm.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +46,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -55,7 +77,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/neha/Desktop/SGA/src/main/resources/query",
+    "last_opened_file_path": "/home/neha/Desktop/SGA/src/main/resources/asserts",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -70,9 +92,9 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/asserts" />
       <recent name="$PROJECT_DIR$/src/main/resources/query" />
       <recent name="$PROJECT_DIR$/src/main/resources/reports" />
-      <recent name="$PROJECT_DIR$/src/main/resources/asserts" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -179,7 +201,10 @@
       <workItem from="1715524401441" duration="3873000" />
       <workItem from="1715580702608" duration="4344000" />
       <workItem from="1715618581155" duration="4652000" />
-      <workItem from="1715672341193" duration="20598000" />
+      <workItem from="1715672341193" duration="20700000" />
+      <workItem from="1715747278665" duration="6366000" />
+      <workItem from="1715756909456" duration="3256000" />
+      <workItem from="1715760999904" duration="11459000" />
     </task>
     <task id="LOCAL-00001" summary="completed ui">
       <option name="closed" value="true" />
@@ -309,7 +334,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715720291559</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="validation">
+      <option name="closed" value="true" />
+      <created>1715723408537</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1715723408537</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,7 +362,8 @@
     <MESSAGE value="validation done" />
     <MESSAGE value="jasper reports" />
     <MESSAGE value="Transaction done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Transaction done" />
+    <MESSAGE value="validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="validation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

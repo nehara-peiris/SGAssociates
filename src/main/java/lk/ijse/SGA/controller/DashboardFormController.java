@@ -1,5 +1,6 @@
 package lk.ijse.SGA.controller;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -27,7 +29,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.scene.paint.Color;
+
 public class DashboardFormController implements Initializable {
+    public JFXComboBox cmbReports;
     @FXML
     private Label lblUserId;
     @FXML
@@ -58,6 +63,16 @@ public class DashboardFormController implements Initializable {
         setUserDetail();
         setDate();
         setTime();
+
+        setValuesToCombo();
+
+        cmbReports.setStyle("-fx-prompt-text-fill: white");
+
+    }
+
+    private void setValuesToCombo() {
+        cmbReports.getItems().add("Assigned Work");
+        cmbReports.getItems().add("Salary Details");
     }
 
     public void setUserDetail(){
@@ -82,7 +97,13 @@ public class DashboardFormController implements Initializable {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
         caseTypeCounts.forEach((type, count) -> {
-            series.getData().add(new XYChart.Data<>(type, count));
+            XYChart.Data<String, Number> data = new XYChart.Data<>(type, count);
+            series.getData().add(data);
+            data.nodeProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    newValue.setStyle("-fx-bar-fill:#1c7850;");
+                }
+            });
         });
 
         chartCase.getData().add(series);
@@ -105,7 +126,13 @@ public class DashboardFormController implements Initializable {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
         deedTypeCounts.forEach((type, count) -> {
-            series.getData().add(new XYChart.Data<>(type, count));
+            XYChart.Data<String, Number> data = new XYChart.Data<>(type, count);
+            series.getData().add(data);
+            data.nodeProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    newValue.setStyle("-fx-bar-fill: #1c7850;");
+                }
+            });
         });
 
         chartDeeds.getData().add(series);
@@ -207,29 +234,32 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     void btnReportsOnAction(ActionEvent event) throws IOException, JRException, SQLException {
-        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/AssignedWorkDetails.jrxml");
+        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/SalaryDetails.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
         JasperViewer.viewReport(jasperPrint, false);
     }
-}
-/*
-try{
-FXMLLoader loader = FXMLLoader.load(this.getClass().getResource("/view/DashboardForm.fxml"));
-Parent rootNode = loader.load();
-Scene scene = new Scene(rootNode);
 
-DashboardFormController controller = loader.getController();
-            controller.setUserDetail();
+    public void cmbReportsOnAction(ActionEvent event) throws JRException, SQLException {
+        String selectedItem = (String) cmbReports.getSelectionModel().getSelectedItem();
 
-Stage stage = (Stage) this.rootNode.getScene().getWindow();
-            stage.setScene(scene);
-            stage.centerOnScreen();
-            stage.setTitle("Dashboard Form");
-        }catch (Exception e){
-        throw new RuntimeException(e);
+        if ("Assigned Work".equals(selectedItem)){
+            JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/AssignedWorkDetails.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
+        }
+
+        if ("Salary Details".equals(selectedItem)) {
+            JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/SalaryDetails.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint, false);
         }
 
 
- */
+    }
+}

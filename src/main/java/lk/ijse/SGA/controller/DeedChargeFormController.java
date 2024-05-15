@@ -12,7 +12,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import lk.ijse.SGA.model.DeedCharge;
+import lk.ijse.SGA.model.tm.CaseChargeTm;
 import lk.ijse.SGA.model.tm.DeedChargeTm;
 import lk.ijse.SGA.model.tm.TotalDeedChargeTm;
 import lk.ijse.SGA.repository.DeedChargeRepo;
@@ -347,5 +349,17 @@ public class DeedChargeFormController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void TableOnClick(MouseEvent mouseEvent) {
+        DeedChargeTm deedChargeTm = tblDeedCharge2.getSelectionModel().getSelectedItem();
+
+        txtDCPayId.setText(deedChargeTm.getDCPayId());
+        txtDeedId.setText(deedChargeTm.getDeedId());
+        txtLawyerId.setText(deedChargeTm.getLawyerId());
+        txtChargeId.setText(deedChargeTm.getChargeId());
+        txtDate.setText(String.valueOf(deedChargeTm.getDate()));
+        txtAmount.setText(String.valueOf(deedChargeTm.getAmount()));
+        txtClientId.setText(deedChargeTm.getClientId());
     }
 }

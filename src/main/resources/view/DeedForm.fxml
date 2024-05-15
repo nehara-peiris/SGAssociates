@@ -25,8 +25,9 @@
       <Label layoutX="56.0" layoutY="247.0" text="Description" textFill="WHITE" />
       <Label layoutX="56.0" layoutY="366.0" text="Date" textFill="WHITE" />
       <Label layoutX="56.0" layoutY="327.0" text="LawyerId" textFill="WHITE" />
-      <TableView fx:id="tblDeed" layoutX="56.0" layoutY="522.0" prefHeight="369.0" prefWidth="1461.0">
+      <TableView fx:id="tblDeed" layoutX="56.0" layoutY="522.0" onMouseClicked="#TableOnClick" prefHeight="369.0" prefWidth="1461.0">
          <columns>
+            <TableColumn fx:id="colDeedId" prefWidth="190.0" text="Deed Id" />
             <TableColumn fx:id="colClientId" prefWidth="111.0" text="Client ID" />
             <TableColumn fx:id="colDescription" prefWidth="220.0" text="Description" />
             <TableColumn fx:id="colType" prefWidth="169.0" text="Type" />

@@ -5,12 +5,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Payment;
 import lk.ijse.SGA.model.Salary;
@@ -27,6 +25,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class PaymentFormController implements Initializable {
+    public TextField txtChoseMonth;
     @FXML
     private AnchorPane rootNode;
     @FXML
@@ -58,10 +57,10 @@ public class PaymentFormController implements Initializable {
     @FXML
     private TableColumn<?, ?>  colLawyerId1;
     @FXML
-    private TableColumn<?, ?>  colDate1;
+    private TableColumn<?, ?>  colMonth1;
     @FXML
     private TableColumn<?, ?>  colTotalSalary1;
-
+    public Label lblMonth;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -119,7 +118,7 @@ public class PaymentFormController implements Initializable {
 
         colSalaryId1.setCellValueFactory(new PropertyValueFactory<>("salaryId"));
         colLawyerId1.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
-        colDate1.setCellValueFactory(new PropertyValueFactory<>("date"));
+        colMonth1.setCellValueFactory(new PropertyValueFactory<>("month"));
         colTotalSalary1.setCellValueFactory(new PropertyValueFactory<>("totalSalary"));
     }
 
@@ -169,29 +168,54 @@ public class PaymentFormController implements Initializable {
     void btnSaveOnAction(ActionEvent event) {
         String paymentId = txtPaymentId.getText();
         String lawyerId = txtLawyerID.getText();
-        Date date = Date.valueOf(txtDate.getText());
-        double amount = Double.parseDouble(txtAmount.getText());
-        double bonus = Double.parseDouble(txtBonus.getText());
+        String pDate = txtDate.getText();
+        String pAmount = txtAmount.getText();
+        String pBonus = txtBonus.getText();
+        String pmonth = txtChoseMonth.getText();
+
+        if (paymentId.isEmpty() || lawyerId.isEmpty() || pDate.isEmpty() || pAmount.isEmpty() || pBonus.isEmpty() || pmonth.isEmpty()){
+            if (paymentId.isEmpty()) {
+                txtPaymentId.requestFocus();
+                txtPaymentId.setStyle("-fx-border-color: red;");
+            } else if (lawyerId.isEmpty()) {
+                txtLawyerID.requestFocus();
+                txtLawyerID.setStyle("-fx-border-color: red;");
+            } else if (pDate.isEmpty()) {
+                txtDate.requestFocus();
+                txtDate.setStyle("-fx-border-color: red;");
+            } else if (pAmount.isEmpty()) {
+                txtAmount.requestFocus();
+                txtAmount.setStyle("-fx-border-color: red;");
+            } else if (pBonus.isEmpty()){
+                txtBonus.requestFocus();
+                txtBonus.setStyle("-fx-border-color: red;");
+            }else {
+                txtChoseMonth.requestFocus();
+                txtChoseMonth.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        Date date = Date.valueOf(pDate);
+        double amount = Double.parseDouble(pAmount);
+        double bonus = Double.parseDouble(pBonus);
 
         Payment payment = new Payment(paymentId, lawyerId, date, amount, bonus);
 
         try {
             boolean isSaved = PaymentRepo.save(payment);
             if (isSaved) {
-                String generatedSalaryId = PaymentRepo.getCurrentId();
-                if (generatedSalaryId != null) {
-                    txtPaymentId.setText(generatedSalaryId);
-                }
+                new Alert(Alert.AlertType.CONFIRMATION, "Payment saved successfully!").show();
+                clearFields();
                 loadAllPayment();
                 SalaryRepo.save(new Salary(null,lawyerId,date,amount+bonus));
                 loadTotalSalary();
-                new Alert(Alert.AlertType.CONFIRMATION, "Payment saved successfully!").show();
-                clearFields();
+                setDate();
+                txtPaymentId.requestFocus();
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private void clearFields() {
@@ -237,4 +261,12 @@ public class PaymentFormController implements Initializable {
         }
     }
 
+    public void TableOnClick(MouseEvent mouseEvent) {
+        PaymentTm paymentTm = tblPayment.getSelectionModel().getSelectedItem();
+        txtPaymentId.setText(paymentTm.getPaymentId());
+        txtLawyerID.setText(paymentTm.getLawyerId());
+        txtDate.setText(String.valueOf(paymentTm.getDate()));
+        txtAmount.setText(String.valueOf(paymentTm.getAmount()));
+        txtBonus.setText(String.valueOf(paymentTm.getBonus()));
+    }
 }
