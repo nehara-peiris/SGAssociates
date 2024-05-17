@@ -9,6 +9,15 @@ SELECT caseId, clientId, SUM(amount) AS total_amount FROM caseCharge GROUP BY ca
 //bonus calculating
 SELECT lawyerId, SUM(amount) total, ROUND(0.5 * SUM(amount)) FROM caseCharge GROUP BY  lawyerId;
 
+//total earning of lawyer
+SELECT l.lawyerId, l.name, SUM(dc.amount) AS total_earnings
+FROM lawyer l
+         LEFT JOIN deedCharge dc ON l.lawyerId = dc.lawyerId
+         LEFT JOIN caseCharge cc ON l.lawyerId = cc.lawyerId
+GROUP BY l.lawyerId, l.name;
+
+
+
 //Calculate the bonus
 UPDATE salary AS s
 SET s.bonus = (

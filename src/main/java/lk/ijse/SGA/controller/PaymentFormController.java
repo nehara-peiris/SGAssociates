@@ -2,14 +2,10 @@ package lk.ijse.SGA.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Payment;
 import lk.ijse.SGA.model.Salary;
@@ -19,9 +15,7 @@ import lk.ijse.SGA.repository.PaymentRepo;
 import lk.ijse.SGA.repository.SalaryRepo;
 
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -29,16 +23,6 @@ public class PaymentFormController implements Initializable {
     public TextField txtChoseMonth;
     @FXML
     private AnchorPane rootNode;
-    @FXML
-    private TextField txtPaymentId;
-    @FXML
-    private TextField txtLawyerID;
-    @FXML
-    private TextField txtDate;
-    @FXML
-    private TextField txtAmount;
-    @FXML
-    private TextField txtBonus;
     @FXML
     private TableView<PaymentTm> tblPayment;
     @FXML
@@ -49,8 +33,6 @@ public class PaymentFormController implements Initializable {
     private TableColumn<?, ?> colDate2;
     @FXML
     private TableColumn<?, ?> colAmount2;
-    @FXML
-    private TableColumn<?, ?> colBonus2;
     @FXML
     private TableView<SalaryTm>  tblSalary;
     @FXML
@@ -65,84 +47,9 @@ public class PaymentFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setDate();
-        //getCurrentId();
         setCellValueFactory();
         loadAllPayment();
         loadTotalSalary();
-
-        keyEventsHandling();
-
-        Validations();
-        addTextChangeListener(txtPaymentId);
-        addTextChangeListener(txtLawyerID);
-        addTextChangeListener(txtDate);
-        addTextChangeListener(txtAmount);
-    }
-
-
-    private void Validations() {
-        txtPaymentId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtPaymentId.getText().isEmpty() && !event.getCharacter().equals("P")){
-                event.consume();
-            }
-        });
-
-        txtLawyerID.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtLawyerID.getText().isEmpty() && !event.getCharacter().equals("L")){
-                event.consume();
-            }
-        });
-    }
-    private void addTextChangeListener(TextField textField) {
-        textField.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            if (textField == txtPaymentId && !newValue.matches("^P.*$")) {
-            }
-
-            if (textField == txtLawyerID && !newValue.matches("^L.*$")) {
-            }
-
-            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
-            }
-
-            if (textField == txtAmount && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {
-                new Alert(Alert.AlertType.ERROR, "Invalid number format").show();
-            }
-
-        });
-    }
-
-    private void keyEventsHandling() {
-        txtPaymentId.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtLawyerID.requestFocus();
-            }
-        });
-
-        txtLawyerID.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtDate.requestFocus();
-            }
-        });
-
-        txtDate.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                txtAmount.requestFocus();
-            }
-        });
-
-        txtAmount.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                btnSaveOnAction(null);
-            }
-        });
-
-    }
-    private void setDate() {
-        LocalDate now = LocalDate.now();
-        txtDate.setText(String.valueOf(now));
     }
 
     private void setCellValueFactory() {
@@ -199,132 +106,4 @@ public class PaymentFormController implements Initializable {
         }
     }
 
-    @FXML
-    void btnSaveOnAction(ActionEvent event) {
-        String paymentId = txtPaymentId.getText();
-        String lawyerId = txtLawyerID.getText();
-        String pDate = txtDate.getText();
-        String pAmount = txtAmount.getText();
-        String pmonth = txtChoseMonth.getText();
-
-        if (paymentId.isEmpty() || lawyerId.isEmpty() || pDate.isEmpty() || pAmount.isEmpty() || pmonth.isEmpty()){
-            if (paymentId.isEmpty()) {
-                txtPaymentId.setStyle("-fx-border-color: red;");
-                txtPaymentId.requestFocus();
-            } else if (lawyerId.isEmpty()) {
-                txtLawyerID.setStyle("-fx-border-color: red;");
-                txtLawyerID.requestFocus();
-            } else if (pDate.isEmpty()) {
-                txtDate.setStyle("-fx-border-color: red;");
-                txtDate.requestFocus();
-            } else if (pAmount.isEmpty()) {
-                txtAmount.setStyle("-fx-border-color: red;");
-                txtAmount.requestFocus();
-            }else {
-                txtChoseMonth.setStyle("-fx-border-color: red;");
-                txtChoseMonth.requestFocus();
-            }
-            return;
-        }
-
-        Date date = Date.valueOf(pDate);
-        double amount = Double.parseDouble(pAmount);
-
-        Payment payment = new Payment(paymentId, lawyerId, date, amount);
-
-        try {
-            boolean isSaved = PaymentRepo.save(payment);
-            if (isSaved) {
-                loadAllPayment();
-                new Alert(Alert.AlertType.CONFIRMATION, "Payment saved successfully!").show();
-                clearFields();
-                SalaryRepo.save(new Salary(null,lawyerId,date,amount));
-                loadTotalSalary();
-                setDate();
-                txtPaymentId.requestFocus();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void clearFields() {
-        txtPaymentId.clear();
-        txtLawyerID.clear();
-        txtDate.clear();
-        txtAmount.clear();
-    }
-
-    @FXML
-    void btnUpdateOnAction(ActionEvent event){
-        String paymentId = txtPaymentId.getText();
-        String lawyerId = txtLawyerID.getText();
-        String pDate = txtDate.getText();
-        String pAmount = txtAmount.getText();
-        String pmonth = txtChoseMonth.getText();
-
-        if (paymentId.isEmpty() || lawyerId.isEmpty() || pDate.isEmpty() || pAmount.isEmpty() || pmonth.isEmpty()){
-            if (paymentId.isEmpty()) {
-                txtPaymentId.requestFocus();
-                txtPaymentId.setStyle("-fx-border-color: red;");
-            } else if (lawyerId.isEmpty()) {
-                txtLawyerID.requestFocus();
-                txtLawyerID.setStyle("-fx-border-color: red;");
-            } else if (pDate.isEmpty()) {
-                txtDate.requestFocus();
-                txtDate.setStyle("-fx-border-color: red;");
-            } else if (pAmount.isEmpty()) {
-                txtAmount.requestFocus();
-                txtAmount.setStyle("-fx-border-color: red;");
-            }else {
-                txtChoseMonth.requestFocus();
-                txtChoseMonth.setStyle("-fx-border-color: red;");
-            }
-            return;
-        }
-
-        Date date = Date.valueOf(pDate);
-        double amount = Double.parseDouble(pAmount);
-
-        Payment payment = new Payment(paymentId, lawyerId, date, amount);
-
-        try{
-            boolean isSaved = PaymentRepo.update(payment);
-            if (isSaved){
-                new Alert(Alert.AlertType.CONFIRMATION, "Payment updated successfully!").show();
-                loadAllPayment();
-                loadTotalSalary();
-                clearFields();
-                txtPaymentId.requestFocus();
-            }
-        }catch(SQLException e){
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    void btnDeleteOnAction(ActionEvent event) throws SQLException {
-        String id = txtPaymentId.getText();
-
-        try {
-            boolean isDeleted = PaymentRepo.delete(id);
-            if(isDeleted) {
-                new Alert(Alert.AlertType.CONFIRMATION, "payment deleted!").show();
-                loadAllPayment();
-                loadTotalSalary();
-                clearFields();
-                txtPaymentId.requestFocus();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    public void TableOnClick(MouseEvent mouseEvent) {
-        PaymentTm paymentTm = tblPayment.getSelectionModel().getSelectedItem();
-        txtPaymentId.setText(paymentTm.getPaymentId());
-        txtLawyerID.setText(paymentTm.getLawyerId());
-        txtDate.setText(String.valueOf(paymentTm.getDate()));
-        txtAmount.setText(String.valueOf(paymentTm.getAmount()));
-    }
 }

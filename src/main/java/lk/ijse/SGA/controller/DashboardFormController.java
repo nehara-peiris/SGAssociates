@@ -20,7 +20,6 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -29,7 +28,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import javafx.scene.paint.Color;
 
 public class DashboardFormController implements Initializable {
     public JFXComboBox cmbReports;
@@ -230,15 +228,6 @@ public class DashboardFormController implements Initializable {
         AnchorPane dashboardForm = FXMLLoader.load(this.getClass().getResource("/view/DashboardForm.fxml"));
 
         mainNode.getChildren().add(dashboardForm);
-    }
-
-    @FXML
-    void btnReportsOnAction(ActionEvent event) throws IOException, JRException, SQLException {
-        JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/SalaryDetails.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());
-        JasperViewer.viewReport(jasperPrint, false);
     }
 
     public void cmbReportsOnAction(ActionEvent event) throws JRException, SQLException {

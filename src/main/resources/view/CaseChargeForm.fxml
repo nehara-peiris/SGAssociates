@@ -1,76 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.CaseChargeFormController">
+<AnchorPane prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #adedd7;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.CaseChargeFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000d6" height="835.0" layoutX="25.0" layoutY="124.0" stroke="BLACK" strokeType="INSIDE" width="1540.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0c3831" height="842.0" layoutX="29.0" layoutY="128.0" stroke="BLACK" strokeType="INSIDE" width="1517.0" />
       <Label layoutX="576.0" layoutY="48.0" text="Case Charge Detail">
          <font>
             <Font name="System Bold" size="41.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="170.0" text="CCPay Id" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <Label layoutX="56.0" layoutY="215.0" text="Case ID" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <Label layoutX="57.0" layoutY="306.0" text="Charge ID" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <Label layoutX="57.0" layoutY="351.0" text="Date" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <Label layoutX="57.0" layoutY="396.0" text="Amount" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <Label layoutX="55.0" layoutY="441.0" text="Client ID" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-      <TextField fx:id="txtCCPayId" layoutX="137.0" layoutY="166.0" prefHeight="24.0" prefWidth="317.0" promptText="CPXXX" />
-      <TextField fx:id="txtCaseId" layoutX="137.0" layoutY="211.0" prefWidth="317.0" promptText="CAXXX" />
-      <TextField fx:id="txtChargeId" layoutX="138.0" layoutY="302.0" prefWidth="317.0" promptText="CHXXX" />
-      <TextField fx:id="txtDate" layoutX="138.0" layoutY="347.0" prefWidth="317.0" promptText="YYYY-MM-DD" />
-      <TextField fx:id="txtAmount" layoutX="138.0" layoutY="392.0" prefWidth="317.0" promptText="XXXX.XX" />
-      <TextField fx:id="txtClientId" layoutX="138.0" layoutY="437.0" prefHeight="24.0" prefWidth="317.0" promptText="CXXX" />
-      <TableView fx:id="tblCaseCharge2" layoutX="49.0" layoutY="585.0" onMouseClicked="#TableOnClick" prefHeight="355.0" prefWidth="1476.0">
+      <TableView fx:id="tblCaseCharge2" layoutX="56.0" layoutY="161.0" prefHeight="777.0" prefWidth="1064.0">
         <columns>
-          <TableColumn fx:id="colCCPayId2" prefWidth="129.0" text="CCPay ID" />
-          <TableColumn fx:id="colCaseId2" prefWidth="115.0" text="Case ID" />
-            <TableColumn fx:id="colChargeId2" prefWidth="157.0" text="Charge Id" />
-            <TableColumn fx:id="colDate2" prefWidth="220.0" text="Date" />
-            <TableColumn fx:id="colAmount2" prefWidth="143.0" text="Amount" />
-            <TableColumn fx:id="colClientId2" prefWidth="137.0" text="Client ID" />
+          <TableColumn fx:id="colCCPayId2" prefWidth="135.0" text="CCPay ID" />
+          <TableColumn fx:id="colCaseId2" prefWidth="138.0" text="Case ID" />
+            <TableColumn fx:id="colChargeId2" prefWidth="149.0" text="Charge Id" />
+            <TableColumn fx:id="colDate2" prefWidth="244.0" text="Date" />
+            <TableColumn fx:id="colAmount2" prefWidth="221.0" text="Amount" />
+            <TableColumn fx:id="colClientId2" prefWidth="176.0" text="Client ID" />
         </columns>
       </TableView>
-      <JFXButton buttonType="RAISED" layoutX="49.0" layoutY="517.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#58b7da" style="-fx-background-color: #65B741;" text="Save" textFill="#0f4b5b" />
-      <JFXButton buttonType="RAISED" layoutX="197.0" layoutY="517.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: F3CA52;" text="Update" textFill="#cd431c" />
-      <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="517.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: F05454;" text="Delete" textFill="WHITE" />
-      <TableView fx:id="tblCaseCharge1" layoutX="521.0" layoutY="166.0" prefHeight="383.0" prefWidth="1004.0">
+      <TableView fx:id="tblCaseCharge1" layoutX="1149.0" layoutY="161.0" prefHeight="777.0" prefWidth="355.0">
         <columns>
-          <TableColumn fx:id="colCaseId1" prefWidth="116.0" text="Case ID" />
-            <TableColumn fx:id="colTotalPay1" prefWidth="192.0" text="Total Payment" />
+          <TableColumn fx:id="colCaseId1" prefWidth="134.0" text="Case ID" />
+            <TableColumn fx:id="colTotalPay1" prefWidth="220.0" text="Total Payment" />
         </columns>
       </TableView>
-      <Label layoutX="55.0" layoutY="260.0" text="Lawyer ID" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtLawyerId" layoutX="138.0" layoutY="257.0" prefHeight="24.0" prefWidth="317.0" promptText="LXXX" />
    </children>
 </AnchorPane>

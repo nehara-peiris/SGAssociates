@@ -10,8 +10,6 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TotalDeedChargeTm {
-    private String DCPayId;
     private String deedId;
-    private Date date;
     private double TotalCharge;
 }

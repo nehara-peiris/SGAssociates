@@ -137,7 +137,7 @@ public class ChargeFormController implements Initializable {
     }
 
     @FXML
-    void btnSaveOnAction (ActionEvent event) throws SQLException {
+    void btnSaveOnAction (ActionEvent event) {
         String chargeId = txtChargeId.getText();
         String description = txtDescription.getText();
         String crgAmount = txtAmount.getText();
@@ -180,7 +180,7 @@ public class ChargeFormController implements Initializable {
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    void btnUpdateOnAction(ActionEvent event) {
         String chargeId = txtChargeId.getText();
         String description = txtDescription.getText();
         String crgAmount = txtAmount.getText();
@@ -254,8 +254,14 @@ public class ChargeFormController implements Initializable {
         txtAmount.setText(String.valueOf(chargeTm.getAmount()));
     }
 
-    public void btnPayCalOnAction(ActionEvent event) throws IOException {
-        AnchorPane deedCharge = FXMLLoader.load(this.getClass().getResource("/view/ChargesCalculationForm.fxml"));
+    public void btnCalDeedChargeOnAction(ActionEvent event) throws IOException {
+        AnchorPane deedCharge = FXMLLoader.load(this.getClass().getResource("/view/CalculateDeedChargeForm.fxml"));
+
+        rootNode.getChildren().add(deedCharge);
+    }
+
+    public void btnCalCaseChargeOnAction(ActionEvent event) throws IOException {
+        AnchorPane deedCharge = FXMLLoader.load(this.getClass().getResource("/view/CalculateCaseChargeForm.fxml"));
 
         rootNode.getChildren().add(deedCharge);
     }

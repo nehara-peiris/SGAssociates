@@ -257,7 +257,7 @@ public class CasesFormController implements Initializable {
     }
 
     @FXML
-    void btnSaveOnAction(ActionEvent event) throws SQLException {
+    void btnSaveOnAction(ActionEvent event) {
         String caseId = txtCaseId.getText();
         String clientId = txtClientId.getText();
         String description = txtDescription.getText();
@@ -319,7 +319,7 @@ public class CasesFormController implements Initializable {
     }
 
     @FXML
-    void btnUpdateOnAction(ActionEvent event) throws SQLException {
+    void btnUpdateOnAction(ActionEvent event) {
         String caseId = txtCaseId.getText();
         String clientId = txtClientId.getText();
         String description = txtDescription.getText();

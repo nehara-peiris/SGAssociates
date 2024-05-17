@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -17,18 +16,7 @@
                 <Font name="System Bold" size="41.0" />
             </font>
         </Label>
-        <Label layoutX="58.0" layoutY="211.0" text="Payment ID" textFill="WHITE" />
-        <Label layoutX="62.0" layoutY="326.0" text="Lawyer ID" textFill="WHITE" />
-        <Label layoutX="62.0" layoutY="464.0" text="Date" textFill="WHITE" />
-        <Label layoutX="62.0" layoutY="587.0" text="Amount" textFill="WHITE" />
-        <TextField fx:id="txtPaymentId" layoutX="143.0" layoutY="207.0" prefHeight="24.0" prefWidth="351.0" />
-        <TextField fx:id="txtLawyerID" layoutX="143.0" layoutY="322.0" prefHeight="24.0" prefWidth="351.0" />
-        <TextField fx:id="txtDate" layoutX="143.0" layoutY="460.0" prefHeight="24.0" prefWidth="351.0" />
-        <TextField fx:id="txtAmount" layoutX="143.0" layoutY="583.0" prefHeight="24.0" prefWidth="351.0" />
-        <JFXButton buttonType="RAISED" layoutX="58.0" layoutY="888.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
-        <JFXButton buttonType="RAISED" layoutX="205.0" layoutY="888.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Update" textFill="WHITE" />
-        <JFXButton buttonType="RAISED" layoutX="439.0" layoutY="888.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="76.0" ripplerFill="#e13a0c" style="-fx-background-color: #94d6ca;" text="Delete" />
-        <TableView fx:id="tblPayment" layoutX="546.0" layoutY="575.0" onMouseClicked="#TableOnClick" prefHeight="348.0" prefWidth="981.0">
+        <TableView fx:id="tblPayment" layoutX="546.0" layoutY="575.0" prefHeight="348.0" prefWidth="981.0">
             <columns>
                 <TableColumn fx:id="colPayId2" prefWidth="202.0" text="Payment ID" />
                 <TableColumn fx:id="colLawyerId2" prefWidth="224.0" text="Lawyer ID" />

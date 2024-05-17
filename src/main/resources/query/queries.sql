@@ -79,7 +79,7 @@ CREATE TABLE charge(
 
 CREATE TABLE payment(
     payId VARCHAR(6) primary key ,
-    lawyerId VARCHAR(6),
+    clientId VARCHAR(6),
     date DATE,
     amount DECIMAL,
     FOREIGN KEY (lawyerId) references lawyer(lawyerId) ON DELETE CASCADE ON UPDATE CASCADE
@@ -124,7 +124,6 @@ CREATE TABLE caseCharge(
 );
 
 CREATE TABLE salary(
-    salaryId VARCHAR(6),
     lawyerId VARCHAR(6),
     date DATE,
     monthlySalary DECIMAL,
@@ -259,6 +258,6 @@ INSERT INTO caseCharge VALUES ('P002', 'CA005', 'L004', 'CH008', '2024-04-08', 1
 INSERT INTO caseCharge VALUES ('P002', 'CA005', 'L008', 'CH009', '2024-04-09', 250.00, 'C006');
 
 
-INSERT INTO salary VALUES ('SA1', 'L001', '2024-04-08', 10000);
-INSERT INTO salary VALUES ('SA2', 'L002', '2024-04-09', 20000);
-INSERT INTO salary VALUES ('SA3', 'L003', '2024-04-10', 12000);
+INSERT INTO salary VALUES ('L001', '2024-04-08', 10000);
+INSERT INTO salary VALUES ('L002', '2024-04-09', 20000);
+INSERT INTO salary VALUES ('L003', '2024-04-10', 12000);

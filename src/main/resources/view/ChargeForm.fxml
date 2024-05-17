@@ -39,9 +39,10 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="62.0" layoutY="731.0" onAction="#btnCasesOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Cases" />
-      <JFXButton buttonType="RAISED" layoutX="289.0" layoutY="731.0" onAction="#btnDeedsOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Deeds" />
+      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="803.0" onAction="#btnCasesOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Case Charge Detail" />
+      <JFXButton buttonType="RAISED" layoutX="264.0" layoutY="803.0" onAction="#btnDeedsOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Deed Charge Detail" />
       <Line endX="349.0" layoutX="171.0" layoutY="634.0" opacity="0.45" startX="-114.0" stroke="#9a9a9a" />
-      <JFXButton buttonType="RAISED" layoutX="62.0" layoutY="810.0" onAction="#btnPayCalOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Calculate" />
+      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="731.0" onAction="#btnCalCaseChargeOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Calculate Case Charge" />
+      <JFXButton buttonType="RAISED" layoutX="264.0" layoutY="731.0" onAction="#btnCalDeedChargeOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Calculate Deed Charge" />
    </children>
 </AnchorPane>
