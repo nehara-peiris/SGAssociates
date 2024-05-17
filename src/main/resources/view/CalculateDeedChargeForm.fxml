@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #adedd7;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.CalculateDeedChargeFormController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0c3831" height="842.0" layoutX="50.0" layoutY="108.0" stroke="BLACK" strokeType="INSIDE" width="1517.0" />
+        <Label layoutX="524.0" layoutY="41.0" text="Deed Charge Calculation">
+            <font>
+                <Font name="System Bold" size="41.0" />
+            </font>
+        </Label>
+        <Label layoutX="100.0" layoutY="145.0" text="Payment ID" textFill="WHITE" />
+        <Label layoutX="100.0" layoutY="285.0" text="Deed ID" textFill="WHITE" />
+        <Label layoutX="100.0" layoutY="355.0" text="Lawyer ID" textFill="WHITE" />
+        <Label layoutX="100.0" layoutY="215.0" text="Date" textFill="WHITE" />
+        <Label layoutX="100.0" layoutY="425.0" text="Client ID" textFill="WHITE" />
+        <Label layoutX="100.0" layoutY="495.0" text="Client Name" textFill="WHITE" />
+        <Label layoutX="100.0" layoutY="565.0" text="Charge ID" textFill="WHITE" />
+        <Label layoutX="100.0" layoutY="635.0" text="Description" textFill="WHITE" />
+        <Label layoutX="100.0" layoutY="705.0" text="Amount" textFill="WHITE" />
+        <TableView fx:id="tblPayCal" layoutX="529.0" layoutY="167.0" prefHeight="695.0" prefWidth="1000.0">
+            <columns>
+                <TableColumn fx:id="colChargeId" prefWidth="167.0" text="Charge ID" />
+                <TableColumn fx:id="colDescription" prefWidth="417.0" text="Description" />
+                <TableColumn fx:id="colAmount" prefWidth="263.0" text="Amount" />
+                <TableColumn fx:id="colAction" minWidth="9.0" prefWidth="152.0" text="Action" />
+            </columns>
+        </TableView>
+        <TextField fx:id="txtDeedId" layoutX="211.0" layoutY="281.0" />
+        <TextField fx:id="txtLawyerId" layoutX="211.0" layoutY="351.0" />
+        <TextField fx:id="txtClientId" layoutX="211.0" layoutY="421.0" onAction="#clientIDOnAction" />
+        <TextField fx:id="txtChargeId" layoutX="211.0" layoutY="561.0" onAction="#chargetxtOnAction" />
+        <JFXButton fx:id="btnAddCart" buttonType="RAISED" layoutX="165.0" layoutY="882.0" onAction="#btnAddOnAction" prefHeight="37.0" prefWidth="205.0" style="-fx-background-color: black;" text="Add to Cart" textFill="WHITE" />
+        <JFXButton buttonType="RAISED" layoutX="1324.0" layoutY="889.0" onAction="#btnAddToDBOnAction" prefHeight="37.0" prefWidth="205.0" style="-fx-background-color: black;" text="Add to Database" textFill="WHITE" />
+        <Label layoutX="529.0" layoutY="900.0" text="Net Total" textFill="WHITE" />
+        <Label fx:id="lblPayId" layoutX="211.0" layoutY="145.0" textFill="WHITE" />
+        <Label fx:id="lblDate" layoutX="211.0" layoutY="215.0" textFill="WHITE" />
+        <Label fx:id="lblClientName" layoutX="211.0" layoutY="495.0" textFill="WHITE" />
+        <Label fx:id="lblDescription" layoutX="211.0" layoutY="635.0" textFill="WHITE" />
+        <Label fx:id="lblAmount" layoutX="211.0" layoutY="705.0" textFill="WHITE" />
+        <Label fx:id="lblTotal" layoutX="635.0" layoutY="900.0" textFill="WHITE" />
+    </children>
+</AnchorPane>
