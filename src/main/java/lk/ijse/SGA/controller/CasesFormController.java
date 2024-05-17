@@ -77,12 +77,8 @@ public class CasesFormController implements Initializable {
         setCasesBarchart();
 
         Validations();
-        addTextChangeListener(txtCaseId);
         addTextChangeListener(txtDescription);
         addTextChangeListener(txtType);
-        addTextChangeListener(txtDate);
-        addTextChangeListener(txtClientId);
-        addTextChangeListener(txtLawyerId);
 
     }
 
@@ -188,16 +184,6 @@ public class CasesFormController implements Initializable {
                     }
                 }
             }
-
-            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-            }
-
-            if (textField == txtClientId && !newValue.matches("^C.*$")) {
-            }
-
-            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-            }
-
         });
     }
 
@@ -208,14 +194,14 @@ public class CasesFormController implements Initializable {
             }
         });
 
-        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtClientId.getText().isEmpty() && !event.getCharacter().equals("C")){
+        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[C0-9]")) {
                 event.consume();
             }
         });
 
-        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[L0-9]")) {
                 event.consume();
             }
         });

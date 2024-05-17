@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -16,22 +15,19 @@
                 <Font name="System Bold" size="41.0" />
             </font>
         </Label>
-        <TableView fx:id="tblPayment" layoutX="546.0" layoutY="575.0" prefHeight="348.0" prefWidth="981.0">
+        <TableView fx:id="tblPayment" layoutX="57.0" layoutY="204.0" prefHeight="720.0" prefWidth="742.0">
             <columns>
-                <TableColumn fx:id="colPayId2" prefWidth="202.0" text="Payment ID" />
-                <TableColumn fx:id="colLawyerId2" prefWidth="224.0" text="Lawyer ID" />
-                <TableColumn fx:id="colDate2" prefWidth="322.0" text="Date" />
-                <TableColumn fx:id="colAmount2" minWidth="0.0" prefWidth="232.0" text="Amount" />
+                <TableColumn fx:id="colPayId2" prefWidth="129.0" text="Payment ID" />
+                <TableColumn fx:id="colLawyerId2" prefWidth="152.0" text="Lawyer ID" />
+                <TableColumn fx:id="colDate2" prefWidth="255.0" text="Date" />
+                <TableColumn fx:id="colAmount2" minWidth="0.0" prefWidth="205.0" text="Amount" />
             </columns>
         </TableView>
-        <TableView fx:id="tblSalary" layoutX="545.0" layoutY="207.0" prefHeight="312.0" prefWidth="981.0">
+        <TableView fx:id="tblSalary" layoutX="862.0" layoutY="204.0" prefHeight="720.0" prefWidth="656.0">
             <columns>
-                <TableColumn fx:id="colSalaryId1" prefWidth="204.0" text="Salary ID" />
-                <TableColumn fx:id="colLawyerId1" prefWidth="216.0" text="Lawyer ID" />
-                <TableColumn fx:id="colMonth1" prefWidth="326.0" text="Month" />
-                <TableColumn fx:id="colTotalSalary1" prefWidth="234.0" text="Total Salary" />
+                <TableColumn fx:id="colLawyerId1" prefWidth="183.0" text="Lawyer ID" />
+                <TableColumn fx:id="colTotalSalary1" prefWidth="229.0" text="Total Salary" />
             </columns>
         </TableView>
-      <TextField fx:id="txtChoseMonth" layoutX="545.0" layoutY="162.0" prefHeight="24.0" prefWidth="274.0" promptText="Chose Month" />
     </children>
 </AnchorPane>

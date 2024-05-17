@@ -80,12 +80,8 @@ public class DeedFormController implements Initializable {
         setDeedBarchart();
 
         Validations();
-        addTextChangeListener(txtDeedId);
         addTextChangeListener(txtDescription);
         addTextChangeListener(txtType);
-        addTextChangeListener(txtDate);
-        addTextChangeListener(txtClientId);
-        addTextChangeListener(txtLawyerId);
 
     }
 
@@ -95,20 +91,20 @@ public class DeedFormController implements Initializable {
     }
 
     private void Validations() {
-        txtDeedId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtDeedId.getText().isEmpty() && !event.getCharacter().equals("D")){
+        txtDeedId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[D0-9]")) {
                 event.consume();
             }
         });
 
-        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[L0-9]")) {
                 event.consume();
             }
         });
 
-        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtClientId.getText().isEmpty() && !event.getCharacter().equals("C")){
+        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[C0-9]")) {
                 event.consume();
             }
         });
@@ -117,9 +113,6 @@ public class DeedFormController implements Initializable {
 
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            if (textField == txtDeedId && !newValue.matches("^D.*$")) {
-            }
 
             if (textField == txtDescription) {
                 if (!newValue.isEmpty()) {
@@ -145,14 +138,6 @@ public class DeedFormController implements Initializable {
                         }
                     }
                 }
-            }
-
-            if (textField == txtClientId && !newValue.matches("^C.*$")) {
-
-            }
-
-            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-
             }
         });
     }

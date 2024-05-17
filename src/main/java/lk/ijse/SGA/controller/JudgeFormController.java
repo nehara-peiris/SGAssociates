@@ -50,7 +50,6 @@ public class JudgeFormController {
        keyEventsHandling();
 
        Validations();
-       addTextChangeListener(txtJudgeId);
        addTextChangeListener(txtName);
        addTextChangeListener(txtCourtId);
        addTextChangeListener(txtYrsOfExp);
@@ -87,10 +86,6 @@ public class JudgeFormController {
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (textField == txtJudgeId && !newValue.matches("^J.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with J").show();
-            }
-
             if (textField == txtName) {
                 if (!newValue.isEmpty()) {
                     if (!Character.isUpperCase(newValue.charAt(0))) {
@@ -117,8 +112,8 @@ public class JudgeFormController {
     }
 
     private void Validations() {
-        txtJudgeId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtJudgeId.getText().isEmpty() && !event.getCharacter().equals("J")){
+        txtJudgeId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[J0-9]")) {
                 event.consume();
             }
         });

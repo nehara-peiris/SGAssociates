@@ -119,14 +119,14 @@ public class ClientFormController implements Initializable {
     }
 
     private void Validations() {
-        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtClientId.getText().isEmpty() && !event.getCharacter().equals("C")){
+        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[C0-9]")) {
                 event.consume();
             }
         });
 
-        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[L0-9]")) {
                 event.consume();
             }
         });
@@ -134,10 +134,6 @@ public class ClientFormController implements Initializable {
 
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            if (textField == txtClientId && !newValue.matches("^C.*$")) {
-            }
-
             if (textField == txtName) {
                 if (!newValue.isEmpty()) {
                     if (!Character.isUpperCase(newValue.charAt(0))) {
@@ -181,8 +177,6 @@ public class ClientFormController implements Initializable {
                 }
             }
 
-            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-            }
         });
     }
 

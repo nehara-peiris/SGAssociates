@@ -10,9 +10,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @Data
 public class Salary {
-    private String salaryId;
     private String lawyerId;
-    private Date date;
     private double totalSalary;
 
 }

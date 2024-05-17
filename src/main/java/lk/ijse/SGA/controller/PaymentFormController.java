@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class PaymentFormController implements Initializable {
-    public TextField txtChoseMonth;
     @FXML
     private AnchorPane rootNode;
     @FXML
@@ -36,14 +35,9 @@ public class PaymentFormController implements Initializable {
     @FXML
     private TableView<SalaryTm>  tblSalary;
     @FXML
-    private TableColumn<?, ?>  colSalaryId1;
-    @FXML
     private TableColumn<?, ?>  colLawyerId1;
     @FXML
-    private TableColumn<?, ?>  colMonth1;
-    @FXML
     private TableColumn<?, ?>  colTotalSalary1;
-    public Label lblMonth;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -59,9 +53,7 @@ public class PaymentFormController implements Initializable {
         colAmount2.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
 
-        colSalaryId1.setCellValueFactory(new PropertyValueFactory<>("salaryId"));
         colLawyerId1.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
-        colMonth1.setCellValueFactory(new PropertyValueFactory<>("month"));
         colTotalSalary1.setCellValueFactory(new PropertyValueFactory<>("totalSalary"));
     }
 
@@ -92,9 +84,7 @@ public class PaymentFormController implements Initializable {
             List<Salary> salaryList = SalaryRepo.getAll();
             for (Salary salary : salaryList) {
                 SalaryTm tm = new SalaryTm(
-                        salary.getSalaryId(),
                         salary.getLawyerId(),
-                        salary.getDate(),
                         salary.getTotalSalary()
                 );
                 obList.add(tm);

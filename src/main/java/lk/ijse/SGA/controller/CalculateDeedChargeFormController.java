@@ -10,15 +10,13 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import lk.ijse.SGA.model.CalDeedCharge;
 import lk.ijse.SGA.model.Charge;
 import lk.ijse.SGA.model.DeedCharge;
 import lk.ijse.SGA.model.Payment;
 import lk.ijse.SGA.model.tm.ChargeCalculationTm;
-import lk.ijse.SGA.repository.ChargeRepo;
-import lk.ijse.SGA.repository.ClientRepo;
-import lk.ijse.SGA.repository.DeedChargeRepo;
-import lk.ijse.SGA.repository.PaymentRepo;
+import lk.ijse.SGA.repository.*;
 
 import java.net.URL;
 import java.sql.Date;
@@ -71,6 +69,33 @@ public class CalculateDeedChargeFormController implements Initializable {
         getCurrentPayemntID();
         setCellValueFactory();
         keyEventsHandling();
+        Validations();
+    }
+
+    private void Validations() {
+        txtDeedId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[D0-9]")) {
+                event.consume();
+            }
+        });
+
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[L0-9]")) {
+                event.consume();
+            }
+        });
+
+        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[C0-9]")) {
+                event.consume();
+            }
+        });
+
+        txtChargeId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[CH0-9]")) {
+                event.consume();
+            }
+        });
     }
 
     private void keyEventsHandling() {
@@ -223,16 +248,6 @@ public class CalculateDeedChargeFormController implements Initializable {
 
         var pay = new Payment(paymentID, lawyerID, date, total);
 
-        try {
-            boolean isSaved = PaymentRepo.save(pay);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Payment saved successfully!").show();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-
         List<DeedCharge> deedChargeList = new ArrayList<>();
 
         for (int i = 0; i < tblPayCal.getItems().size(); i++){
@@ -250,7 +265,19 @@ public class CalculateDeedChargeFormController implements Initializable {
             }
 
         }
+
         CalDeedCharge calDeedCharge = new CalDeedCharge(pay, deedChargeList);
+
+        try {
+            boolean isPlaced = CalDeedChargeRepo.calDeedCharge(calDeedCharge);
+            if (isPlaced) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
 
     }
 }

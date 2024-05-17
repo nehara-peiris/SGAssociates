@@ -62,11 +62,8 @@ public class SummonFormController implements Initializable {
         keyEventsHandling();
 
         Validations();
-        addTextChangeListener(txtSummonId);
         addTextChangeListener(txtDescription);
         addTextChangeListener(txtDefendant);
-        addTextChangeListener(txtLawyerId);
-        addTextChangeListener(txtDate);
 
     }
 
@@ -110,9 +107,6 @@ public class SummonFormController implements Initializable {
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (textField == txtSummonId && !newValue.matches("^S.*$")) {
-            }
-
             if (textField == txtDescription) {
                 if (!newValue.isEmpty()) {
                     if (!Character.isUpperCase(newValue.charAt(0))) {
@@ -138,24 +132,18 @@ public class SummonFormController implements Initializable {
                     }
                 }
             }
-
-            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-            }
-
-            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-            }
         });
     }
 
     private void Validations() {
-        txtSummonId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtSummonId.getText().isEmpty() && !event.getCharacter().equals("S")){
+        txtSummonId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[S0-9]")) {
                 event.consume();
             }
         });
 
-        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[L0-9]")) {
                 event.consume();
             }
         });

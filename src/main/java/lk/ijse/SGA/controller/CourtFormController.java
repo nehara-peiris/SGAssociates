@@ -66,9 +66,6 @@ public class CourtFormController {
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (textField == txtCourtId && !newValue.matches("^CT.*$")) {
-            }
-
             if (textField == txtLocation) {
                 if (!newValue.isEmpty()) {
                     if (!Character.isUpperCase(newValue.charAt(0))) {

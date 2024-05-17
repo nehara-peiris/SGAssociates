@@ -55,6 +55,7 @@ public class ChargeFormController implements Initializable {
 
         Validations();
         addTextChangeListener(txtDescription);
+        addTextChangeListener(txtAmount);
 
     }
 

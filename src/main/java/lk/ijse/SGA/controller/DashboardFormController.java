@@ -242,7 +242,7 @@ public class DashboardFormController implements Initializable {
         }
 
         if ("Salary Details".equals(selectedItem)) {
-            JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/SalaryDetails.jrxml");
+            JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/SalaryDetail.jrxml");
             JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DbConnection.getInstance().getConnection());

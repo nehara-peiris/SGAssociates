@@ -83,7 +83,6 @@ public class LawyerFormController implements Initializable {
         keyEventsHandling();
 
         Validations();
-        addTextChangeListener(txtLawyerId);
         addTextChangeListener(txtName);
         addTextChangeListener(txtAddress);
         addTextChangeListener(txtContact);
@@ -92,8 +91,8 @@ public class LawyerFormController implements Initializable {
     }
 
     private void Validations() {
-        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[L0-9]")) {
                 event.consume();
             }
         });
@@ -102,10 +101,6 @@ public class LawyerFormController implements Initializable {
 
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-            }
-
             if (textField == txtName) {
                 if (!newValue.isEmpty()) {
                     if (!Character.isUpperCase(newValue.charAt(0))) {
