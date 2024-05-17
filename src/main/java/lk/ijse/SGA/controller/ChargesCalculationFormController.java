@@ -10,14 +10,9 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import lk.ijse.SGA.model.Charge;
-import lk.ijse.SGA.model.ChargeCalculation;
-import lk.ijse.SGA.model.DeedCharge;
-import lk.ijse.SGA.model.Payment;
+import lk.ijse.SGA.model.*;
 import lk.ijse.SGA.model.tm.ChargeCalculationTm;
-import lk.ijse.SGA.repository.ChargeRepo;
-import lk.ijse.SGA.repository.ClientRepo;
-import lk.ijse.SGA.repository.PaymentRepo;
+import lk.ijse.SGA.repository.*;
 
 
 import java.net.URL;
@@ -198,26 +193,39 @@ public class ChargesCalculationFormController implements Initializable {
         String chargeId = txtChargeId.getText();
         String description = lblDescription.getText();
         double amount = Double.parseDouble(lblAmount.getText());
+        double total = Double.parseDouble(lblTotal.getText());
 
-        var pay = new Payment(paymentID, lawyerID, date, amount);
+        var pay = new Payment(paymentID, lawyerID, date, total);
+
+        try {
+            boolean isSaved = PaymentRepo.save(pay);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Payment saved successfully!").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
 
         List<DeedCharge> deedChargeList = new ArrayList<>();
 
         for (int i = 0; i < tblPayCal.getItems().size(); i++){
             ChargeCalculationTm tm = obList.get(i);
 
-            DeedCharge deedCharge = new DeedCharge(
-                    paymentID,
-                    deedID,
-                    lawyerID,
-                    chargeId,
-                    date,
-                    amount,
-                    clientID
-            );
-            deedChargeList.add(deedCharge);
+            DeedCharge deedCharge = new DeedCharge(paymentID, deedID, lawyerID, chargeId, date, amount, clientID);
+
+            try {
+                boolean isSaved = DeedChargeRepo.save(deedCharge);
+                if (isSaved) {
+                    deedChargeList.add(deedCharge);
+                }
+            } catch (SQLException e) {
+                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            }
 
         }
         ChargeCalculation chargeCalculation = new ChargeCalculation(pay, deedChargeList);
+
     }
 }
+
