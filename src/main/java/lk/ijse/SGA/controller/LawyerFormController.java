@@ -1,11 +1,13 @@
 package lk.ijse.SGA.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,13 +20,19 @@ import lk.ijse.SGA.model.tm.LawyerTm;
 import lk.ijse.SGA.repository.LawyerRepo;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class LawyerFormController implements Initializable {
+    public JFXButton btnSave;
     @FXML
     private TextField txtLawyerId;
     @FXML
@@ -62,22 +70,6 @@ public class LawyerFormController implements Initializable {
     @FXML
     private  TableColumn<?, ?> colDate;
 
-
-    public static void lawCaseUpdate(String caseId, String lawyerId, Date dateOfCase) {
-
-       Date date = dateOfCase;
-
-       LawCase lawCase = new LawCase(lawyerId, caseId, date);
-
-        try{
-            boolean isSaved = LawyerRepo.saveLawcase(lawCase);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "LawCase saved!").show();
-            }
-        }catch(SQLException e){
-            throw new RuntimeException(e);
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -145,7 +137,7 @@ public class LawyerFormController implements Initializable {
                 if (!newValue.matches("\\d{0,10}")) {
                     // If it contains non-digits or its length is not 10, prevent typing and display an error message
                     textField.setText(oldValue != null ? oldValue : "");
-                    JOptionPane.showMessageDialog(null, "Please enter 10 integer numbers.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Only numbers are allowed.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -156,11 +148,9 @@ public class LawyerFormController implements Initializable {
             }
 
             if (textField == txtYrsOfExp) {
-                // Check if the new value contains only digits and has a length of 10
-                if (!newValue.matches("\\d{0,10}")) {
-                    // If it contains non-digits or its length is not 10, prevent typing and display an error message
+                if (!newValue.matches("\\d{0,2}")) {
                     textField.setText(oldValue != null ? oldValue : "");
-                    JOptionPane.showMessageDialog(null, "Only numbers are allowed", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Only 2 numbers are allowed.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -196,6 +186,12 @@ public class LawyerFormController implements Initializable {
                 txtContact.requestFocus();
             }
         });
+
+        txtContact.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnSave.requestFocus();
+            }
+        });
     }
 
     private void setCellValueFactory() {
@@ -207,6 +203,7 @@ public class LawyerFormController implements Initializable {
         colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
 
     }
+
     private void loadAllLawyers() {
         ObservableList<LawyerTm> obList = FXCollections.observableArrayList();
 
@@ -229,7 +226,6 @@ public class LawyerFormController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
     private void loadAssignedCases() {
         ObservableList<LawCaseTm> obList = FXCollections.observableArrayList();
 
@@ -300,6 +296,38 @@ public class LawyerFormController implements Initializable {
         }
     }
 
+    public static void lawCaseSave(String caseId, String lawyerId, Date dateOfCase) {
+
+        Date date = dateOfCase;
+
+        LawCase lawCase = new LawCase(lawyerId, caseId, date);
+
+        try{
+            boolean isSaved = LawyerRepo.saveLawcase(lawCase);
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "LawCase saved!").show();
+            }
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void lawCaseUpdate(String caseId, String lawyerId, Date dateOfCase) {
+
+        Date date = dateOfCase;
+
+        LawCase lawCase = new LawCase(lawyerId, caseId, date);
+
+        try{
+            boolean isUpdated = LawyerRepo.updateLawCase(lawCase);
+            if (isUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, "LawCase updated!").show();
+            }
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
+    }
+
     private void clearFields() {
         txtLawyerId.setText("");
         txtName.setText("");
@@ -313,10 +341,36 @@ public class LawyerFormController implements Initializable {
     void btnUpdateOnAction(ActionEvent event){
         String lawyerId = txtLawyerId.getText();
         String name = txtName.getText();
-        int yrsOfExp = Integer.parseInt(txtYrsOfExp.getText());
+        String yearsOfExp = txtYrsOfExp.getText();
         String address = txtAddress.getText();
         String email = txtEmail.getText();
-        int contact = Integer.parseInt(txtContact.getText());
+        String contactNo = txtContact.getText();
+
+        if (lawyerId.isEmpty() || name.isEmpty() || yearsOfExp.isEmpty() || address.isEmpty() || email.isEmpty() || contactNo.isEmpty()) {
+            if (lawyerId.isEmpty()) {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            } else if (name.isEmpty()) {
+                txtName.requestFocus();
+                txtName.setStyle("-fx-border-color: red;");
+            } else if (yearsOfExp.isEmpty()) {
+                txtYrsOfExp.requestFocus();
+                txtYrsOfExp.setStyle("-fx-border-color: red;");
+            } else if (address.isEmpty()) {
+                txtAddress.requestFocus();
+                txtAddress.setStyle("-fx-border-color: red;");
+            } else if (email.isEmpty()) {
+                txtEmail.requestFocus();
+                txtEmail.setStyle("-fx-border-color: red;");
+            } else {
+                txtContact.requestFocus();
+                txtContact.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        int yrsOfExp = Integer.parseInt(yearsOfExp);
+        int contact = Integer.parseInt(contactNo);
 
         Lawyer lawyer = new Lawyer(lawyerId, name, yrsOfExp, address, email, contact);
 
@@ -327,8 +381,9 @@ public class LawyerFormController implements Initializable {
                 loadAllLawyers();
                 loadAssignedCases();
                 clearFields();
+                txtLawyerId.requestFocus();
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -345,7 +400,7 @@ public class LawyerFormController implements Initializable {
                 clearFields();
                 loadAssignedCases();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -358,5 +413,32 @@ public class LawyerFormController implements Initializable {
         txtAddress.setText(lawyerTm.getAddress());
         txtEmail.setText(lawyerTm.getEmail());
         txtContact.setText(String.valueOf(lawyerTm.getContact()));
+    }
+
+    public void BtnSendEmailOnAction(ActionEvent event) {
+        sendEmail();
+
+    }
+    @FXML
+    private void sendEmail() {
+
+        String toWhom = txtEmail.getText();
+        new Thread(()->{
+            try {
+                String subject = "Confidential: Detailed Report for Review and Legal Counsel";
+                String emailBody = "Dear  Sir/Madam\n" +
+                        "I hope this email finds you well.This is a friendly reminder regarding the detailed report we discussed previously. \n" +
+                        "I will be sending you the full report and relevant documentation as a PDF attachment. Your review and counsel on this matter would be greatly appreciated.\n" +
+                        "If you have any immediate questions or need further information before receiving the report, please feel free to reach out to me.Thank you for your attention to this matter.\n\n\n\n\n" +
+                        "Best regards,\n" +
+                        "Nehara Peiris";
+                String encodedEmailBody = URLEncoder.encode(emailBody, "UTF-8");
+                String encodedSubject = URLEncoder.encode(subject, "UTF-8");
+                String url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + toWhom + "&body="+encodedEmailBody+"&su="+encodedSubject;
+                Desktop.getDesktop().browse(new URI(url));
+            } catch (IOException | URISyntaxException e) {
+                System.out.println("An error occurred : "+e.getLocalizedMessage());
+            }
+        }).start();
     }
 }

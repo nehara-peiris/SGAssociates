@@ -118,7 +118,6 @@ CREATE TABLE payment(
     lawyerId VARCHAR(6),
     date DATE,
     amount DECIMAL,
-    bonus DECIMAL,
     FOREIGN KEY (lawyerId) references lawyer(lawyerId) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

@@ -14,5 +14,4 @@ public class Payment {
     private String lawyerId;
     private Date date;
     private double amount;
-    private double bonus;
 }

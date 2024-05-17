@@ -129,4 +129,17 @@ public class LawyerRepo {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public static boolean updateLawCase(LawCase lawCase) throws SQLException {
+        String sql = "UPDATE lawCase  SET lawyerId = ?  WHERE caseId = ? AND date = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        pstm.setObject(1, lawCase.getLawyerId());
+        pstm.setObject(2, lawCase.getCaseId());
+        pstm.setObject(3, lawCase.getDate());
+
+        return pstm.executeUpdate() > 0;
+    }
 }

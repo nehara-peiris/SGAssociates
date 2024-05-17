@@ -78,3 +78,7 @@ SET nextId = CONCAT('L', LPAD(currentId + 1, 3, '0'));
 END;
 //
 DELIMITER ;
+
+
+// API for AI
+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

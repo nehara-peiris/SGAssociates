@@ -13,5 +13,4 @@ public class PaymentTm {
     private String lawyerId;
     private Date date;
     private double amount;
-    private double bonus;
 }

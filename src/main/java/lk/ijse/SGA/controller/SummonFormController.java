@@ -1,5 +1,6 @@
 package lk.ijse.SGA.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,18 +16,19 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Summon;
-import lk.ijse.SGA.model.tm.PaymentTm;
 import lk.ijse.SGA.model.tm.SummonTm;
 import lk.ijse.SGA.repository.SummonRepo;
 
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class SummonFormController implements Initializable {
 
+    public JFXButton btnSave;
     @FXML
     private AnchorPane rootNode;
     @FXML
@@ -54,13 +56,23 @@ public class SummonFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        setDate();
         setCellValueFactory();
         loadAllSummons();
         keyEventsHandling();
 
         Validations();
         addTextChangeListener(txtSummonId);
+        addTextChangeListener(txtDescription);
+        addTextChangeListener(txtDefendant);
+        addTextChangeListener(txtLawyerId);
+        addTextChangeListener(txtDate);
 
+    }
+
+    private void setDate() {
+        LocalDate now = LocalDate.now();
+        txtDate.setText(String.valueOf(now));
     }
 
     private void keyEventsHandling() {
@@ -87,13 +99,18 @@ public class SummonFormController implements Initializable {
                 txtDate.requestFocus();
             }
         });
+
+        txtDate.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnSave.requestFocus();
+            }
+        });
     }
 
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
             if (textField == txtSummonId && !newValue.matches("^S.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with S").show();
             }
 
             if (textField == txtDescription) {
@@ -123,11 +140,9 @@ public class SummonFormController implements Initializable {
             }
 
             if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
             }
 
             if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
             }
         });
     }
@@ -135,6 +150,12 @@ public class SummonFormController implements Initializable {
     private void Validations() {
         txtSummonId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
             if (txtSummonId.getText().isEmpty() && !event.getCharacter().equals("S")){
+                event.consume();
+            }
+        });
+
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
                 event.consume();
             }
         });
@@ -201,7 +222,6 @@ public class SummonFormController implements Initializable {
 
         Date date = Date.valueOf(sDate);
 
-
         Summon summon = new Summon(summonId, description, defendant, lawyerId, date);
 
         try{
@@ -209,11 +229,12 @@ public class SummonFormController implements Initializable {
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "summon saved!").show();
                 clearFields();
+                setDate();
                 loadAllSummons();
                 txtSummonId.requestFocus();
             }
         }catch(SQLException e){
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
 
@@ -240,12 +261,14 @@ public class SummonFormController implements Initializable {
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION, "summon updated successfully!").show();
                 clearFields();
+                loadAllSummons();
+                setDate();
+                txtSummonId.requestFocus();
             }
         }catch(SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
@@ -255,26 +278,13 @@ public class SummonFormController implements Initializable {
             boolean isDeleted = SummonRepo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "summon deleted!").show();
+                loadAllSummons();
+                clearFields();
+                setDate();
+                txtSummonId.requestFocus();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    void txtSearchOnAction(ActionEvent event) throws SQLException {
-        String id = txtSummonId.getText();
-
-        Summon summon = SummonRepo.searchById(id);
-
-        if (summon != null) {
-            txtSummonId.setText(summon.getSummonId());
-            txtDescription.setText(summon.getDescription());
-            txtDefendant.setText(String.valueOf(summon.getDefendant()));
-            txtLawyerId.setText(summon.getLawyerId());
-            txtDate.setText(String.valueOf(summon.getDate()));
-        } else {
-            new Alert(Alert.AlertType.INFORMATION, "Lawyer not found!").show();
         }
     }
 

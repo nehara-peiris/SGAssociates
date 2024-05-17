@@ -1,5 +1,6 @@
 package lk.ijse.SGA.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ChargeFormController implements Initializable {
+    public JFXButton btnSave;
     @FXML
     private AnchorPane rootNode;
     @FXML
@@ -52,7 +54,7 @@ public class ChargeFormController implements Initializable {
         keyEventsHandling();
 
         Validations();
-        addTextChangeListener(txtChargeId);
+        addTextChangeListener(txtDescription);
 
     }
 
@@ -68,14 +70,16 @@ public class ChargeFormController implements Initializable {
                 txtAmount.requestFocus();
             }
         });
+
+        txtAmount.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnSave.requestFocus();
+            }
+        });
     }
 
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-
-            if (textField == txtChargeId && !newValue.matches("^CH.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
-            }
 
             if (textField == txtDescription) {
                 if (!newValue.isEmpty()) {
@@ -91,16 +95,14 @@ public class ChargeFormController implements Initializable {
             }
 
             if (textField == txtAmount && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {
-                new Alert(Alert.AlertType.ERROR, "Invalid number format").show();
             }
 
         });
     }
 
     private void Validations() {
-
-        txtChargeId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtChargeId.getText().isEmpty() && !event.getCharacter().equals("CH")){
+        txtChargeId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[CH0-9]")) {
                 event.consume();
             }
         });
@@ -157,12 +159,14 @@ public class ChargeFormController implements Initializable {
         double amount = Double.parseDouble(crgAmount);
 
         Charge charge = new Charge(chargeId, description, amount);
+
         try {
             boolean isSaved = ChargeRepo.save(charge);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "charge saved!").show();
-                clearFields();
                 loadAllCharges();
+                clearFields();
+                txtChargeId.requestFocus();
             }
         } catch (SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -175,12 +179,27 @@ public class ChargeFormController implements Initializable {
         txtAmount.clear();
     }
 
-
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws SQLException {
         String chargeId = txtChargeId.getText();
         String description = txtDescription.getText();
-        double amount = Double.parseDouble(txtAmount.getText());
+        String crgAmount = txtAmount.getText();
+
+        if (chargeId.isEmpty() || description.isEmpty() || crgAmount.isEmpty()) {
+            if (chargeId.isEmpty()) {
+                txtChargeId.requestFocus();
+                txtChargeId.setStyle("-fx-border-color: red;");
+            } else if (description.isEmpty()) {
+                txtDescription.requestFocus();
+                txtDescription.setStyle("-fx-border-color: red;");
+            } else {
+                txtAmount.requestFocus();
+                txtAmount.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        double amount = Double.parseDouble(crgAmount);
 
         Charge charge = new Charge(chargeId, description, amount);
 
@@ -188,13 +207,14 @@ public class ChargeFormController implements Initializable {
             boolean isSaved = ChargeRepo.update(charge);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "charge updated!").show();
+                loadAllCharges();
                 clearFields();
+                txtChargeId.requestFocus();
             }
         }catch(SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
@@ -204,6 +224,9 @@ public class ChargeFormController implements Initializable {
             boolean isDeleted = ChargeRepo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "charge deleted!").show();
+                loadAllCharges();
+                clearFields();
+                txtChargeId.requestFocus();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -225,5 +248,15 @@ public class ChargeFormController implements Initializable {
     }
 
     public void TableOnClick(MouseEvent mouseEvent) {
+        ChargeTm chargeTm = tblCharge.getSelectionModel().getSelectedItem();
+        txtChargeId.setText(chargeTm.getChargeId());
+        txtDescription.setText(chargeTm.getDescription());
+        txtAmount.setText(String.valueOf(chargeTm.getAmount()));
+    }
+
+    public void btnPayCalOnAction(ActionEvent event) throws IOException {
+        AnchorPane deedCharge = FXMLLoader.load(this.getClass().getResource("/view/ChargesCalculationForm.fxml"));
+
+        rootNode.getChildren().add(deedCharge);
     }
 }

@@ -21,12 +21,12 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Cases;
 import lk.ijse.SGA.model.tm.CasesTm;
-import lk.ijse.SGA.model.tm.PaymentTm;
 import lk.ijse.SGA.repository.CasesRepo;
 
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -49,6 +49,8 @@ public class CasesFormController implements Initializable {
     @FXML
     private TableColumn<?,?> colClientId;
     @FXML
+    private TableColumn<?,?> colCaseId;
+    @FXML
     private TableColumn<?,?> colDescription;
     @FXML
     private TableColumn<?,?> colDate;
@@ -69,6 +71,7 @@ public class CasesFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllCases();
+        setDate();
 
         keyEventsHandling();
         setCasesBarchart();
@@ -81,6 +84,11 @@ public class CasesFormController implements Initializable {
         addTextChangeListener(txtClientId);
         addTextChangeListener(txtLawyerId);
 
+    }
+
+    private void setDate() {
+        LocalDate now = LocalDate.now();
+        txtDate.setText(String.valueOf(now));
     }
 
     private void keyEventsHandling() {
@@ -110,6 +118,12 @@ public class CasesFormController implements Initializable {
 
         txtDate.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
+                txtLawyerId.requestFocus();
+            }
+        });
+
+        txtLawyerId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
                 btnSave.requestFocus();
             }
         });
@@ -127,12 +141,28 @@ public class CasesFormController implements Initializable {
         }
     }
 
+    private void populateBarChart() throws SQLException {
+        chartCase.getData().clear();
+
+        Map<String, Integer> caseTypeCounts = CasesRepo.getAllToChart();
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+
+        caseTypeCounts.forEach((type, count) -> {
+            XYChart.Data<String, Number> data = new XYChart.Data<>(type, count);
+            series.getData().add(data);
+            data.nodeProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    newValue.setStyle("-fx-bar-fill:#1c7850;");
+                }
+            });
+        });
+
+        chartCase.getData().add(series);
+    }
+
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
-           /* if (textField == txtCaseId && !newValue.matches("^CA.*$")) {
-            }
-            */
             if (textField == txtDescription) {
                 if (!newValue.isEmpty()) {
                     if (!Character.isUpperCase(newValue.charAt(0))) {
@@ -163,7 +193,6 @@ public class CasesFormController implements Initializable {
             }
 
             if (textField == txtClientId && !newValue.matches("^C.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with C").show();
             }
 
             if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
@@ -173,6 +202,18 @@ public class CasesFormController implements Initializable {
     }
 
     private void Validations() {
+        txtCaseId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[CA0-9]")) {
+                event.consume();
+            }
+        });
+
+        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtClientId.getText().isEmpty() && !event.getCharacter().equals("C")){
+                event.consume();
+            }
+        });
+
         txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
             if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
                 event.consume();
@@ -181,20 +222,10 @@ public class CasesFormController implements Initializable {
 
     }
 
-    private void populateBarChart() throws SQLException {
-        chartCase.getData().clear();
 
-        Map<String, Integer> caseTypeCounts =CasesRepo.getAllToChart();
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-
-        caseTypeCounts.forEach((type, count) -> {
-            series.getData().add(new XYChart.Data<>(type, count));
-        });
-
-        chartCase.getData().add(series);
-    }
 
     private void setCellValueFactory() {
+        colCaseId.setCellValueFactory(new PropertyValueFactory<>("caseId"));
         colClientId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -209,6 +240,7 @@ public class CasesFormController implements Initializable {
             List<Cases> casesList = CasesRepo.getAll();
             for (Cases cases : casesList) {
                 CasesTm tm = new CasesTm(
+                        cases.getCaseId(), 
                         cases.getDescription(),
                         cases.getDate(),
                         cases.getType(),
@@ -263,23 +295,27 @@ public class CasesFormController implements Initializable {
         try{
             boolean isSaved = CasesRepo.save(cases);
             if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "case saved!").show();
-                LawyerFormController.lawCaseUpdate(caseId, lawyerId, date);
                 loadAllCases();
+                populateBarChart();
+                LawyerFormController.lawCaseSave(caseId, lawyerId, date);
+                new Alert(Alert.AlertType.CONFIRMATION, "case saved!").show();
                 clearFields();
+                setDate();
                 txtCaseId.requestFocus();
             }
         }catch(SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            txtCaseId.requestFocus();
         }
     }
 
     private void clearFields() {
-        txtCaseId.setText("");
-        txtDescription.setText("");
-        txtDate.setText("");
-        txtClientId.setText("");
-        txtType.setText("");
+        txtCaseId.clear();
+        txtDescription.clear();
+        txtDate.clear();
+        txtClientId.clear();
+        txtType.clear();
+        txtLawyerId.clear();
     }
 
     @FXML
@@ -288,18 +324,52 @@ public class CasesFormController implements Initializable {
         String clientId = txtClientId.getText();
         String description = txtDescription.getText();
         String type = txtType.getText();
-        Date date = Date.valueOf(txtDate.getText());
+        String dateOfCase = txtDate.getText();
+        String lawyerId = txtLawyerId.getText();
+
+        if (caseId.isEmpty() || clientId.isEmpty() || description.isEmpty() || type.isEmpty() || dateOfCase.isEmpty() || lawyerId.isEmpty()) {
+            if (caseId.isEmpty()) {
+                txtCaseId.requestFocus();
+                txtCaseId.setStyle("-fx-border-color: red;");
+            } else if (clientId.isEmpty()) {
+                txtClientId.requestFocus();
+                txtClientId.setStyle("-fx-border-color: red;");
+            } else if (description.isEmpty()) {
+                txtDescription.requestFocus();
+                txtDescription.setStyle("-fx-border-color: red;");
+            } else if (type.isEmpty()) {
+                txtType.requestFocus();
+                txtType.setStyle("-fx-border-color: red;");
+            } else if (dateOfCase.isEmpty()) {
+                txtDate.requestFocus();
+                txtDate.setStyle("-fx-border-color: red;");
+            } else {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        Date date = Date.valueOf(dateOfCase);
 
         Cases cases = new Cases(caseId, description, type, date, clientId);
+
 
         try{
             boolean isUpdated = CasesRepo.update(cases);
             if (isUpdated) {
+                LawyerFormController.lawCaseUpdate(caseId, lawyerId, date);
                 new Alert(Alert.AlertType.CONFIRMATION, "case updated!").show();
+                loadAllCases();
                 clearFields();
+                setDate();
+                txtCaseId.requestFocus();
+
+
             }
         }catch(SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            txtCaseId.requestFocus();
         }
     }
 
@@ -311,15 +381,20 @@ public class CasesFormController implements Initializable {
             boolean isDeleted = CasesRepo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Case deleted!").show();
+                clearFields();
+                setDate();
+                loadAllCases();
+                txtCaseId.requestFocus();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            txtCaseId.requestFocus();
         }
     }
 
     public void TableOnClick(MouseEvent mouseEvent) {
         CasesTm casesTm = tblCase.getSelectionModel().getSelectedItem();
-
+        txtCaseId.setText(casesTm.getCaseId());
         txtDescription.setText(casesTm.getDescription());
         txtDate.setText(String.valueOf(casesTm.getDate()));
         txtType.setText(String.valueOf(casesTm.getType()));

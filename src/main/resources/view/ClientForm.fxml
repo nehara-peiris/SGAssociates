@@ -19,7 +19,7 @@
             <Font name="DejaVu Serif Bold" size="41.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="845.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Save" textFill="WHITE">
+      <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="56.0" layoutY="845.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Save" textFill="WHITE">
          <effect>
             <DropShadow blurType="ONE_PASS_BOX" height="32.86" radius="16.6725" spread="0.14" width="35.83">
                <color>
@@ -51,5 +51,14 @@
       <TextField fx:id="txtLawyerId" layoutX="137.0" layoutY="667.0" prefHeight="24.0" prefWidth="345.0" />
       <JFXButton buttonType="RAISED" layoutX="185.0" layoutY="845.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Update" textFill="WHITE" />
       <JFXButton buttonType="RAISED" layoutX="416.0" layoutY="845.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="81.0" ripplerFill="#e13a0c" style="-fx-background-color: #94d6ca;" text="Delete" />
+      <JFXButton fx:id="sendEmail" buttonType="RAISED" layoutX="1371.0" layoutY="41.0" onAction="#BtnSendEmailOnAction" prefHeight="35.0" prefWidth="145.0" ripplerFill="#45668c" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Send Email" textFill="WHITE">
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" height="32.86" radius="16.6725" spread="0.14" width="35.83">
+               <color>
+                  <Color red="0.02296539954841137" green="0.3815789520740509" blue="0.34571757912635803" />
+               </color>
+            </DropShadow>
+         </effect>
+      </JFXButton>
    </children>
 </AnchorPane>

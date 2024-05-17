@@ -20,10 +20,8 @@ public class PaymentRepo {
             String lawyerID = resultSet.getString(2);
             Date date = Date.valueOf(resultSet.getString(3));
             double amount = Double.parseDouble(resultSet.getString(4));
-            double bonus = Double.parseDouble(resultSet.getString(5));
 
-
-            Payment payment = new Payment(paymentId, lawyerID, date, amount, bonus);
+            Payment payment = new Payment(paymentId, lawyerID, date, amount);
             paymentList.add(payment);
         }
 
@@ -31,7 +29,7 @@ public class PaymentRepo {
     }
 
     public static boolean save(Payment payment) throws SQLException {
-        String sql = "INSERT INTO payment VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO payment VALUES(?,?,?,?)";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -40,17 +38,25 @@ public class PaymentRepo {
         pstm.setObject(2, payment.getLawyerId());
         pstm.setObject(3, payment.getDate());
         pstm.setObject(4, payment.getAmount());
-        pstm.setObject(5, payment.getBonus());
 
         return pstm.executeUpdate() > 0;
     }
 
-    public static String getCurrentId() {
+    public static String getCurrentId() throws SQLException {
+        String sql = "SELECT payId FROM payment ORDER BY payId DESC LIMIT 1";
+        PreparedStatement pstm = DbConnection.getInstance().getConnection()
+                .prepareStatement(sql);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if(resultSet.next()) {
+            String orderId = resultSet.getString(1);
+            return orderId;
+        }
         return null;
     }
 
     public static boolean update(Payment payment) throws SQLException {
-        String sql = "UPDATE payment SET lawyerId = ?, date = ?, amount = ?, bonus = ? WHERE paymentId = ?";
+        String sql = "UPDATE payment SET lawyerId = ?, date = ?, amount = ? WHERE paymentId = ?";
 
         Connection connection = DbConnection.getInstance().getConnection();
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -58,8 +64,7 @@ public class PaymentRepo {
         pstm.setObject(1, payment.getLawyerId());
         pstm.setObject(2, payment.getDate());
         pstm.setObject(3, payment.getAmount());
-        pstm.setObject(4, payment.getBonus());
-        pstm.setObject(5, payment.getPaymentId());
+        pstm.setObject(4, payment.getPaymentId());
 
         return pstm.executeUpdate() > 0;
     }

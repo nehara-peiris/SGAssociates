@@ -1,5 +1,6 @@
 package lk.ijse.SGA.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,10 +18,11 @@ import lk.ijse.SGA.model.Judge;
 import lk.ijse.SGA.model.tm.JudgeTm;
 import lk.ijse.SGA.repository.JudgeRepo;
 
-import java.sql.SQLException;
+import javax.swing.*;
 import java.util.List;
 
 public class JudgeFormController {
+    public JFXButton btnSave;
     @FXML
     private TextField txtJudgeId;
     @FXML
@@ -49,6 +51,9 @@ public class JudgeFormController {
 
        Validations();
        addTextChangeListener(txtJudgeId);
+       addTextChangeListener(txtName);
+       addTextChangeListener(txtCourtId);
+       addTextChangeListener(txtYrsOfExp);
 
    }
 
@@ -68,6 +73,12 @@ public class JudgeFormController {
         txtCourtId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 txtYrsOfExp.requestFocus();
+            }
+        });
+
+        txtYrsOfExp.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnSave.requestFocus();
             }
         });
 
@@ -94,10 +105,13 @@ public class JudgeFormController {
             }
 
             if (textField == txtCourtId && !newValue.matches("^CT.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with CT").show();
             }
 
-            if (textField == txtYrsOfExp && !newValue.matches("^\\d{10}$")) {
+            if (textField == txtYrsOfExp) {
+                if (!newValue.matches("\\d{0,2}")) {
+                    textField.setText(oldValue != null ? oldValue : "");
+                    JOptionPane.showMessageDialog(null, "Only 2 numbers are allowed.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
@@ -109,11 +123,14 @@ public class JudgeFormController {
             }
         });
 
-        txtCourtId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtCourtId.getText().isEmpty() && !event.getCharacter().equals("CT")){
+        txtCourtId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[CT0-9]")) {
                 event.consume();
             }
         });
+
+
+
     }
 
     private void setCellValueFactory() {
@@ -140,21 +157,19 @@ public class JudgeFormController {
             }
 
             tblJudge.setItems(obList);
-        }catch (SQLException e) {
+        }catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     @FXML
-    void btnSaveOnAction (ActionEvent event) throws SQLException {
+    void btnSaveOnAction (ActionEvent event)  {
         String judgeId = txtJudgeId.getText();
         String name = txtName.getText();
         String courtId = txtCourtId.getText();
         String yearsOfExp = txtYrsOfExp.getText();
 
         if (judgeId.isEmpty() || name.isEmpty() || courtId.isEmpty() || yearsOfExp.isEmpty()) {
-
-            // Request focus on the unfilled TextField
             if (judgeId.isEmpty()) {
                 txtJudgeId.requestFocus();
                 txtJudgeId.setStyle("-fx-border-color: red;");
@@ -183,7 +198,7 @@ public class JudgeFormController {
                 loadAllJudges();
                 txtJudgeId.requestFocus();
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             throw new RuntimeException(e);
         }
     }
@@ -200,7 +215,26 @@ public class JudgeFormController {
         String judgeId = txtJudgeId.getText();
         String name = txtName.getText();
         String courtId = txtCourtId.getText();
-        int yrsOfExp = Integer.parseInt(txtYrsOfExp.getText());
+        String yearsOfExp = txtYrsOfExp.getText();
+
+        if (judgeId.isEmpty() || name.isEmpty() || courtId.isEmpty() || yearsOfExp.isEmpty()) {
+            if (judgeId.isEmpty()) {
+                txtJudgeId.requestFocus();
+                txtJudgeId.setStyle("-fx-border-color: red;");
+            } else if (name.isEmpty()) {
+                txtName.requestFocus();
+                txtName.setStyle("-fx-border-color: red;");
+            } else if (courtId.isEmpty()) {
+                txtName.requestFocus();
+                txtName.setStyle("-fx-border-color: red;");
+            } else {
+                txtYrsOfExp.requestFocus();
+                txtYrsOfExp.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        int yrsOfExp = Integer.parseInt(yearsOfExp);
 
         Judge judge = new Judge(judgeId, name, courtId, yrsOfExp);
 
@@ -209,8 +243,10 @@ public class JudgeFormController {
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Judge Updated!").show();
                 clearFields();
+                loadAllJudges();
+                txtJudgeId.requestFocus();
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -224,8 +260,10 @@ public class JudgeFormController {
             boolean isDeleted = JudgeRepo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Judge deleted!").show();
+                clearFields();
+                txtJudgeId.requestFocus();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }

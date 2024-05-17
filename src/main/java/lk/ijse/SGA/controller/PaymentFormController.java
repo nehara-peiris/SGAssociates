@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.SGA.model.Payment;
@@ -71,7 +72,48 @@ public class PaymentFormController implements Initializable {
         loadTotalSalary();
 
         keyEventsHandling();
+
+        Validations();
+        addTextChangeListener(txtPaymentId);
+        addTextChangeListener(txtLawyerID);
+        addTextChangeListener(txtDate);
+        addTextChangeListener(txtAmount);
     }
+
+
+    private void Validations() {
+        txtPaymentId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtPaymentId.getText().isEmpty() && !event.getCharacter().equals("P")){
+                event.consume();
+            }
+        });
+
+        txtLawyerID.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerID.getText().isEmpty() && !event.getCharacter().equals("L")){
+                event.consume();
+            }
+        });
+    }
+    private void addTextChangeListener(TextField textField) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (textField == txtPaymentId && !newValue.matches("^P.*$")) {
+            }
+
+            if (textField == txtLawyerID && !newValue.matches("^L.*$")) {
+            }
+
+            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
+            }
+
+            if (textField == txtAmount && !newValue.matches("^-?\\d+(\\.\\d+)?$")) {
+                new Alert(Alert.AlertType.ERROR, "Invalid number format").show();
+            }
+
+        });
+    }
+
     private void keyEventsHandling() {
         txtPaymentId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -93,15 +135,10 @@ public class PaymentFormController implements Initializable {
 
         txtAmount.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                txtBonus.requestFocus();
-            }
-        });
-
-        txtBonus.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
                 btnSaveOnAction(null);
             }
         });
+
     }
     private void setDate() {
         LocalDate now = LocalDate.now();
@@ -113,7 +150,6 @@ public class PaymentFormController implements Initializable {
         colLawyerId2.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
         colDate2.setCellValueFactory(new PropertyValueFactory<>("date"));
         colAmount2.setCellValueFactory(new PropertyValueFactory<>("amount"));
-        colBonus2.setCellValueFactory(new PropertyValueFactory<>("bonus"));
 
 
         colSalaryId1.setCellValueFactory(new PropertyValueFactory<>("salaryId"));
@@ -132,8 +168,7 @@ public class PaymentFormController implements Initializable {
                         payment.getPaymentId(),
                         payment.getLawyerId(),
                         payment.getDate(),
-                        payment.getAmount(),
-                        payment.getBonus()
+                        payment.getAmount()
                 );
                 obList.add(tm);
             }
@@ -170,45 +205,40 @@ public class PaymentFormController implements Initializable {
         String lawyerId = txtLawyerID.getText();
         String pDate = txtDate.getText();
         String pAmount = txtAmount.getText();
-        String pBonus = txtBonus.getText();
         String pmonth = txtChoseMonth.getText();
 
-        if (paymentId.isEmpty() || lawyerId.isEmpty() || pDate.isEmpty() || pAmount.isEmpty() || pBonus.isEmpty() || pmonth.isEmpty()){
+        if (paymentId.isEmpty() || lawyerId.isEmpty() || pDate.isEmpty() || pAmount.isEmpty() || pmonth.isEmpty()){
             if (paymentId.isEmpty()) {
-                txtPaymentId.requestFocus();
                 txtPaymentId.setStyle("-fx-border-color: red;");
+                txtPaymentId.requestFocus();
             } else if (lawyerId.isEmpty()) {
-                txtLawyerID.requestFocus();
                 txtLawyerID.setStyle("-fx-border-color: red;");
+                txtLawyerID.requestFocus();
             } else if (pDate.isEmpty()) {
-                txtDate.requestFocus();
                 txtDate.setStyle("-fx-border-color: red;");
+                txtDate.requestFocus();
             } else if (pAmount.isEmpty()) {
-                txtAmount.requestFocus();
                 txtAmount.setStyle("-fx-border-color: red;");
-            } else if (pBonus.isEmpty()){
-                txtBonus.requestFocus();
-                txtBonus.setStyle("-fx-border-color: red;");
+                txtAmount.requestFocus();
             }else {
-                txtChoseMonth.requestFocus();
                 txtChoseMonth.setStyle("-fx-border-color: red;");
+                txtChoseMonth.requestFocus();
             }
             return;
         }
 
         Date date = Date.valueOf(pDate);
         double amount = Double.parseDouble(pAmount);
-        double bonus = Double.parseDouble(pBonus);
 
-        Payment payment = new Payment(paymentId, lawyerId, date, amount, bonus);
+        Payment payment = new Payment(paymentId, lawyerId, date, amount);
 
         try {
             boolean isSaved = PaymentRepo.save(payment);
             if (isSaved) {
+                loadAllPayment();
                 new Alert(Alert.AlertType.CONFIRMATION, "Payment saved successfully!").show();
                 clearFields();
-                loadAllPayment();
-                SalaryRepo.save(new Salary(null,lawyerId,date,amount+bonus));
+                SalaryRepo.save(new Salary(null,lawyerId,date,amount));
                 loadTotalSalary();
                 setDate();
                 txtPaymentId.requestFocus();
@@ -223,24 +253,49 @@ public class PaymentFormController implements Initializable {
         txtLawyerID.clear();
         txtDate.clear();
         txtAmount.clear();
-        txtBonus.clear();
     }
 
     @FXML
     void btnUpdateOnAction(ActionEvent event){
         String paymentId = txtPaymentId.getText();
         String lawyerId = txtLawyerID.getText();
-        Date date = Date.valueOf(txtDate.getText());
-        double amount = Double.parseDouble(txtAmount.getText());
-        double bonus = Double.parseDouble(txtBonus.getText());
+        String pDate = txtDate.getText();
+        String pAmount = txtAmount.getText();
+        String pmonth = txtChoseMonth.getText();
 
-        Payment payment = new Payment(paymentId, lawyerId, date, amount, bonus);
+        if (paymentId.isEmpty() || lawyerId.isEmpty() || pDate.isEmpty() || pAmount.isEmpty() || pmonth.isEmpty()){
+            if (paymentId.isEmpty()) {
+                txtPaymentId.requestFocus();
+                txtPaymentId.setStyle("-fx-border-color: red;");
+            } else if (lawyerId.isEmpty()) {
+                txtLawyerID.requestFocus();
+                txtLawyerID.setStyle("-fx-border-color: red;");
+            } else if (pDate.isEmpty()) {
+                txtDate.requestFocus();
+                txtDate.setStyle("-fx-border-color: red;");
+            } else if (pAmount.isEmpty()) {
+                txtAmount.requestFocus();
+                txtAmount.setStyle("-fx-border-color: red;");
+            }else {
+                txtChoseMonth.requestFocus();
+                txtChoseMonth.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        Date date = Date.valueOf(pDate);
+        double amount = Double.parseDouble(pAmount);
+
+        Payment payment = new Payment(paymentId, lawyerId, date, amount);
 
         try{
             boolean isSaved = PaymentRepo.update(payment);
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION, "Payment updated successfully!").show();
+                loadAllPayment();
+                loadTotalSalary();
                 clearFields();
+                txtPaymentId.requestFocus();
             }
         }catch(SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -255,6 +310,10 @@ public class PaymentFormController implements Initializable {
             boolean isDeleted = PaymentRepo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "payment deleted!").show();
+                loadAllPayment();
+                loadTotalSalary();
+                clearFields();
+                txtPaymentId.requestFocus();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -267,6 +326,5 @@ public class PaymentFormController implements Initializable {
         txtLawyerID.setText(paymentTm.getLawyerId());
         txtDate.setText(String.valueOf(paymentTm.getDate()));
         txtAmount.setText(String.valueOf(paymentTm.getAmount()));
-        txtBonus.setText(String.valueOf(paymentTm.getBonus()));
     }
 }

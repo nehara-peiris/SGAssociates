@@ -9,44 +9,41 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.PaymentFormController">
+<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #adedd7;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.PaymentFormController">
     <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" height="837.0" layoutX="37.0" layoutY="118.0" stroke="BLACK" strokeType="INSIDE" width="1522.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0c3831" height="837.0" layoutX="37.0" layoutY="118.0" stroke="BLACK" strokeType="INSIDE" width="1522.0" />
         <Label layoutX="526.0" layoutY="35.0" text="Payments Management">
             <font>
                 <Font name="System Bold" size="41.0" />
             </font>
         </Label>
-        <Label layoutX="56.0" layoutY="166.0" text="Payment ID" textFill="WHITE" />
-        <Label layoutX="56.0" layoutY="211.0" text="Lawyer ID" textFill="WHITE" />
-        <Label layoutX="56.0" layoutY="256.0" text="Date" textFill="WHITE" />
-        <Label layoutX="56.0" layoutY="301.0" text="Amount" textFill="WHITE" />
-        <Label layoutX="56.0" layoutY="346.0" text="Bonus" textFill="WHITE" />
-        <TextField fx:id="txtPaymentId" layoutX="137.0" layoutY="162.0" prefHeight="24.0" prefWidth="317.0" />
-        <TextField fx:id="txtLawyerID" layoutX="137.0" layoutY="207.0" prefWidth="317.0" />
-        <TextField fx:id="txtDate" layoutX="137.0" layoutY="252.0" prefWidth="317.0" />
-        <TextField fx:id="txtAmount" layoutX="137.0" layoutY="297.0" prefWidth="317.0" />
-        <TextField fx:id="txtBonus" layoutX="137.0" layoutY="342.0" prefWidth="317.0" />
-        <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="469.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #65B741;" text="save" textFill="#1937bc" />
-        <JFXButton buttonType="RAISED" layoutX="203.0" layoutY="469.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #F3CA52;" text="update" textFill="#ff4040" />
-        <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="469.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#e13a0c" style="-fx-background-color: #f26b6b;" text="delete" textFill="WHITE" />
-        <TableView fx:id="tblPayment" layoutX="56.0" layoutY="575.0" onMouseClicked="#TableOnClick" prefHeight="348.0" prefWidth="1471.0">
+        <Label layoutX="58.0" layoutY="211.0" text="Payment ID" textFill="WHITE" />
+        <Label layoutX="62.0" layoutY="326.0" text="Lawyer ID" textFill="WHITE" />
+        <Label layoutX="62.0" layoutY="464.0" text="Date" textFill="WHITE" />
+        <Label layoutX="62.0" layoutY="587.0" text="Amount" textFill="WHITE" />
+        <TextField fx:id="txtPaymentId" layoutX="143.0" layoutY="207.0" prefHeight="24.0" prefWidth="351.0" />
+        <TextField fx:id="txtLawyerID" layoutX="143.0" layoutY="322.0" prefHeight="24.0" prefWidth="351.0" />
+        <TextField fx:id="txtDate" layoutX="143.0" layoutY="460.0" prefHeight="24.0" prefWidth="351.0" />
+        <TextField fx:id="txtAmount" layoutX="143.0" layoutY="583.0" prefHeight="24.0" prefWidth="351.0" />
+        <JFXButton buttonType="RAISED" layoutX="58.0" layoutY="888.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
+        <JFXButton buttonType="RAISED" layoutX="205.0" layoutY="888.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Update" textFill="WHITE" />
+        <JFXButton buttonType="RAISED" layoutX="439.0" layoutY="888.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="76.0" ripplerFill="#e13a0c" style="-fx-background-color: #94d6ca;" text="Delete" />
+        <TableView fx:id="tblPayment" layoutX="546.0" layoutY="575.0" onMouseClicked="#TableOnClick" prefHeight="348.0" prefWidth="981.0">
             <columns>
-                <TableColumn fx:id="colPayId2" prefWidth="214.0" text="Payment ID" />
-                <TableColumn fx:id="colLawyerId2" prefWidth="214.0" text="Lawyer ID" />
-                <TableColumn fx:id="colDate2" prefWidth="224.0" text="Date" />
-                <TableColumn fx:id="colAmount2" prefWidth="178.0" text="Amount" />
-                <TableColumn fx:id="colBonus2" prefWidth="179.0" text="Bonus" />
+                <TableColumn fx:id="colPayId2" prefWidth="202.0" text="Payment ID" />
+                <TableColumn fx:id="colLawyerId2" prefWidth="224.0" text="Lawyer ID" />
+                <TableColumn fx:id="colDate2" prefWidth="322.0" text="Date" />
+                <TableColumn fx:id="colAmount2" minWidth="0.0" prefWidth="232.0" text="Amount" />
             </columns>
         </TableView>
-        <TableView fx:id="tblSalary" layoutX="545.0" layoutY="207.0" prefHeight="290.0" prefWidth="981.0">
+        <TableView fx:id="tblSalary" layoutX="545.0" layoutY="207.0" prefHeight="312.0" prefWidth="981.0">
             <columns>
-                <TableColumn fx:id="colSalaryId1" prefWidth="94.0" text="Salary ID" />
-                <TableColumn fx:id="colLawyerId1" prefWidth="98.0" text="Lawyer ID" />
-                <TableColumn fx:id="colMonth1" prefWidth="98.0" text="Month" />
-                <TableColumn fx:id="colTotalSalary1" prefWidth="98.0" text="Total Salary" />
+                <TableColumn fx:id="colSalaryId1" prefWidth="204.0" text="Salary ID" />
+                <TableColumn fx:id="colLawyerId1" prefWidth="216.0" text="Lawyer ID" />
+                <TableColumn fx:id="colMonth1" prefWidth="326.0" text="Month" />
+                <TableColumn fx:id="colTotalSalary1" prefWidth="234.0" text="Total Salary" />
             </columns>
         </TableView>
-      <TextField fx:id="txtChoseMonth" layoutX="545.0" layoutY="162.0" prefHeight="24.0" prefWidth="220.0" promptText="Chose Month" />
+      <TextField fx:id="txtChoseMonth" layoutX="545.0" layoutY="162.0" prefHeight="24.0" prefWidth="274.0" promptText="Chose Month" />
     </children>
 </AnchorPane>

@@ -9,9 +9,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1591.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.SummonFormController">
+<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1591.0" style="-fx-background-color: #adedd7;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.SummonFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="845.0" layoutX="33.0" layoutY="111.0" stroke="BLACK" strokeType="INSIDE" width="1529.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0c3831" height="845.0" layoutX="33.0" layoutY="111.0" stroke="BLACK" strokeType="INSIDE" width="1529.0" />
       <Label layoutX="530.0" layoutY="36.0" prefHeight="65.0" prefWidth="532.0" text="Summon Management">
          <font>
             <Font name="System Bold" size="41.0" />
@@ -21,23 +21,23 @@
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="54.0" layoutY="184.0" text="Description" textFill="WHITE">
+      <Label layoutX="54.0" layoutY="223.0" text="Description" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="54.0" layoutY="223.0" text="Defendant" textFill="WHITE">
+      <Label layoutX="52.0" layoutY="305.0" text="Defendant" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <Label layoutX="54.0" layoutY="264.0" text="LawyerId" textFill="WHITE">
+      <Label layoutX="52.0" layoutY="393.0" text="LawyerId" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <TextField fx:id="txtSummonId" layoutX="152.0" layoutY="139.0" onAction="#txtSearchOnAction" prefWidth="317.0" />
-      <TextField fx:id="txtDescription" layoutX="152.0" layoutY="180.0" prefHeight="24.0" prefWidth="317.0" />
-      <TextField fx:id="txtDefendant" layoutX="152.0" layoutY="219.0" prefHeight="24.0" prefWidth="317.0" />
-      <TextField fx:id="txtLawyerId" layoutX="152.0" layoutY="260.0" prefHeight="24.0" prefWidth="317.0" />
-      <TableView fx:id="tblSummon" layoutX="518.0" layoutY="137.0" onMouseClicked="#TableOnClick" prefHeight="460.0" prefWidth="1005.0">
+      <TextField fx:id="txtSummonId" layoutX="152.0" layoutY="139.0" prefWidth="317.0" />
+      <TextField fx:id="txtDescription" layoutX="152.0" layoutY="219.0" prefHeight="24.0" prefWidth="317.0" />
+      <TextField fx:id="txtDefendant" layoutX="150.0" layoutY="301.0" prefHeight="24.0" prefWidth="317.0" />
+      <TextField fx:id="txtLawyerId" layoutX="150.0" layoutY="389.0" prefHeight="24.0" prefWidth="317.0" />
+      <TableView fx:id="tblSummon" layoutX="518.0" layoutY="137.0" onMouseClicked="#TableOnClick" prefHeight="785.0" prefWidth="1005.0">
         <columns>
           <TableColumn fx:id="colSummonId" prefWidth="133.0" text="Summon Id" />
           <TableColumn fx:id="colDescription" prefWidth="349.0" text="Description" />
@@ -46,13 +46,13 @@
             <TableColumn fx:id="colDate" prefWidth="162.0" text="Date" />
         </columns>
       </TableView>
-      <JFXButton buttonType="RAISED" layoutX="54.0" layoutY="562.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #65B741;" text="save" textFill="#1937bc" />
-      <JFXButton buttonType="RAISED" layoutX="202.0" layoutY="562.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #F3CA52;" text="update" textFill="#ff4040" />
-      <JFXButton buttonType="RAISED" layoutX="337.0" layoutY="562.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#e13a0c" style="-fx-background-color: #f26b6b;" text="delete" textFill="WHITE" />
-      <Label layoutX="54.0" layoutY="308.0" text="Date" textFill="WHITE">
+      <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="54.0" layoutY="562.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Save" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="202.0" layoutY="562.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Update" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="426.0" layoutY="562.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="69.0" ripplerFill="#e13a0c" style="-fx-background-color: #94d6ca;" text="Delete" />
+      <Label layoutX="52.0" layoutY="472.0" text="Date" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font></Label>
-      <TextField fx:id="txtDate" layoutX="152.0" layoutY="304.0" prefHeight="24.0" prefWidth="317.0" />
+      <TextField fx:id="txtDate" layoutX="150.0" layoutY="468.0" prefHeight="24.0" prefWidth="317.0" />
    </children>
 </AnchorPane>

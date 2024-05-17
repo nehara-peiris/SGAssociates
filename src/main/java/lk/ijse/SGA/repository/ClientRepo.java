@@ -97,4 +97,22 @@ public class ClientRepo {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public static String getName(String cid) throws SQLException {
+        String sql = "SELECT name FROM client WHERE clientId = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1,cid);
+
+        ResultSet resultSet = pstm.executeQuery();
+        if (resultSet.next()) {
+            String name = resultSet.getString(1);
+
+            return name;
+        }
+        return null;
+
+
+    }
 }

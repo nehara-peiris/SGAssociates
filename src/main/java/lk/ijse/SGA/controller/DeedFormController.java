@@ -1,5 +1,6 @@
 package lk.ijse.SGA.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,12 +27,14 @@ import lk.ijse.SGA.repository.DeedRepo;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class DeedFormController implements Initializable {
 
+    public JFXButton btnSave;
     @FXML
     private AnchorPane rootNode;
     @FXML
@@ -71,13 +74,24 @@ public class DeedFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         loadAllDeeds();
+        setDate();
 
         keyEventsHandling();
         setDeedBarchart();
 
         Validations();
         addTextChangeListener(txtDeedId);
+        addTextChangeListener(txtDescription);
+        addTextChangeListener(txtType);
+        addTextChangeListener(txtDate);
+        addTextChangeListener(txtClientId);
+        addTextChangeListener(txtLawyerId);
 
+    }
+
+    private void setDate() {
+        LocalDate now = LocalDate.now();
+        txtDate.setText(String.valueOf(now));
     }
 
     private void Validations() {
@@ -86,13 +100,25 @@ public class DeedFormController implements Initializable {
                 event.consume();
             }
         });
+
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
+                event.consume();
+            }
+        });
+
+        txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtClientId.getText().isEmpty() && !event.getCharacter().equals("C")){
+                event.consume();
+            }
+        });
+
     }
 
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
             if (textField == txtDeedId && !newValue.matches("^D.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with D").show();
             }
 
             if (textField == txtDescription) {
@@ -121,16 +147,12 @@ public class DeedFormController implements Initializable {
                 }
             }
 
-            if (textField == txtDate && !newValue.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-                new Alert(Alert.AlertType.ERROR, "Date format must be YYYY-MM-DD").show();
-            }
-
             if (textField == txtClientId && !newValue.matches("^C.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with C").show();
+
             }
 
             if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
+
             }
         });
     }
@@ -165,6 +187,12 @@ public class DeedFormController implements Initializable {
                 txtDate.requestFocus();
             }
         });
+
+        txtDate.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnSave.requestFocus();
+            }
+        });
     }
 
     private void setDeedBarchart() {
@@ -185,19 +213,25 @@ public class DeedFormController implements Initializable {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
         deedTypeCounts.forEach((type, count) -> {
-            series.getData().add(new XYChart.Data<>(type, count));
+            XYChart.Data<String, Number> data = new XYChart.Data<>(type, count);
+            series.getData().add(data);
+            data.nodeProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    newValue.setStyle("-fx-bar-fill: #1c7850;");
+                }
+            });
         });
 
         chartDeeds.getData().add(series);
     }
 
     private void setCellValueFactory() {
+        colDeedId.setCellValueFactory(new PropertyValueFactory<>("deedId"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
         colType.setCellValueFactory(new PropertyValueFactory<>("Type"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
         colLawyerId.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
         colClientId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
-
     }
 
     private void loadAllDeeds() {
@@ -265,6 +299,7 @@ public class DeedFormController implements Initializable {
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION, "Deed saved successfully!").show();
                 clearFields();
+                setDate();
                 loadAllDeeds();
                 txtDeedId.requestFocus();
             }
@@ -274,11 +309,12 @@ public class DeedFormController implements Initializable {
     }
 
     private void clearFields() {
-        txtDeedId.setText("");
-        txtDescription.setText("");
-        txtDate.setText("");
-        txtClientId.setText("");
-        txtLawyerId.setText("");
+        txtDeedId.clear();
+        txtDescription.clear();
+        txtType.clear();
+        txtDate.clear();
+        txtClientId.clear();
+        txtLawyerId.clear();
     }
 
     @FXML
@@ -286,9 +322,34 @@ public class DeedFormController implements Initializable {
         String deedId = txtDeedId.getText();
         String description = txtDescription.getText();
         String type = txtType.getText();
-        Date date = Date.valueOf(txtDate.getText());
+        String dateOfDeed = txtDate.getText();
         String lawyerId = txtLawyerId.getText();
         String clientId = txtClientId.getText();
+
+        if (deedId.isEmpty() || clientId.isEmpty() || description.isEmpty() || type.isEmpty() || dateOfDeed.isEmpty() || lawyerId.isEmpty()) {
+            if (deedId.isEmpty()) {
+                txtDeedId.requestFocus();
+                txtDeedId.setStyle("-fx-border-color: red;");
+            } else if (clientId.isEmpty()) {
+                txtClientId.requestFocus();
+                txtClientId.setStyle("-fx-border-color: red;");
+            } else if (description.isEmpty()) {
+                txtDescription.requestFocus();
+                txtDescription.setStyle("-fx-border-color: red;");
+            } else if (type.isEmpty()) {
+                txtType.requestFocus();
+                txtType.setStyle("-fx-border-color: red;");
+            } else if (dateOfDeed.isEmpty()) {
+                txtDate.requestFocus();
+                txtDate.setStyle("-fx-border-color: red;");
+            } else {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        Date date = Date.valueOf(dateOfDeed);
 
         Deed deed = new Deed(deedId, description, type, date, lawyerId, clientId);
 
@@ -296,13 +357,15 @@ public class DeedFormController implements Initializable {
             boolean isUpdated = DeedRepo.update(deed);
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION, "Deed updated successfully!").show();
+                loadAllDeeds();
                 clearFields();
+                setDate();
+                txtDeedId.requestFocus();
             }
         }catch(SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
@@ -312,26 +375,13 @@ public class DeedFormController implements Initializable {
             boolean isDeleted = ClientRepo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Deed deleted!").show();
+                loadAllDeeds();
+                clearFields();
+                setDate();
+                txtDeedId.requestFocus();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-    @FXML
-    void txtSearchOnAction(ActionEvent event) throws SQLException {
-        String id = txtDeedId.getText();
-
-        Deed deed = DeedRepo.searchById(id);
-        if (deed != null) {
-            txtDeedId.setText(deed.getDeedId());
-            txtDescription.setText(deed.getDescription());
-            txtType.setText(deed.getType());
-            txtDate.setText(String.valueOf(deed.getDate()));
-            txtClientId.setText(deed.getClientId());
-            txtLawyerId.setText(deed.getLawyerId());
-        } else {
-            new Alert(Alert.AlertType.INFORMATION, "Client not found!").show();
         }
     }
 

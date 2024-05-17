@@ -1,5 +1,6 @@
 package lk.ijse.SGA.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +22,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CourtFormController {
+    public JFXButton btnSave;
     @FXML
     private AnchorPane rootNode;
     @FXML
@@ -42,6 +44,7 @@ public class CourtFormController {
 
         Validations();
         addTextChangeListener(txtCourtId);
+        addTextChangeListener(txtLocation);
 
     }
 
@@ -52,13 +55,18 @@ public class CourtFormController {
             }
         });
 
+        txtLocation.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnSave.requestFocus();
+            }
+        });
+
     }
 
     private void addTextChangeListener(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
             if (textField == txtCourtId && !newValue.matches("^CT.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with CT").show();
             }
 
             if (textField == txtLocation) {
@@ -77,8 +85,8 @@ public class CourtFormController {
     }
 
     private void Validations() {
-        txtCourtId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
-            if (txtCourtId.getText().isEmpty() && !event.getCharacter().equals("CT")){
+        txtCourtId.addEventFilter(KeyEvent.KEY_TYPED, event -> {
+            if (!event.getCharacter().matches("[CT0-9]")) {
                 event.consume();
             }
         });
@@ -152,6 +160,18 @@ public class CourtFormController {
         String courtId = txtCourtId.getText();
         String location = txtLocation.getText();
 
+        if (courtId.isEmpty() || location.isEmpty()) {
+
+            if (courtId.isEmpty()) {
+                txtCourtId.requestFocus();
+                txtCourtId.setStyle("-fx-border-color: red;");
+            } else {
+                txtLocation.requestFocus();
+                txtLocation.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
         Court court = new Court(courtId, location);
 
         try{
@@ -159,6 +179,8 @@ public class CourtFormController {
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "court updated!").show();
                 clearFields();
+                loadAllCourts();
+                txtCourtId.requestFocus();
             }
         }catch (SQLException e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
@@ -174,6 +196,9 @@ public class CourtFormController {
             boolean isDeleted = CourtRepo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Court deleted!").show();
+                loadAllCourts();
+                clearFields();
+                txtCourtId.requestFocus();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

@@ -1,5 +1,6 @@
 package lk.ijse.SGA.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,12 +20,18 @@ import lk.ijse.SGA.model.tm.ClientTm;
 import lk.ijse.SGA.repository.ClientRepo;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ClientFormController implements Initializable {
+    public JFXButton btnSave;
     @FXML
     private TextField txtClientId;
     @FXML
@@ -39,7 +46,8 @@ public class ClientFormController implements Initializable {
     private TextField txtLawyerId;
     @FXML
     private AnchorPane rootNode;
-    public TableColumn colClientId;
+    @FXML
+    private TableColumn<?, ?> colClientId;
     @FXML
     private TableColumn<?, ?> colName;
     @FXML
@@ -102,11 +110,23 @@ public class ClientFormController implements Initializable {
             }
         });
 
+        txtLawyerId.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                btnSave.requestFocus();
+            }
+        });
+
     }
 
     private void Validations() {
         txtClientId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
             if (txtClientId.getText().isEmpty() && !event.getCharacter().equals("C")){
+                event.consume();
+            }
+        });
+
+        txtLawyerId.addEventFilter(KeyEvent.KEY_TYPED, event ->{
+            if (txtLawyerId.getText().isEmpty() && !event.getCharacter().equals("L")){
                 event.consume();
             }
         });
@@ -116,7 +136,6 @@ public class ClientFormController implements Initializable {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
 
             if (textField == txtClientId && !newValue.matches("^C.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
             }
 
             if (textField == txtName) {
@@ -146,9 +165,7 @@ public class ClientFormController implements Initializable {
             }
 
             if (textField == txtContact) {
-                // Check if the new value contains only digits and has a length of 10
                 if (!newValue.matches("\\d{0,10}")) {
-                    // If it contains non-digits or its length is not 10, prevent typing and display an error message
                     textField.setText(oldValue != null ? oldValue : "");
                     JOptionPane.showMessageDialog(null, "Please enter 10 integer numbers.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -158,23 +175,19 @@ public class ClientFormController implements Initializable {
             }
 
             if (textField == txtContact) {
-                // Check if the new value contains only digits and has a length of 10
                 if (!newValue.matches("\\d{0,10}")) {
-                    // If it contains non-digits or its length is not 10, prevent typing and display an error message
                     textField.setText(oldValue != null ? oldValue : "");
                     JOptionPane.showMessageDialog(null, "Please enter 10 integer numbers.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
 
             if (textField == txtLawyerId && !newValue.matches("^L.*$")) {
-                new Alert(Alert.AlertType.ERROR ,"Start with L").show();
             }
         });
     }
 
-
-
     private void setCellValueFactory() {
+        colClientId.setCellValueFactory(new PropertyValueFactory<>("clientId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("Name"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("Address"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("Email"));
@@ -199,7 +212,7 @@ public class ClientFormController implements Initializable {
                 obList.add(tm);
             }
             tblClient.setItems(obList);
-        }catch (SQLException e) {
+        }catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -215,8 +228,6 @@ public class ClientFormController implements Initializable {
         String lawyerId = txtLawyerId.getText();
 
         if (clientId.isEmpty() || name.isEmpty() || address.isEmpty() || email.isEmpty() || contactNo.isEmpty() || lawyerId.isEmpty()) {
-
-            // Request focus on the unfilled TextField
             if (clientId.isEmpty()) {
                 txtClientId.requestFocus();
                 txtClientId.setStyle("-fx-border-color: red;");
@@ -265,7 +276,6 @@ public class ClientFormController implements Initializable {
         txtLawyerId.clear();
     }
 
-
     @FXML
     void txtSearchOnAction(ActionEvent event) throws SQLException {
         String id = txtClientId.getText();
@@ -289,8 +299,33 @@ public class ClientFormController implements Initializable {
         String name = txtName.getText();
         String address = txtAddress.getText();
         String email = txtEmail.getText();
-        int contact = Integer.parseInt(txtContact.getText());
+        String contactNo = txtContact.getText();
         String lawyerId = txtLawyerId.getText();
+
+        if (clientId.isEmpty() || name.isEmpty() || address.isEmpty() || email.isEmpty() || contactNo.isEmpty() || lawyerId.isEmpty()) {
+            if (clientId.isEmpty()) {
+                txtClientId.requestFocus();
+                txtClientId.setStyle("-fx-border-color: red;");
+            } else if (name.isEmpty()) {
+                txtName.requestFocus();
+                txtName.setStyle("-fx-border-color: red;");
+            } else if (address.isEmpty()) {
+                txtAddress.requestFocus();
+                txtAddress.setStyle("-fx-border-color: red;");
+            } else if (email.isEmpty()) {
+                txtEmail.requestFocus();
+                txtEmail.setStyle("-fx-border-color: red;");
+            }else if (contactNo.isEmpty()) {
+                txtContact.requestFocus();
+                txtContact.setStyle("-fx-border-color: red;");
+            } else {
+                txtLawyerId.requestFocus();
+                txtLawyerId.setStyle("-fx-border-color: red;");
+            }
+            return;
+        }
+
+        int contact = Integer.parseInt(contactNo);
 
         Client client = new Client(clientId, name, address, email, contact, lawyerId);
 
@@ -299,12 +334,12 @@ public class ClientFormController implements Initializable {
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION, "Client updated successfully!").show();
                 clearFields();
+                loadAllClients();
             }
-        }catch(SQLException e){
+        }catch(Exception e){
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
-
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
@@ -314,8 +349,10 @@ public class ClientFormController implements Initializable {
             boolean isDeleted = ClientRepo.delete(id);
             if(isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Client deleted!").show();
+                loadAllClients();
+                txtClientId.requestFocus();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
@@ -329,4 +366,33 @@ public class ClientFormController implements Initializable {
         txtContact.setText(String.valueOf(clientTm.getContact()));
         txtLawyerId.setText(clientTm.getLawyerID());
     }
+
+    public void BtnSendEmailOnAction(ActionEvent event) {
+        sendEmail();
+
+    }
+    @FXML
+    private void sendEmail() {
+
+        String toWhom = txtEmail.getText();
+        new Thread(()->{
+            try {
+                String subject = "Confidential: Detailed Report for Review and Legal Counsel";
+                String emailBody = "Dear  Sir/Madam\n" +
+                        "I hope this email finds you well.I wanted to inform you that I will be sending you the detailed report and relevant documentation as a PDF attachment.\n" +
+                        "This report contains important information regarding your [                      ]. Please review the attached document at your earliest convenience.\n" +
+                        "If you have any questions or require further clarification, do not hesitate to contact me.\n" +
+                        "Thank you for your continued trust and cooperation.\n" +
+                        "Best regards,\n" +
+                        "Nehara Peiris";
+                String encodedEmailBody = URLEncoder.encode(emailBody, "UTF-8");
+                String encodedSubject = URLEncoder.encode(subject, "UTF-8");
+                String url = "https://mail.google.com/mail/?view=cm&fs=1&to=" + toWhom + "&body="+encodedEmailBody+"&su="+encodedSubject;
+                Desktop.getDesktop().browse(new URI(url));
+            } catch (IOException | URISyntaxException e) {
+                System.out.println("An error occurred : "+e.getLocalizedMessage());
+            }
+        }).start();
+    }
+
 }

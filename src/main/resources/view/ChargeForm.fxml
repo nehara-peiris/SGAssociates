@@ -6,23 +6,24 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.ChargeFormController">
+<AnchorPane fx:id="rootNode" prefHeight="984.0" prefWidth="1592.0" style="-fx-background-color: #adedd7;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.SGA.controller.ChargeFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="845.0" layoutX="30.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" width="1533.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0c3831" height="845.0" layoutX="30.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" width="1533.0" />
       <Label layoutX="549.0" layoutY="29.0" prefHeight="57.0" prefWidth="494.0" text="Charge Management">
          <font>
             <Font name="System Bold" size="41.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="160.0" text="Charge id" textFill="WHITE" />
-      <Label layoutX="56.0" layoutY="207.0" text="Description" textFill="WHITE" />
-      <Label layoutX="56.0" layoutY="255.0" text="amount" textFill="WHITE" />
-      <TextField fx:id="txtChargeId" layoutX="137.0" layoutY="156.0" prefHeight="24.0" prefWidth="317.0" promptText="CHXXX" />
-      <TextField fx:id="txtDescription" layoutX="137.0" layoutY="203.0" prefHeight="24.0" prefWidth="317.0" />
-      <TextField fx:id="txtAmount" layoutX="137.0" layoutY="251.0" prefHeight="24.0" prefWidth="317.0" promptText="XXXX.XX" />
+      <Label layoutX="56.0" layoutY="182.0" text="Charge id" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="300.0" text="Description" textFill="WHITE" />
+      <Label layoutX="56.0" layoutY="409.0" text="Amount" textFill="WHITE" />
+      <TextField fx:id="txtChargeId" layoutX="137.0" layoutY="178.0" prefHeight="24.0" prefWidth="359.0" promptText="CHXXX" />
+      <TextField fx:id="txtDescription" layoutX="137.0" layoutY="296.0" prefHeight="24.0" prefWidth="359.0" />
+      <TextField fx:id="txtAmount" layoutX="137.0" layoutY="405.0" prefHeight="24.0" prefWidth="359.0" promptText="XXXX.XX" />
       <TableView fx:id="tblCharge" layoutX="558.0" layoutY="156.0" onMouseClicked="#TableOnClick" prefHeight="728.0" prefWidth="943.0">
         <columns>
           <TableColumn fx:id="colChargeId" prefWidth="114.0" text="Charge ID" />
@@ -30,15 +31,17 @@
             <TableColumn fx:id="colAmount" prefWidth="330.0" text="Amount" />
         </columns>
       </TableView>
-      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="549.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-color: #65B741;" text="save" textFill="#1937bc" />
-      <JFXButton buttonType="RAISED" layoutX="198.0" layoutY="549.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #F3CA52;" text="update" textFill="#ff4040" />
-      <JFXButton buttonType="RAISED" layoutX="339.0" layoutY="549.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#e13a0c" style="-fx-background-color: #f26b6b;" text="delete" textFill="WHITE" />
-      <Label layoutX="56.0" layoutY="675.0" prefHeight="47.0" prefWidth="260.0" style="-fx-background-color: black;" text="Charging Details" textFill="#ebeabc">
+      <JFXButton fx:id="btnSave" buttonType="RAISED" layoutX="56.0" layoutY="536.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#45668c" style="-fx-background-radius: 10; -fx-background-color: #1c7850;" text="Save" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="186.0" layoutY="536.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="115.0" ripplerFill="#60c641" style="-fx-background-color: #1c7850; -fx-background-radius: 10;" text="Update" textFill="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="431.0" layoutY="536.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="75.0" ripplerFill="#e13a0c" style="-fx-background-color: #94d6ca;" text="Delete" />
+      <Label layoutX="56.0" layoutY="659.0" prefHeight="47.0" prefWidth="260.0" text="Charging Details" textFill="#ebeabc">
          <font>
-            <Font size="30.0" />
+            <Font size="20.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="56.0" layoutY="756.0" onAction="#btnCasesOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #001524;" text="Cases" textFill="#68cdd0" />
-      <JFXButton layoutX="56.0" layoutY="817.0" onAction="#btnDeedsOnAction" prefHeight="35.0" prefWidth="115.0" style="-fx-background-color: #001524;" text="Deeds" textFill="#68cdd0" />
+      <JFXButton buttonType="RAISED" layoutX="62.0" layoutY="731.0" onAction="#btnCasesOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Cases" />
+      <JFXButton buttonType="RAISED" layoutX="289.0" layoutY="731.0" onAction="#btnDeedsOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Deeds" />
+      <Line endX="349.0" layoutX="171.0" layoutY="634.0" opacity="0.45" startX="-114.0" stroke="#9a9a9a" />
+      <JFXButton buttonType="RAISED" layoutX="62.0" layoutY="810.0" onAction="#btnPayCalOnAction" prefHeight="35.0" prefWidth="180.0" style="-fx-background-color: ACE1AF; -fx-background-radius: 10;" text="Calculate" />
    </children>
 </AnchorPane>

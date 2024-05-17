@@ -60,4 +60,27 @@ public class ChargeRepo {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public static Charge getData(String chargeId) throws SQLException {
+        String sql = "SELECT description, amount FROM charge WHERE chargeId = ?";
+
+        Connection connection = DbConnection.getInstance().getConnection();
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setObject(1, chargeId);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        //ArrayList<Charge> chargeList = new ArrayList<>();
+
+        while (resultSet.next()){
+            String description = resultSet.getString(1);
+            String amount = resultSet.getString(2);
+
+            Charge charge = new Charge(chargeId, description, Double.parseDouble(amount));
+           // chargeList.add(charge);
+            return charge;
+        }
+        //return chargeList;
+        return null;
+    }
 }

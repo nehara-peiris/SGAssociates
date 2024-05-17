@@ -24,9 +24,9 @@
                 <NumberAxis fx:id="axisNoOfCases" side="LEFT" />
               </yAxis>
             </BarChart>
-            <BarChart fx:id="chartDeeds" animated="false" layoutX="914.0" layoutY="30.0" prefHeight="905.0" prefWidth="565.0" title="Deed Growth">
+            <BarChart fx:id="chartDeeds" layoutX="829.0" layoutY="30.0" prefHeight="924.0" prefWidth="565.0" style="-fx-background-color: #adedd7;" title="Deed Growth">
               <xAxis>
-                <CategoryAxis fx:id="axisDeeds" prefHeight="8.0" prefWidth="439.0" side="BOTTOM" />
+                <CategoryAxis fx:id="axisDeeds" side="BOTTOM" />
               </xAxis>
               <yAxis>
                 <NumberAxis fx:id="axisNoOfDeeds" side="LEFT" />
@@ -37,7 +37,7 @@
          <children>
             <JFXButton buttonType="RAISED" onAction="#btnLawyersOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Lawyers" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="61.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="59.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../asserts/lawyer.png" />
                      </image>
@@ -70,9 +70,9 @@
                </font></JFXButton>
             <JFXButton buttonType="RAISED" onAction="#btnCasesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Cases" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="60.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-deed-66.png" />
+                        <Image url="@../asserts/cases.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -83,7 +83,7 @@
                <graphic>
                   <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-deed-64.png" />
+                        <Image url="@../asserts/deed.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -92,9 +92,9 @@
                </font></JFXButton>
             <JFXButton buttonType="RAISED" onAction="#btnSummonsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Summons" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="59.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-letter-64.png" />
+                        <Image url="@../asserts/summon.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -103,9 +103,9 @@
                </font></JFXButton>
             <JFXButton buttonType="RAISED" onAction="#btnCourtsOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Courts" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="73.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-court-64.png" />
+                        <Image url="@../asserts/court.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -114,9 +114,9 @@
                </font></JFXButton>
             <JFXButton buttonType="RAISED" onAction="#btnChargesOnAction" prefHeight="87.0" prefWidth="240.0" ripplerFill="#91bbe1" text="Charges" textFill="WHITE">
                <graphic>
-                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-pay-80.png" />
+                        <Image url="@../asserts/charge.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -128,9 +128,9 @@
                   <Font size="16.0" />
                </font>
                <graphic>
-                  <ImageView fitHeight="65.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="65.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../asserts/icons8-cost-80.png" />
+                        <Image url="@../asserts/payment.png" />
                      </image>
                   </ImageView>
                </graphic>
