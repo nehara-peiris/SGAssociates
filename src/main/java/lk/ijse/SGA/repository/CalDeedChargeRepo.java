@@ -2,7 +2,6 @@ package lk.ijse.SGA.repository;
 
 import lk.ijse.SGA.db.DbConnection;
 import lk.ijse.SGA.model.CalDeedCharge;
-import lk.ijse.SGA.model.DeedCharge;
 
 import java.sql.Connection;
 import java.sql.SQLException;
