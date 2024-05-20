@@ -43,6 +43,33 @@ WHERE s.lawyerId IN (
 );
 
 
+SELECT
+    cl.clientId,
+    cl.name AS clientName,
+    l.lawyerId,
+    l.name AS lawyerName,
+    ca.caseId,
+    ca.description AS caseDescription,
+    ca.type AS caseType,
+    ca.date AS caseDate,
+    d.deedId,
+    d.description AS deedDescription,
+    d.type AS deedType,
+    d.date AS deedDate
+FROM
+    client cl
+        LEFT JOIN
+    lawyer l ON cl.lawyerId = l.lawyerId
+        LEFT JOIN
+    cases ca ON cl.clientId = ca.clientId
+        LEFT JOIN
+    deed d ON cl.clientId = d.clientId
+WHERE
+    cl.clientId = 'C001'
+ORDER BY
+    ca.date, d.date;
+
+
 
 
 DELIMITER //

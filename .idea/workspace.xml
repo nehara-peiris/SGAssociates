@@ -6,29 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="da6271e5-d11f-486f-afcc-fc4fba9a262d" name="Changes" comment="Final Project Done">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/Launcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CalculateCaseChargeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CalculateCaseChargeFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CalculateDeedChargeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CalculateDeedChargeFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CasesFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CasesFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ChargeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ChargeFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ClientFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/ClientFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CourtFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/CourtFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DashboardFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DashboardFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/DeedFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/JudgeFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/JudgeFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/LawyerFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/LawyerFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/PaymentFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/PaymentFormController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/SummonFormController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/controller/SummonFormController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Salary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/Salary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/SalaryTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/SalaryTm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/SalaryRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/SalaryRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/TotalCaseChargeTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/TotalCaseChargeTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/TotalDeedChargeTm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/model/tm/TotalDeedChargeTm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CalCaseChargeRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CalCaseChargeRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CalDeedChargeRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CalDeedChargeRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CaseChargeRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/lk/ijse/SGA/repository/CaseChargeRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/query/Queries.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/query/Queries.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/query/queries.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/query/queries.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/reports/SalaryDetails.jrxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/view/PaymentForm.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/PaymentForm.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/reports/SalaryDetail.jrxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/reports/SalaryDetail.jrxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="PARALLEL_COMPILATION" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -56,29 +55,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.JDBCConfiguration.executor": "Run",
-    "Application.Launcher.executor": "Run",
-    "Application.LauncherWrapper.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/neha/Desktop/SGA/src/main/resources/reports",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.JDBCConfiguration.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Launcher.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LauncherWrapper.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/neha/Desktop/SGA/src/main/resources/reports&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/reports" />
@@ -195,7 +199,9 @@
       <workItem from="1715756909456" duration="3256000" />
       <workItem from="1715760999904" duration="11639000" />
       <workItem from="1715836901808" duration="50647000" />
-      <workItem from="1715948735740" duration="22137000" />
+      <workItem from="1715948735740" duration="22374000" />
+      <workItem from="1716005265566" duration="10631000" />
+      <workItem from="1716223437861" duration="555000" />
     </task>
     <task id="LOCAL-00001" summary="completed ui">
       <option name="closed" value="true" />
@@ -381,7 +387,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715970837607</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Final Project Done">
+      <option name="closed" value="true" />
+      <created>1715983745561</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1715983745561</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

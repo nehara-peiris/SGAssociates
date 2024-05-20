@@ -52,7 +52,6 @@ public class PaymentFormController implements Initializable {
         colDate2.setCellValueFactory(new PropertyValueFactory<>("date"));
         colAmount2.setCellValueFactory(new PropertyValueFactory<>("amount"));
 
-
         colLawyerId1.setCellValueFactory(new PropertyValueFactory<>("lawyerId"));
         colTotalSalary1.setCellValueFactory(new PropertyValueFactory<>("totalSalary"));
     }

@@ -34,6 +34,7 @@ public class CaseChargeRepo {
     }
 
     public static boolean save(CaseCharge caseCharge) throws SQLException {
+
         String sql = "INSERT INTO caseCharge VALUES(?,?,?,?,?,?,?)";
 
         Connection connection = DbConnection.getInstance().getConnection();

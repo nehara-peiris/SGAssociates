@@ -11,10 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import lk.ijse.SGA.model.CalDeedCharge;
-import lk.ijse.SGA.model.Charge;
-import lk.ijse.SGA.model.DeedCharge;
-import lk.ijse.SGA.model.Payment;
+import lk.ijse.SGA.model.*;
 import lk.ijse.SGA.model.tm.ChargeCalculationTm;
 import lk.ijse.SGA.repository.*;
 
@@ -66,7 +63,7 @@ public class CalculateDeedChargeFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setDate();
-        getCurrentPayemntID();
+        getCurrentPaymentID();
         setCellValueFactory();
         keyEventsHandling();
         Validations();
@@ -125,7 +122,7 @@ public class CalculateDeedChargeFormController implements Initializable {
         lblDate.setText(String.valueOf(now));
     }
 
-    private void getCurrentPayemntID() {
+    private void getCurrentPaymentID() {
         try {
             String currentId = PaymentRepo.getCurrentId();
 
@@ -249,34 +246,31 @@ public class CalculateDeedChargeFormController implements Initializable {
         var pay = new Payment(paymentID, lawyerID, date, total);
 
         List<DeedCharge> deedChargeList = new ArrayList<>();
+        ObservableList<ChargeCalculationTm> tblPayCalItems = tblPayCal.getItems();
 
         for (int i = 0; i < tblPayCal.getItems().size(); i++){
-            ChargeCalculationTm tm = obList.get(i);
-
-            DeedCharge deedCharge = new DeedCharge(paymentID, deedID, lawyerID, chargeId, date, amount, clientID);
-
-            try {
-                boolean isSaved = DeedChargeRepo.save(deedCharge);
-                if (isSaved) {
-                    deedChargeList.add(deedCharge);
-                }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            }
-
+            DeedCharge deedCharge = new DeedCharge(
+                    paymentID,
+                    deedID,
+                    lawyerID,
+                    tblPayCalItems.get(i).getChargeId(),
+                    date,
+                    tblPayCalItems.get(i).getAmount(),
+                    clientID
+            );
+            deedChargeList.add(deedCharge);
         }
 
-        CalDeedCharge calDeedCharge = new CalDeedCharge(pay, deedChargeList);
+        CalDeedCharge calDeedCharge = new CalDeedCharge();
+        calDeedCharge.setPayment(pay);
+        calDeedCharge.setDeedChargeList(deedChargeList);
 
         try {
-            boolean isPlaced = CalDeedChargeRepo.calDeedCharge(calDeedCharge);
-            if (isPlaced) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
-            }
+            boolean isSaved = CalDeedChargeRepo.calDeedCharge(calDeedCharge);
+            new Alert(Alert.AlertType.INFORMATION,isSaved?"saved":"error").show();
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            e.printStackTrace();
+//            throw new RuntimeException(e);
         }
 
     }

@@ -37,7 +37,7 @@ GROUP BY l.lawyerId, l.name;]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="49" splitType="Stretch">
+		<band height="39" splitType="Stretch">
 			<staticText>
 				<reportElement x="-30" y="-20" width="612" height="50" backcolor="#FFFFFF" uuid="0ffe5b9e-bcb5-4825-b576-b3edf3ca8bcd"/>
 				<box>
@@ -51,10 +51,22 @@ GROUP BY l.lawyerId, l.name;]]>
 				</textElement>
 				<text><![CDATA[SHIRANTHI GUNAWARDENA ASSOCIATES]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="520" y="-10" width="50" height="30" uuid="01098cab-8a62-49eb-9ab0-f279bed40d9a"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="-20" y="3" width="142" height="30" uuid="4c3a5aa7-0a9a-4770-808d-201ea5166ae8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[SALARY DETAILS]]></text>
+			</staticText>
+		</band>
 	</pageHeader>
 	<columnHeader>
 		<band height="37" splitType="Stretch">
@@ -82,23 +94,23 @@ GROUP BY l.lawyerId, l.name;]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="60" splitType="Stretch">
+		<band height="36" splitType="Stretch">
 			<textField>
-				<reportElement x="22" y="10" width="100" height="30" uuid="a26684ba-8eed-4eca-b13b-36da7f574394">
+				<reportElement x="22" y="0" width="100" height="30" uuid="a26684ba-8eed-4eca-b13b-36da7f574394">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4e2697ab-bd27-46e2-8e90-55e2461542d1"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{lawyerId}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="178" y="10" width="100" height="30" uuid="3a601379-e504-4908-b36c-d4480bcf3b0e">
+				<reportElement x="180" y="0" width="100" height="30" uuid="3a601379-e504-4908-b36c-d4480bcf3b0e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eb8b0f1e-d10f-44da-b9b1-6ef74197ad72"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="10" width="100" height="30" uuid="7a2c266e-5920-4a24-a2d0-cd55702926c6">
+				<reportElement x="345" y="0" width="100" height="30" uuid="7a2c266e-5920-4a24-a2d0-cd55702926c6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9fb998aa-3a75-4a6a-b29f-bd03f7fd0752"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -107,12 +119,12 @@ GROUP BY l.lawyerId, l.name;]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="6" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="6" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="12" splitType="Stretch"/>
 	</summary>
 </jasperReport>

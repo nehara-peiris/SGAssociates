@@ -231,7 +231,7 @@ public class CalculateCaseChargeFormController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-/*
+
     public void btnAddToDBOnAction(ActionEvent event) {
         String paymentID = lblPayId.getText();
         Date date = Date.valueOf(lblDate.getText());
@@ -245,136 +245,32 @@ public class CalculateCaseChargeFormController implements Initializable {
         var pay = new Payment(paymentID, lawyerID, date, total);
 
         List<CaseCharge> caseChargeList = new ArrayList<>();
+        ObservableList<ChargeCalculationTm> tblPayCalItems = tblPayCal.getItems();
 
         for (int i = 0; i < tblPayCal.getItems().size(); i++){
-            ChargeCalculationTm tm = obList.get(i);
-
-            CaseCharge caseCharge = new CaseCharge(paymentID, caseId, lawyerID, chargeId, date, amount, clientID);
-
-            try {
-                boolean isSaved = CaseChargeRepo.save(caseCharge);
-                if (isSaved) {
-                    caseChargeList.add(caseCharge);
-                }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            }
-
+            CaseCharge caseCharge = new CaseCharge(
+                    paymentID,
+                    caseId,
+                    lawyerID,
+                    tblPayCalItems.get(i).getChargeId(),
+                    date,
+                    tblPayCalItems.get(i).getAmount(),
+                    clientID
+            );
+            caseChargeList.add(caseCharge);
         }
-        CalCaseCharge calCaseCharge = new CalCaseCharge(pay, caseChargeList);
+
+        CalCaseCharge calCaseCharge = new CalCaseCharge();
+        calCaseCharge.setPayment(pay);
+        calCaseCharge.setCaseChargeList(caseChargeList);
 
         try {
-            boolean isPlaced = CalCaseChargeRepo.calCaseCharge(calCaseCharge);
-            if (isPlaced) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
-            }
+            boolean isSaved = CalCaseChargeRepo.calCaseCharge(calCaseCharge);
+            new Alert(Alert.AlertType.INFORMATION,isSaved?"saved":"error").show();
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+            e.printStackTrace();
+//            throw new RuntimeException(e);
         }
-    }
-
-
-    public void btnAddToDBOnAction(ActionEvent event) {
-        String paymentID = lblPayId.getText();
-        Date date = Date.valueOf(lblDate.getText());
-        String caseId = txtCaseId.getText();
-        String lawyerID = txtLawyerId.getText();
-        String clientID = txtClientId.getText();
-        String chargeId = txtChargeId.getText();
-        double amount = Double.parseDouble(lblAmount.getText());
-        double total = Double.parseDouble(lblTotal.getText());
-
-        // Create Payment object
-        var pay = new Payment(paymentID, lawyerID, date, total);
-
-        try {
-            // Save Payment to the database
-            boolean isPaymentSaved = PaymentRepo.save(pay);
-
-            if (isPaymentSaved) {
-                // Create a list to hold CaseCharge objects
-                List<CaseCharge> caseChargeList = new ArrayList<>();
-
-                // Iterate through the table items
-                for (int i = 0; i < tblPayCal.getItems().size(); i++) {
-                    ChargeCalculationTm tm = obList.get(i);
-
-                    // Create CaseCharge object
-                    CaseCharge caseCharge = new CaseCharge(paymentID, caseId, lawyerID, chargeId, date, amount, clientID);
-
-                    // Save CaseCharge to the database
-                    boolean isCaseChargeSaved = CaseChargeRepo.save(caseCharge);
-
-                    if (isCaseChargeSaved) {
-                        caseChargeList.add(caseCharge);
-                    } else {
-                        new Alert(Alert.AlertType.WARNING, "Failed to save CaseCharge for item " + (i + 1)).show();
-                    }
-                }
-
-                // Create CalCaseCharge object
-                CalCaseCharge calCaseCharge = new CalCaseCharge(pay, caseChargeList);
-
-                // Save CalCaseCharge to the database
-                boolean isPlaced = CalCaseChargeRepo.calCaseCharge(calCaseCharge);
-
-                if (isPlaced) {
-                    new Alert(Alert.AlertType.CONFIRMATION, "Order Placed!").show();
-                } else {
-                    new Alert(Alert.AlertType.WARNING, "Order Placed Unsuccessfully!").show();
-                }
-            } else {
-                new Alert(Alert.AlertType.WARNING, "Failed to save Payment.").show();
-            }
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
- */
-
-
-    public void btnAddToDBOnAction(ActionEvent event) {
-        String paymentID = lblPayId.getText();
-        Date date = Date.valueOf(lblDate.getText());
-        String caseId = txtCaseId.getText();
-        String lawyerID = txtLawyerId.getText();
-        String clientID = txtClientId.getText();
-        String chargeId = txtChargeId.getText();
-        double amount = Double.parseDouble(lblAmount.getText());
-        double total = Double.parseDouble(lblTotal.getText());
-
-        var pay = new Payment(paymentID, lawyerID, date, total);
-
-        try{
-            boolean isSaved = PaymentRepo.save(pay);
-            if (isSaved) {
-                new Alert(Alert.AlertType.CONFIRMATION, "payment saved!").show();
-            }
-        }catch(SQLException e){
-            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-
-        List<CaseCharge> caseChargeList = new ArrayList<>();
-
-        for (int i = 0; i < tblPayCal.getItems().size(); i++){
-            ChargeCalculationTm tm = obList.get(i);
-
-            CaseCharge caseCharge = new CaseCharge(paymentID, caseId, lawyerID, chargeId, date, amount, clientID);
-
-            try {
-                boolean isSaved = CaseChargeRepo.save(caseCharge);
-                if (isSaved) {
-                    caseChargeList.add(caseCharge);
-                }
-            } catch (SQLException e) {
-                new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-            }
-
-        }
-        CalCaseCharge calCaseCharge = new CalCaseCharge(pay, caseChargeList);
 
     }
 

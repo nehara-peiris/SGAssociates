@@ -15,11 +15,12 @@ public class CalCaseChargeRepo {
         try {
             boolean isPaymentSaved = PaymentRepo.save(cc.getPayment());
             if (isPaymentSaved) {
-                boolean isCaseChargeSaved = CaseChargeRepo.save((CaseCharge) cc.getCaseChargeList());
-                if (isCaseChargeSaved) {
-                    connection.commit();
-                    return true;
+                for (int i = 0; i < cc.getCaseChargeList().size(); i++) {
+                    boolean save = CaseChargeRepo.save(cc.getCaseChargeList().get(i));
+                    if (!save) return false;
                 }
+                connection.commit();
+                return true;
             }
             connection.rollback();
             return false;
