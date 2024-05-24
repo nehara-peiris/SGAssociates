@@ -30,28 +30,5 @@ public class CalDeedChargeRepo {
         } finally {
             connection.setAutoCommit(true);
         }
-
-
-/*
-        try {
-            boolean isPaymentSaved = PaymentRepo.save(cc.getPayment());
-            if (isPaymentSaved) {
-                boolean isDeedChargeSaved = DeedChargeRepo.save((DeedCharge) cc.getDeedChargeList());
-                if (isDeedChargeSaved) {
-                    connection.commit();
-                    return true;
-                }
-            }
-            connection.rollback();
-            return false;
-        } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
-            connection.rollback();
-            return false;
-        } finally {
-            connection.setAutoCommit(true);
-        }
-
- */
     }
 }

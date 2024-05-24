@@ -37,6 +37,12 @@ public class RegisterFormController implements Initializable {
     private void keyEventsHandling() {
         txtUserId.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
+                txtUsername.requestFocus();
+            }
+        });
+
+        txtUsername.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
                 txtPassword.requestFocus();
             }
         });
